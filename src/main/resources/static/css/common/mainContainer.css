@@ -1,0 +1,14 @@
+body {
+    margin : 0;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* 가운데 정렬 */
+    display: flex;
+}
+
+#main-content {
+    flex: 1; /* 남은 공간을 모두 차지 */
+}

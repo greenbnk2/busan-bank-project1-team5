@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Summernote -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+
+    <script th:src="@{/js/board/summerNote.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{common/aside :: aside}"></div>
+        <div id="main-content">
+            <div>
+                <p>제목 : [[${press.title}]]</p>
+                <p>작성자 : [[${press.writer}]]</p>
+                <p>작성일 : [[${press.createdAt}]]</p>
+                <div th:utext="${press.content}">내용</div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

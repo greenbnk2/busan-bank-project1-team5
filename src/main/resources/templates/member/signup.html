@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <form th:action="@{/member/signup}" method="post">
+                <section class="section">
+                    <label for="mem_id">아이디</label>
+                    <input id="mem_id" type="text" name="mem_id" placeholder="아이디 입력">
+
+                    <label for="password">비밀번호</label>
+                    <input id="password" type="password" name="password" placeholder="비밀번호 입력">
+
+                    <label for="name">이름</label>
+                    <input id="name" type="text" name="name" placeholder="이름 입력">
+
+                    <input id="role" type="hidden" name="role" value="GENERAL">
+
+                    <button type="submit">회원가입</button>
+                </section>
+            </form>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

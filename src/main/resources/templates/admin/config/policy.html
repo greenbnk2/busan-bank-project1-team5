@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
+</head>
+<div th:replace="~{admin/common/header :: header}"></div>
+<body>
+<main>
+    <div class="main-container">
+        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div id="main-content">
+
+            <div class="space" th:each="terms : ${termsList}">
+                <h3>[[${terms.category}]]</h3>
+                <p class="description">[[${terms.title}]]입니다.</p>
+                <form th:action="@{/admin/config/policy/update}" method="post">
+                    <input type="hidden" name="termsId" th:value="${terms.termsId}">
+                    <table>
+                        <tr>
+                            <td>약관 내용</td>
+                            <td>
+                                <textarea name="content" rows="5" cols="80" th:text="${terms.content}"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>필수 여부</td>
+                            <td>
+                                <label>
+                                    <input type="radio" name="required" value="true" th:checked="${terms.isRequired}"> 필수
+                                </label>
+                                <label>
+                                    <input type="radio" name="required" value="false" th:checked="${!terms.isRequired}"> 선택
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:right;">
+                                <input type="submit" value="수정">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <hr>
+            </div>
+
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

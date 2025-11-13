@@ -1,0 +1,38 @@
+<aside th:fragment="aside">
+    <link rel="stylesheet" th:href="@{/css/admin/common/aside.css}">
+    <div id="aside-container">
+        <ul>
+            <a th:href="@{#}" class="menu-title">환경설정</a>
+            <ul class="submenu">
+                <li><a th:href="@{/admin/config/basic}">기본설정</a></li>
+                <li><a th:href="@{/admin/config/banner}">배너관리</a></li>
+                <li><a th:href="@{/admin/config/policy}">약관관리</a></li>
+                <li><a th:href="@{/admin/config/category}">카테고리</a></li>
+                <li><a th:href="@{/admin/config/version}">버전설정</a></li>
+            </ul>
+        </ul>
+
+        <ul>
+            <a th:href="@{#}" class="menu-title">상품관리</a>
+            <ul class="submenu">
+                <li><a th:href="@{/admin/product/list}">상품목록</a></li>
+                <li><a th:href="@{/admin/product/register}">상품등록</a></li>
+            </ul>
+        </ul>
+
+        <ul>
+            <a th:href="@{#}" class="menu-title">고객센터</a>
+            <ul class="submenu">
+                <li><a th:href="@{#}">게시판목록</a></li>
+                <li><a th:href="@{#}">상품 문의 게시판</a></li>
+            </ul>
+        </ul>
+
+        <ul>
+            <a th:href="@{#}" class="menu-title">회원관리</a>
+            <ul class="submenu">
+                <li><a th:href="@{/admin/member/list}">회원목록</a></li>
+            </ul>
+        </ul>
+    </div>
+</aside>

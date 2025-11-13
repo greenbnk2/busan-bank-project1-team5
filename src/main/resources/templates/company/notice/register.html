@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Summernote -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+
+    <script th:src="@{/js/board/summerNote.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{common/aside :: aside}"></div>
+        <div id="main-content">
+            <div>
+                <form th:action="@{/company/notice/register}" method="POST">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
+
+                <label for="content">내용</label>
+                <textarea id="content" class="summernote" name="content" placeholder="내용을 입력하세요"></textarea>
+
+                <input type="submit" value="등록">
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

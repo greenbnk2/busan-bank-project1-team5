@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
+</head>
+<div th:replace="~{admin/common/header :: header}"></div>
+<body>
+<main>
+    <div class="main-container">
+        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div id="main-content">
+            <div class="space">
+                <h3>카테고리 관리</h3>
+                <p class="description">메인, 상품 페이지 사이드 카테고리 메뉴입니다.</p>
+                <ul>
+                    <a th:href="@{#}" class="category">1차 카테고리</a>
+                    <ul class="category-submenu">
+                        <li>2차 카테고리</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

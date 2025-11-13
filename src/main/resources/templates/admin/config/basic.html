@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
+</head>
+<div th:replace="~{admin/common/header :: header}"></div>
+<body>
+<main>
+    <div class="main-container">
+        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div id="main-content">
+            <div class="space">
+                <h3>버전 정보</h3>
+                <p class="description">현재 사이트 버전입니다.</p>
+                <table>
+                    <tr>
+                        <td>사이트 버전</td>
+                        <td>[[${basicConfig.siteInfo.version}]]</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="space">
+                <h3>사이트</h3>
+                <p class="description">브라우저 탭, 헤더 및 푸터 노출 정보입니다.</p>
+                <table>
+                    <tr>
+                        <td>제목</td>
+                        <td>[[${basicConfig.siteInfo.title}]]</td>
+                    </tr>
+                    <tr>
+                        <td>부제목</td>
+                        <td>[[${basicConfig.siteInfo.subtitle}]]</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="space">
+                <h3>로고</h3>
+                <p class="description">브라우저 탭, 헤더 및 푸터 노출 로고입니다.</p>
+                <form th:action="@{/admin/config/basic/upload}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="siteId" th:value="${basicConfig.siteInfo.siteId}">
+                    <table>
+                        <tr>
+                            <td>헤더로고</td>
+                            <td>
+                                <!-- 기존 이미지가 있으면 표시 -->
+                                <div th:if="${basicConfig.siteInfo.headerLogo}">
+                                    <p>현재 이미지 :</p>
+                                    <img th:src="@{/uploads/{name}(name=${basicConfig.siteInfo.headerLogo})}"
+                                         alt="헤더로고" style="max-width: 200px;">
+                                </div>
+                                <input type="file" name="header_logo" accept="image/*">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>푸터로고</td>
+                            <td>
+                                <div th:if="${basicConfig.siteInfo.footerLogo}">
+                                    <p>현재 이미지 :</p>
+                                    <img th:src="@{/uploads/{name}(name=${basicConfig.siteInfo.footerLogo})}"
+                                         alt="헤더로고" style="max-width: 200px;">
+                                </div>
+                                <input type="file" name="footer_logo" accept="image/*">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>파비콘</td>
+                            <td>
+                                <div th:if="${basicConfig.siteInfo.favicon}">
+                                    <p>현재 이미지 :</p>
+                                    <img th:src="@{/uploads/{name}(name=${basicConfig.siteInfo.favicon})}"
+                                         alt="헤더로고" style="max-width: 200px;">
+                                </div>
+                                <input type="file" name="favicon" accept="image/*">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button type="submit">저장</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+            <div class="space">
+                <h3>기업정보</h3>
+                <p class="description">푸터에 노출되는 기업정보입니다.</p>
+                <table>
+                    <tr>
+                        <td>상호명</td>
+                        <td>[[${basicConfig.companyInfo.companyName}]]</td>
+                    </tr>
+                    <tr>
+                        <td>대표이사</td>
+                        <td>[[${basicConfig.companyInfo.ceoName}]]</td>
+                    </tr>
+                    <tr>
+                        <td>사업자등록번호</td>
+                        <td>[[${basicConfig.companyInfo.businessNumber}]]</td>
+                    </tr>
+                    <tr>
+                        <td>통신판매업신고</td>
+                        <td>[[${basicConfig.companyInfo.mailOrderNumber}]]</td>
+                    </tr>
+                    <tr>
+                        <td>기본주소</td>
+                        <td>[[${basicConfig.companyInfo.basicAddress}]]</td>
+                    </tr>
+                    <tr>
+                        <td>상세주소</td>
+                        <td>[[${basicConfig.companyInfo.detailedAddress}]]</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="space">
+                <h3>고객센터 정보</h3>
+                <p class="description">푸터에 노출되는 고객센터 정보입니다.</p>
+                <table>
+                    <tr>
+                        <td>전화번호</td>
+                        <td>[[${basicConfig.customerServiceInfo.customerPhone}]]</td>
+                    </tr>
+                    <tr>
+                        <td>업무시간</td>
+                        <td>[[${basicConfig.customerServiceInfo.customerHours}]]</td>
+                    </tr>
+                    <tr>
+                        <td>이메일</td>
+                        <td>[[${basicConfig.customerServiceInfo.customerEmail}]]</td>
+                    </tr>
+                    <tr>
+                        <td>전자금융거래 분쟁담당</td>
+                        <td>[[${basicConfig.customerServiceInfo.disputeContact}]]</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="space">
+                <h3>카피라이트</h3>
+                <p class="description">푸터에 노출되는 카피라이터 정보입니다.</p>
+                <table>
+                    <tr>
+                        <td>카피라이트</td>
+                        <td>[[${basicConfig.siteInfo.copyright}]]</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

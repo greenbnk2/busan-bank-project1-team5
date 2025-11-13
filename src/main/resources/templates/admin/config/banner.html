@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
+</head>
+<div th:replace="~{admin/common/header :: header}"></div>
+<body>
+<main>
+    <div class="main-container">
+        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div id="main-content">
+            <div class="tab-bar">
+                <a th:href="@{#}">메인상단배너</a>
+                <a th:href="@{#}">메인슬라이더배너</a>
+                <a th:href="@{#}">상품 상세보기 배너</a>
+                <a th:href="@{#}">회원로그인배너</a>
+                <a th:href="@{#}">마이페이지배너</a>
+            </div>
+            <div>
+                <h3>메인 상단배너</h3>
+                <hr>
+                <table>
+                    <thead>
+                        <td>번호</td>
+                        <td>이미지</td>
+                        <td>배너정보</td>
+                        <td>배너위치</td>
+                        <td>시작일</td>
+                        <td>종료일</td>
+                        <td>시작시간</td>
+                        <td>종료시간</td>
+                        <td>관리</td>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

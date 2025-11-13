@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <form th:action="@{/member/login}" method="POST">
+                <label>아이디</label>
+                <label>
+                    <input type="text" name="memId" placeholder="아이디 입력" required>
+                </label>
+
+                <label>비밀번호</label>
+                <label>
+                    <input type="password" name="password" placeholder="비밀번호 입력" required>
+                </label>
+
+                <button type="submit" class="btn-login">로그인</button>
+            </form>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>
