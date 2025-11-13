@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{common/aside :: aside}"></div>
+        <div id="main-content">
+            <table>
+                <thead>
+                <th>번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>날짜</th>
+                </thead>
+                <tr>
+                    <td>[[${qna.qnaId}]]</td>
+                    <td>[[${qna.title}]]</td>
+                    <td id="qna-content">[[${qna.content}]]</td>
+                    <td>[[${qna.writer}]]</td>
+                    <td>[[${qna.createdAt}]]</td>
+                </tr>
+            </table>
+
+            <!--
+            <button id="askBtn">AI에게 질문</button>
+
+            <div id="answer"></div>
+            -->
+        </div>
+    </div>
+</main>
+
+<!--
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        const askUrl = /*[[@{/ask}]]*/ '/ask'; // Thymeleaf가 /draft/ask로 변환
+
+        document.getElementById("askBtn").addEventListener("click", function() {
+            const content = document.getElementById("qna-content").innerText;
+
+            fetch(askUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    question: content,
+                    history: []
+                })
+            })
+                .then(response => response.text())
+                .then(data => document.getElementById("answer").innerText = data)
+                .catch(err => console.error(err));
+        });
+    });
+</script>
+-->
+<div th:replace="~{common/footer :: footer}"></div>
+</body>
+</html>

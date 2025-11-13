@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{common/aside :: aside}"></div>
+        <div id="main-content">
+            <h1>상품 목록</h1>
+            <!-- 검색 -->
+            <div class="search-form">
+                <form method="get" th:action="@{/qna/list}">
+                    <div th:with="st=${param.searchType != null ? param.searchType[0] : ''}">
+                        <select name="searchType" id="searchType">
+                            <option value="" th:selected="${st == ''}">전체</option>
+                            <option value="title" th:selected="${st == 'title'}">제목</option>
+                            <option value="content" th:selected="${st == 'content'}">내용</option>
+                            <option value="writer" th:selected="${st == 'writer'}">작성자</option>
+                        </select>
+                    </div>
+
+                    <input type="text" id="keyword" name="keyword" placeholder="검색어"
+                           th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
+
+                    <button type="submit">
+                        <img th:src="@{/images/magnifier.png}" alt="돋보기"/>
+                    </button>
+                </form>
+            </div>
+
+
+            <!--
+                목록 출력
+
+                목록 정렬 기능(인터넷 가입, 금리순, 출시순)
+                목록 페이징
+                썸네일 형태로 보기
+                목록 형태로 보기
+                상세 보기
+            -->
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

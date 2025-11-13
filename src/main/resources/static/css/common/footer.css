@@ -1,0 +1,8 @@
+#footer-container{
+    border-top: 2px solid #CB2B11;
+}
+
+#footer-wrap {
+    max-width: 1200px; /* 가로 크기 1200px */
+    margin: 0 auto; /* 가운데 정렬 */
+}

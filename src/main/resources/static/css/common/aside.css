@@ -1,0 +1,35 @@
+#aside-container {
+    width: 300px;
+}
+
+#aside-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-title {
+    display: block;
+    padding: 15px 0;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+
+.submenu {
+    padding-left: 20px;
+    display: none;
+}
+
+.submenu li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #666;
+}
+
+.submenu li a:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}

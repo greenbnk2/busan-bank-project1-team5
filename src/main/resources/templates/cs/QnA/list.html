@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{common/aside :: aside}"></div>
+        <div id="main-content">
+            <!-- 검색 -->
+            <div class="search-form">
+                <form method="get" th:action="@{/qna/list}">
+                    <div th:with="st=${param.searchType != null ? param.searchType[0] : ''}">
+                        <select name="searchType" id="searchType">
+                            <option value="" th:selected="${st == ''}">전체</option>
+                            <option value="title" th:selected="${st == 'title'}">제목</option>
+                            <option value="content" th:selected="${st == 'content'}">내용</option>
+                            <option value="writer" th:selected="${st == 'writer'}">작성자</option>
+                        </select>
+                    </div>
+
+                    <input type="text" id="keyword" name="keyword" placeholder="검색어"
+                           th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
+
+                    <div th:with="ans=${param.answered != null ? param.answered[0] : ''}">
+                        <select name="answered" id="answered">
+                            <option value="" th:selected="${ans == ''}">답변여부</option>
+                            <option value="true" th:selected="${ans == 'true'}">답변완료</option>
+                            <option value="false" th:selected="${ans == 'false'}">미답변</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">
+                        <img th:src="@{/images/magnifier.png}" alt="돋보기"/>
+                    </button>
+                </form>
+            </div>
+
+            <!-- 정렬 -->
+            <div class="sort">
+                <p>정렬</p>
+                <form method="get" th:action="@{/qna/list}">
+                    <input type="hidden" name="searchType" th:value="${param.searchType != null ? param.searchType[0] : ''}" >
+                    <input type="hidden" name="keyword" th:value="${param.keyword != null ? param.keyword[0] : ''}" >
+                    <input type="hidden" name="answered" th:value="${param.answered != null ? param.answered[0] : ''}" >
+                    <input type="hidden" name="size" th:value="${qnAList.size}" >
+
+                    <!-- 정렬 기준 select -->
+                    <select name="sortBy">
+                        <option value="createdAt" th:selected="${param.sortBy == 'createdAt'}">날짜</option>
+                        <option value="title" th:selected="${param.sortBy == 'title'}">제목</option>
+                    </select>
+
+                    <!-- 정렬 방향 select -->
+                    <select name="direction">
+                        <option value="asc" th:selected="${param.direction == 'asc'}">오름차순</option>
+                        <option value="desc" th:selected="${param.direction == 'desc'}">내림차순</option>
+                    </select>
+
+                    <button type="submit" class="sort-btn">정렬 적용</button>
+                </form>
+            </div>
+
+
+            <!-- 본문 -->
+            <div class="content">
+                <table>
+                    <thead>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>날짜</th>
+                    <th>답변여부</th>
+                    </thead>
+                    <tr th:each="qna, stat : ${qnAList.content}">
+                        <td>[[${qnAList.totalElements - (qnAList.number * qnAList.size + stat.index)}]]</a></td>
+                        <td><a th:href="@{/cs/qna/view/{id}(id=${qna.qnaId})}">[[${qna.title}]]</a></td>
+                        <td>[[${qna.writer}]]</td>
+                        <td>[[${qna.createdAt}]]</td>
+                        <td th:text="${qna.isAnswered ? '답변완료' : '미답변'}"></td>
+                    </tr>
+                </table>
+                <a th:href="@{/qna/register}">글 쓰기</a>
+            </div>
+
+            <!-- 페이징 -->
+            <div class="pagination" th:with="
+                page=${qnAList},
+                now=${page.number},
+                total=${page.totalPages},
+                size=${page.size},
+                block=${5},
+                start=${(now / block) * block},
+                end=${ ((total - 1) < (start + block - 1)) ? (total - 1) : (start + block - 1) },
+                prev=${ (now > 0) ? (now - 1) : 0 },
+                next=${ ((now + 1) < total) ? (now + 1) : (total - 1) },
+                st=${param.searchType != null ? param.searchType[0] : ''},
+                kw=${param.keyword != null ? param.keyword[0] : ''},
+                ans=${param.answered != null ? param.answered[0] : ''}
+             ">
+                <div th:if="${total > 0}">
+                    <a th:href="@{|?page=0&size=${size}&searchType=${st}&keyword=${kw}&answered=${ans}|}"
+                       th:classappend="${page.first} ? ' disabled'">« 처음</a>
+
+                    <a th:href="@{|?page=${prev}&size=${size}&searchType=${st}&keyword=${kw}&answered=${ans}|}"
+                       th:classappend="${page.first} ? ' disabled'">‹ 이전</a>
+
+                    <th:block th:each="i : ${#numbers.sequence(start, end)}">
+                        <a th:href="@{|?page=${i}&size=${size}&searchType=${st}&keyword=${kw}&answered=${ans}|}"
+                           th:classappend="${i == now} ? ' active'">[[${i + 1}]]</a>
+                    </th:block>
+
+                    <a th:href="@{|?page=${next}&size=${size}&searchType=${st}&keyword=${kw}&answered=${ans}|}"
+                       th:classappend="${page.last} ? ' disabled'">다음 ›</a>
+
+                    <a th:href="@{|?page=${total - 1}&size=${size}&searchType=${st}&keyword=${kw}&answered=${ans}|}"
+                       th:classappend="${page.last} ? ' disabled'">마지막 »</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{common/footer :: footer}"></div>
+</body>
+
+
+</html>

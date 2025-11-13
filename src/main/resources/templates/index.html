@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{common/aside :: aside}"></div>
+        <div id="main-content">
+            <!--
+                검색
+                - 카테고리별 검색 구현
+                - 검색 키워드 자동완성 구현
+                - 추천 검색어 구현
+            -->
+
+            <!--
+                메인 카테고리 메뉴 구성
+                ex) 베스트 상품, 목적별 상품, 신규상품
+                우리는 연령별 이런것도 괜찮을듯
+            -->
+
+            <!--
+                배너 구현
+                슬라이드 배너, 기타 배너
+            -->
+
+            <!--
+                메인 최신 글 목록 구현
+                - 새소식 게시판 최신글
+                - 기타 게시판 최신글
+            -->
+
+        </div>
+    </div>
+</main>
+<div th:replace="~{common/footer :: footer}"></div>
+</body>
+</html>

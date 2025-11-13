@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div id="main-content">
+            <form th:action="@{/admin/product/register}" method="post">
+                <section class="section">
+                    <label for="name">상품이름</label>
+                    <input id="name" type="text" name="name" placeholder="상품이름 입력">
+
+                    <label for="description">설명</label>
+                    <input id="description" type="text" name="description" placeholder="설명 입력">
+
+                    <button type="submit">등록</button>
+                </section>
+            </form>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

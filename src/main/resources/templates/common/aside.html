@@ -1,0 +1,27 @@
+<aside th:fragment="aside">
+    <link rel="stylesheet" th:href="@{/css/common/aside.css}">
+    <div id="aside-container">
+        <ul>
+            <a th:href="@{#}" class="menu-title">상품</a>
+            <ul class="submenu">
+                <li><a th:href="@{/product/list}">상품목록</a></li>
+            </ul>
+            <a th:href="@{#}" class="menu-title">은행소개</a>
+            <ul class="submenu">
+                <li><a th:href="@{/company}">은행소개</a></li>
+                <li><a th:href="@{#}">부산은행 스토리</a></li>
+                <li><a th:href="@{#}">투자자 정보</a></li>
+                <li><a th:href="@{#}">영업점 안내</a></li>
+            </ul>
+            <a th:href="@{#}" class="menu-title">고객센터</a>
+            <ul class="submenu">
+                <li><a th:href="@{/cs}">고객센터</a></li>
+                <li><a th:href="@{/cs/qna/list}">고객상담</a></li>
+                <li><a th:href="@{#}">이용안내</a></li>
+                <li><a th:href="@{#}">금융소비자보호</a></li>
+                <li><a th:href="@{#}">상품공시실</a></li>
+                <li><a th:href="@{#}">서식/약관/자료실</a></li>
+            </ul>
+        </ul>
+    </div>
+</aside>

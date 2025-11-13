@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <script th:src="@{/js/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+<main>
+    <div class="main-container">
+        <div th:replace="~{common/aside :: aside}"></div>
+        <div id="main-content">
+            <!--
+                검색기능
+                최신글
+            -->
+
+            <!--
+            고객상담, 이용안내, 금융소비자보호, 상품공시실, 서식/약관/자료실 게시판 구현
+            -->
+            <div class="board">
+                <h1>고객 상담</h1>
+                <a th:href="@{/cs/qna/list}">더보기 > </a>
+                <table>
+                    <thead>
+                        <td>제목</td>
+                        <td>작성자</td>
+                        <td>날짜</td>
+                    </thead>
+                    <tr th:each="qna : ${qnAList}">
+                        <td><a th:href="@{/cs/qna/view/{id}(id=${qna.qnaId})}">[[${qna.title}]]</a></td>
+                        <td>[[${qna.writer}]]</td>
+                        <td>[[${qna.createdAt}]]</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+</body>
+</html>

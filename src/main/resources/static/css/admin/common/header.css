@@ -1,0 +1,13 @@
+#header-container{
+    border-bottom: 2px solid #CB2B11;
+}
+
+#header-wrap {
+    max-width: 1200px; /* 가로 크기 1200px */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+#header-wrap img {
+    width: 100px;
+    height: auto;
+}
