@@ -3,39 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/common/mainContainer.css}">
+    <link rel="stylesheet" th:href="@{/css/member/index.css}">
     <script th:src="@{/js/common/aside.js}"></script>
 </head>
 <body>
 <div th:replace="~{common/header :: header}"></div>
 <main>
     <div class="main-container">
-        <div th:replace="~{common/aside :: aside}"></div>
         <div id="main-content">
-            <!--
-                검색
-                - 카테고리별 검색 구현
-                - 검색 키워드 자동완성 구현
-                - 추천 검색어 구현
-            -->
+            <div class="top-row">
+                <section class="box box-big">
+                    <div class="hero-slider" id="heroSlider">
+                        <div class="hero-track">
+                            <!-- 1번 슬라이드 -->
+                            <article class="hero-slide hero1">
+                                <div class="hero-text">
+                                    <h2>매달 내는 이동통신요금<br>아파트 관리비 10% 할인</h2>
+                                    <p>넷플릭스, 웨이브, 티빙 등<br>스트리밍 30% 할인까지</p>
+                                </div>
+                                <div class="hero-visual">
+                                    <!-- 여기 카드/이미지 들어가는 자리 -->
+                                    <div class="fake-card"></div>
+                                </div>
+                            </article>
 
-            <!--
-                메인 카테고리 메뉴 구성
-                ex) 베스트 상품, 목적별 상품, 신규상품
-                우리는 연령별 이런것도 괜찮을듯
-            -->
+                            <!-- 2번 슬라이드 -->
+                            <article class="hero-slide hero2">
+                                <div class="hero-text">
+                                    <h2>여행 갈 땐<br>해외 이용 수수료 0%</h2>
+                                    <p>공항 라운지, 면세점 할인 제공</p>
+                                </div>
+                                <div class="hero-visual">
+                                    <div class="fake-card"></div>
+                                </div>
+                            </article>
 
-            <!--
-                배너 구현
-                슬라이드 배너, 기타 배너
-            -->
+                            <!-- 3번 슬라이드 -->
+                            <article class="hero-slide hero3">
+                                <div class="hero-text">
+                                    <h2>생활 밀착 혜택을<br>한 장으로</h2>
+                                    <p>주유 · 마트 · 구독 서비스까지 한번에</p>
+                                </div>
+                                <div class="hero-visual">
+                                    <div class="fake-card"></div>
+                                </div>
+                            </article>
+                        </div>
 
-            <!--
-                메인 최신 글 목록 구현
-                - 새소식 게시판 최신글
-                - 기타 게시판 최신글
-            -->
+                        <!-- 점 -->
+                        <div class="hero-dots">
+                            <button class="dot active" data-index="0"></button>
+                            <button class="dot" data-index="1"></button>
+                            <button class="dot" data-index="2"></button>
+                        </div>
+                    </div>
+                </section>
+                <section class="box box-side">
+                    <div class="login-card new">
+                        <!-- 탭 -->
+                        <div class="login-tabs2">
+                            <button class="tab2 active" data-tab="id">로그인</button>
+                        </div>
 
+                        <!-- 탭 내용들 -->
+                        <div class="login-panels2">
+
+                            <!-- 아이디 -->
+                            <div class="panel2 show" id="panel-id">
+                                <label class="input2">
+                                    <input type="text" placeholder="아이디 6~12자리 입력">
+                                </label>
+                                <label class="input2">
+                                    <input type="password" placeholder="비밀번호 6~20자리 입력">
+                                </label>
+                                <button class="red-btn">로그인</button>
+                                <div class="panel-links">
+                                    <a href="#">아이디 | 비밀번호찾기</a>
+                                    <a href="#">회원가입</a>
+                                </div>
+                                <div class="login-quick">
+                                    <a href="#">
+                                        <span class="icon">💡</span>
+                                        <span class="txt">고객지원</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="icon">📝</span>
+                                        <span class="txt">상담·문의</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="icon">🛡</span>
+                                        <span class="txt">도난·분실</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 구분선 -->
+                        <hr class="login-divide">
+                    </div>
+                </section>
+            </div>
+
+            <!-- 아래쪽 3 박스 -->
+            <section class="box box-bottom">
+                <div class="orig-wrap">
+                    <!-- 왼쪽 소개 -->
+                    <div class="orig-left">
+                        <h2 class="orig-title">BNK<br>Personality</h2>
+                        <p class="orig-text">
+                            무친 혜택을 가진<br>
+                            레전드 카드(유희왕 아님)
+                        </p>
+                        <a href="/cards/originals" class="orig-more">전체보기 ›</a>
+                    </div>
+
+                    <!-- 오른쪽 카드 리스트 -->
+                    <div class="orig-list">
+                        <!-- 카드 1 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/the-red">
+                                <img src="https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif"
+                                     alt="카드1">
+                            </a>
+                            <h3 class="orig-name">Blue Eyes White Dragon</h3>
+                        </article>
+
+                        <!-- 카드 2 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/the-pink">
+                                <img src="	https://static11.samsungcard.com/wcms/home/scard/image/personal/DN_AAP1877.gif"
+                                     alt="카드2">
+                            </a>
+                            <h3 class="orig-name">파멸의 예언자</h3>
+                        </article>
+
+                        <!-- 카드 3 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/summit">
+                                <img src="https://static11.samsungcard.com/wcms/home/scard/image/personal/DN_AAP1742.gif"
+                                     alt="카드3">
+                            </a>
+                            <h3 class="orig-name">Summit</h3>
+                        </article>
+
+                        <!-- 카드 4 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/boutique">
+                                <img src="https://static11.samsungcard.com/wcms/home/scard/image/personal/DN_AAP1767.gif"
+                                     alt="카드4">
+                            </a>
+                            <h3 class="orig-name">Boutique – Copper</h3>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="orig-wrap">
+                    <!-- 왼쪽 소개 -->
+                    <div class="orig-left">
+                        <h2 class="orig-title">Legend<br>Cards</h2>
+                        <p class="orig-text">
+                            카드 설명 예시입니다.<br>
+                            카드 설명 예시2입니다.
+                        </p>
+                        <a href="/cards/originals" class="orig-more">전체보기 ›</a>
+                    </div>
+
+                    <!-- 오른쪽 카드 리스트 -->
+                    <div class="orig-list">
+                        <!-- 카드 1 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/the-red">
+                                <img src="https://i.namu.wiki/i/IAJvonqqxo949GavmMtyQOX05yvPs8vXZpJWZ5orEB4ZUMzsEUpj3D6osRLF8WbcXVbpB05ZGwriavHWsSGRbg.webp"
+                                     alt="카드1">
+                            </a>
+                            <h3 class="orig-name">Blue Eyes White Dragon</h3>
+                        </article>
+
+                        <!-- 카드 2 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/the-pink">
+                                <img src="https://item.kakaocdn.net/do/221e5f43bfec8da08db90dd41d7e80879f5287469802eca457586a25a096fd31"
+                                     alt="카드2">
+                            </a>
+                            <h3 class="orig-name">파멸의 예언자</h3>
+                        </article>
+
+                        <!-- 카드 3 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/summit">
+                                <img src="https://item.kakaocdn.net/do/8e9c5b6084a4f06c14baf8341edc9062f43ad912ad8dd55b04db6a64cddaf76d"
+                                     alt="카드3">
+                            </a>
+                            <h3 class="orig-name">Summit</h3>
+                        </article>
+
+                        <!-- 카드 4 -->
+                        <article class="orig-item">
+                            <a href="https://example.com/boutique">
+                                <img src="https://koreafuture.co.kr/data/cheditor4/2504/9e64c0509d6db35311252f453fc322c0dfbe1dbc.jpg"
+                                     alt="카드4">
+                            </a>
+                            <h3 class="orig-name">Boutique – Copper</h3>
+                        </article>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <!-- 공지 -->
+                    <div class="notice-card">
+                        <div class="notice-head">
+                            공지사항
+                            <a href="/notice" class="notice-more">›</a>
+                        </div>
+                        <a href="/notice/2025-kcsi" class="notice-body">
+                            <p class="notice-title">2025년 한국산업의 고객만족도(KCSI)...</p>
+                            <p class="notice-date">25.09.30</p>
+                        </a>
+                    </div>
+
+                    <!-- 배너 1 -->
+                    <a href="https://example.com/edu-card" class="promo-banner">
+                        <div class="promo-text">
+                            <h3>교원 교육 카드<br>최대 12만원 캐시백!</h3>
+                            <p>지금 신청하기</p>
+                        </div>
+                        <div class="promo-img">
+                            <img src="https://cdnu.www.shinhancard.com/pconts/images/dx/banner/2025/20251013642431_hotbn.png"
+                                 alt="">
+                        </div>
+                    </a>
+
+                    <!-- 배너 2 -->
+                    <a href="https://example.com/car-service" class="promo-banner">
+                        <div class="promo-text">
+                            <h3>스피드메이트<br>엔진오일 30% 할인</h3>
+                            <p>와이퍼 무료교환</p>
+                        </div>
+                        <div class="promo-img">
+                            <img src="https://cdnu.www.shinhancard.com/pconts/images/banner/20250320641363_hotbn.png"
+                                 alt="">
+                        </div>
+                    </a>
+                </div>
+            </section>
         </div>
     </div>
 </main>

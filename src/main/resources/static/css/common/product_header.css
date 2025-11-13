@@ -1,0 +1,59 @@
+:root {
+    --header-h: 35px;
+    --border-color: #ddd;
+    --accent: #111;
+    --font: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Apple SD Gothic Neo', 'Spoqa', sans-serif, system-ui;
+    min-height: 900px;
+}
+
+/* ===== 헤더 기본 ===== */
+.header {
+    position: fixed;
+    /* 스크롤 시 상단에 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+
+.header.scrolled {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+    max-width: 800px;
+    margin: 2px auto 2px;
+    display: flex;
+    align-items: center;
+    height: var(--header-h);
+    gap: 100px;;
+
+}
+
+/* ===== 로고 ===== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-main {
+    line-height: 22px;
+}
+
+.logo-main img {
+    display: block;
+    width: 110px;
+}

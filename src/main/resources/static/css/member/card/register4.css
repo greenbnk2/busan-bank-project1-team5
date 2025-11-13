@@ -1,0 +1,181 @@
+@media (min-width:1024px) {
+    html {
+        zoom: 125%;
+    }
+}
+
+.main-content {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 10px;
+}
+
+.idv-wrap {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .03);
+    padding: 28px 24px 24px;
+    max-width: 695px;
+    margin: auto;
+}
+
+.idv-title {
+    margin: 0 0 16px;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.idv-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.idv-tab {
+    height: 54px;
+    border: 1.6px solid #d1d5db;
+    border-radius: 12px;
+    background: #fff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.idv-tab.on {
+    border-color: #111;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .04) inset;
+}
+
+.idv-form {
+    margin-top: 6px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 16px;
+}
+
+@media (max-width:600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-item {
+    margin: 14px 0 10px;
+}
+
+.form-item label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.inline-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.idv-form .form-item input {
+    border: none;
+    /* 기본 테두리 제거 */
+    outline: none;
+    background: transparent;
+    padding: 6px 0;
+    font-size: 16px;
+}
+
+/* 밑줄 기본/포커스 */
+.idv-form .form-item .underline {
+    height: 2px;
+    background: #d3d3d3;
+    /* 기본 연한 회색 */
+}
+
+.idv-form .form-item:focus-within .underline {
+    background: #111;
+    /* 포커스 시 진하게 */
+}
+
+/* 플레이스홀더 톤 */
+.idv-form .form-item input::placeholder {
+    color: #9aa0a6;
+}
+
+/* select를 pill처럼 */
+.select-like {
+    position: relative;
+}
+
+.select-like select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 0 34px 0 12px;
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    font-weight: 600;
+}
+
+.select-like .chev {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #0f172a;
+}
+
+/* 마스킹 입력 */
+.secret-input {
+    -webkit-text-security: disc;
+}
+
+.btn-submit {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 14px;
+    background: #CB2B11;
+    color: #fff;
+    font-weight: 800;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.btn-submit[disabled] {
+    background: #d4d4d4;
+    cursor: not-allowed;
+}
+
+/* 샘플 이미지 박스 */
+.idv-sample {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 0 8px;
+}
+
+.idv-sample-img {
+    width: 320px;
+    /* 필요하면 값 조절 */
+    aspect-ratio: 16 / 10;
+    /* 세로 비율 고정 (대략적인 카드 비율) */
+    object-fit: cover;
+    /* 이미지 꽉 채우기 */
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
+    background: #fafafa;
+}
+
+@media (max-width:600px) {
+    .idv-sample-img {
+        width: 260px;
+    }
+}

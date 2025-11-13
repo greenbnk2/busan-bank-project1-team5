@@ -1,8 +1,53 @@
 <footer th:fragment="footer">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-    <div id="footer-container">
-        <div id="footer-wrap">
-            <p>[[${appInfo.appName}]]-[[${appInfo.appSubName}]] ver.[[${appInfo.appVersion}]]</p>
+    <div class="footer-inner">
+        <!-- 위쪽 링크줄 -->
+        <div class="footer-links">
+            <a href="#">개인정보처리방침</a>
+            <a href="#">경영공시</a>
+            <a href="#">고객정보취급방침</a>
+            <a href="#">보호금융상품등록부</a>
+            <a href="#">상품공시실</a>
+            <a href="#">전자민원접수</a>
+            <a href="#">전자금융이용자보호수칙</a>
+            <a href="#">전자금융사기피해금환급제도</a>
+            <a href="#">위치기반서비스 이용약관</a>
+        </div>
+
+        <!-- 가운데 줄 (전화, 카피라이트, SNS, 드롭다운) -->
+        <div class="footer-main">
+            <div class="footer-left">
+                <p class="footer-tel">
+                    고객상담 <strong>1588-6200, 1544-6200</strong>
+                    <span class="footer-bar">|</span>
+                    해외 <strong>82-2-1588-6200</strong>
+                </p>
+                <p class="footer-copy">COPYRIGHT ⓒ 2014 BUSANBANK. ALL RIGHTS RESERVED.</p>
+
+                <div class="footer-sns">
+                    <!-- 진짜 아이콘으로 바꿀 자리 -->
+                    <a href="#" aria-label="페이스북">F</a>
+                    <a href="#" aria-label="인스타그램">I</a>
+                    <a href="#" aria-label="유튜브">Y</a>
+                    <a href="#" aria-label="웹접근성">W</a>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <div class="foot-select">
+                    <button type="button">
+                        BNK금융네트워크
+                        <span class="arrow">▼</span>
+                    </button>
+                    <!-- 실제로는 ul로 목록 띄우면 됨 -->
+                </div>
+                <div class="foot-select">
+                    <button type="button">
+                        FAMILY SITE
+                        <span class="arrow">▼</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </footer>

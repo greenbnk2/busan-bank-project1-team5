@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/member/card/register2.css}">
+</head>
+<body>
+<div th:replace="~{common/product_header :: product_header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <section class="apply-form-wrap">
+                <div class="apply-form-box">
+                    <header class="apply-form-header">
+                        <h1>기본 정보 입력 후 동의 여부를 확인해 주세요</h1>
+
+                        <!-- 국적 선택 드롭다운 -->
+                        <div class="nation-select-wrap">
+                            <button type="button" class="nation-select" id="nationBtn">
+                                <span id="nationLabel">내국인</span>
+                                <span class="chev">▼</span>
+                            </button>
+                            <ul class="nation-list" id="nationList">
+                                <li data-value="내국인">내국인</li>
+                                <li data-value="외국인">외국인</li>
+                            </ul>
+                        </div>
+                    </header>
+
+                    <div class="apply-form-body">
+                        <!-- 이름 -->
+                        <div class="form-item">
+                            <label for="name">이름</label>
+                            <input id="name" type="text" placeholder="이름을 입력해 주세요." />
+                        </div>
+
+                        <!-- 영문 이름 -->
+                        <div class="form-2col">
+                            <div class="form-item">
+                                <label for="ename-last">영문 성</label>
+                                <input id="ename-last" type="text" placeholder="KIM" />
+                            </div>
+                            <div class="form-item">
+                                <label for="ename-first">영문 이름</label>
+                                <input id="ename-first" type="text" placeholder="CHEOLSU" />
+                                <p class="field-help">여권과 동일한 영문명을 입력해 주세요.</p>
+                            </div>
+                        </div>
+
+                        <!-- 주민등록번호 -->
+                        <div class="form-item">
+                            <label>주민등록번호</label>
+                            <div class="rrn-field">
+                                <!-- 앞 6자리 -->
+                                <input type="text" class="rrn-front" inputmode="numeric" maxlength="6"
+                                       placeholder="생년월일 6자리">
+
+                                <span class="dash">-</span>
+
+                                <!-- 뒤 7자리 (마스킹) -->
+                                <input type="text" class="rrn-back secret-input" inputmode="numeric" maxlength="7"
+                                       aria-label="주민등록번호 뒤 7자리 입력">
+                            </div>
+                        </div>
+
+                        <!-- 휴대폰번호 -->
+                        <div class="form-item">
+                            <label for="phone">휴대폰번호</label>
+                            <input id="phone" type="text" inputmode="numeric" maxlength="11" placeholder="숫자만 입력해 주세요.">
+                        </div>
+
+                        <!-- 이메일  -->
+                        <div class="form-item">
+                            <label for="email">이메일</label>
+                            <input id="email" type="text" placeholder="이메일을 입력해 주세요." />
+                        </div>
+
+                        <!-- 전체 동의 영역 -->
+                        <section class="agree-section">
+                            <div class="agree-all-row">
+                                <button type="button" class="agree-all-btn">
+                                    <span class="agree-check"></span>
+                                    <span class="agree-all-title">전체 동의</span>
+                                </button>
+                                <p class="agree-all-desc">아래 개인정보(신용)정보 필수/선택 동의 항목에 모두 동의합니다.</p>
+                            </div>
+
+                            <!-- 리스트 박스 -->
+                            <div class="agree-list-box">
+                                <!-- 1. 개인정보(신용)정보 필수적 동의 -->
+                                <div class="agree-row required">
+                                    <button type="button" class="agree-head">
+                                    <span class="left">
+                                        <span class="agree-check"></span>
+                                        개인정보(신용)정보 필수적 동의
+                                    </span>
+                                        <span class="right">›</span>
+                                    </button>
+                                    <div class="agree-body">
+                                        <ul>
+                                            <li>개인(신용)정보 필수적 수집·이용에 관한 사항</li>
+                                            <li>고유식별정보 필수적 수집·이용에 관한 사항</li>
+                                            <li>개인(신용)정보 조회에 관한 사항</li>
+                                            <li>고유식별정보 조회에 관한 사항</li>
+                                            <li>개인(신용)정보 필수적 제공에 관한 사항</li>
+                                            <li>고유식별정보 필수적 제공에 관한 사항</li>
+                                            <li>(통신단말장치) 개인(신용)정보 수집·이용에 관한 사항</li>
+                                            <li>(통신단말장치) 고유식별정보 수집·이용에 관한 사항</li>
+                                            <li>(통신단말장치) 개인(신용)정보 제공에 관한 사항</li>
+                                            <li>(통신단말장치) 고유식별정보 제공에 관한 사항</li>
+                                            <li>개인(신용)정보 필수적 제공에 관한 사항(상품서비스)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- 2. 선택적 동의 -->
+                                <div class="agree-row">
+                                    <button type="button" class="agree-head">
+                                    <span class="left">
+                                        <span class="agree-check"></span>
+                                        개인(신용)정보 선택적 동의 (선택)
+                                    </span>
+                                        <span class="right">›</span>
+                                    </button>
+                                    <div class="agree-body">
+                                        <p class="agree-body-desc">
+                                            동의 시 편의 제공(사은품, 할인 쿠폰 등), 신상품(서비스)소개, 발급 관련 편의(심사 우대, 미열료 및 발급 불가 안내) 등
+                                            다양한 혜택을 안내해 드립니다. 미동의 시에도 카드 발급이 가능합니다.
+                                        </p>
+                                        <ul>
+                                            <li>카드 상품 안내 및 이용 권유를 위한 수집·이용</li>
+                                            <li>카드 상품 이외의 부가서비스 안내 등을 위한 수집·이용</li>
+                                            <li>업무 제휴 계약을 체결한 제휴업체에 분석 및 마케팅 목적 제공</li>
+                                            <li>전자적 전송매체를 통한 광고성 정보 수신 동의</li>
+                                            <li>카카오톡 메시지 수신 동의</li>
+                                            <li>앱 PUSH 동의</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="agree-row required">
+                                    <button type="button" class="agree-head">
+                                    <span class="left">
+                                        <span class="agree-check"></span>
+                                        카드 신청 관련 안내 필수적 동의
+                                    </span>
+                                        <span class="right">›</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn-submit" id="submitBtn" disabled>확인</button>
+                        </section>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+<div th:replace="~{common/footer :: footer}"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        /* 1) 헤더/푸터 로드 */
+        fetch('../common/product_header.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('header').innerHTML = html;
+                const headerEl = document.querySelector('.header');
+                if (headerEl) {
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 10) headerEl.classList.add('scrolled');
+                        else headerEl.classList.remove('scrolled');
+                    });
+                }
+            });
+
+        fetch('../common/footer.html')
+            .then(res => res.text())
+            .then(html => (document.getElementById('footer').innerHTML = html));
+
+        /* 2) 내/외국인 드롭다운 */
+        const btn = document.getElementById('nationBtn');
+        const list = document.getElementById('nationList');
+        const label = document.getElementById('nationLabel');
+
+        if (btn && list && label) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isOpen = list.style.display === 'block';
+                list.style.display = isOpen ? 'none' : 'block';
+            });
+
+            list.addEventListener('click', function (e) {
+                const li = e.target.closest('li');
+                if (!li) return;
+                label.textContent = li.dataset.value;
+                list.style.display = 'none';
+            });
+
+            document.addEventListener('click', function () {
+                list.style.display = 'none';
+            });
+        }
+
+        /* 3) 휴대폰 11자리 숫자만 */
+        const phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function () {
+                let onlyNum = this.value.replace(/\D/g, '');
+                if (onlyNum.length > 11) onlyNum = onlyNum.slice(0, 11);
+                this.value = onlyNum;
+            });
+        }
+
+        /* 4) 전체 동의 ↔ 개별 동의 (체크와 펼침 분리) */
+        const allBtn = document.querySelector('.agree-all-btn');
+        const allCheck = document.querySelector('.agree-all-btn .agree-check');
+        const rows = document.querySelectorAll('.agree-row');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // 상세는 기본 닫기
+        document.querySelectorAll('.agree-body').forEach(body => {
+            body.style.display = 'none';
+        });
+
+        // 버튼 활성화 갱신: 필수 행들의 체크가 모두 on 이어야 함
+        function refreshSubmit() {
+            const requiredChecks = document.querySelectorAll('.agree-row.required .agree-check');
+            const allRequiredOn = Array.from(requiredChecks).every(c => c.classList.contains('on'));
+            if (submitBtn) submitBtn.disabled = !allRequiredOn;
+        }
+
+        // 전체 동의 클릭 시 개별 체크 on/off
+        if (allBtn && allCheck) {
+            allBtn.addEventListener('click', function () {
+                const willCheck = !allCheck.classList.contains('on');
+                allCheck.classList.toggle('on', willCheck);
+                rows.forEach(row => {
+                    const chk = row.querySelector('.agree-check');
+                    if (chk) chk.classList.toggle('on', willCheck);
+                });
+                refreshSubmit(); // ← 추가
+            });
+        }
+
+        // 개별 행
+        rows.forEach(row => {
+            const head = row.querySelector('.agree-head');
+            const left = row.querySelector('.agree-head .left');   // 체크 토글 영역
+            const chev = row.querySelector('.agree-head .right');  // 펼침/접힘 버튼
+            const chk = row.querySelector('.agree-check');
+            const body = row.querySelector('.agree-body');
+
+            if (!head || !left || !chk) return;
+
+            // 왼쪽(동그라미+문구) 클릭 → 체크 토글만
+            left.addEventListener('click', (e) => {
+                e.stopPropagation();
+                chk.classList.toggle('on');
+
+                // 전체 동의와 동기화
+                const everyOn = Array.from(document.querySelectorAll('.agree-row .agree-check'))
+                    .every(c => c.classList.contains('on'));
+                allCheck.classList.toggle('on', everyOn);
+
+                refreshSubmit(); // ← 추가
+            });
+
+            // 오른쪽 화살표 클릭 → 상세 펼치기/닫기만
+            if (chev && body) {
+                chev.style.cursor = 'pointer';
+                chev.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const opened = body.style.display === 'block';
+                    body.style.display = opened ? 'none' : 'block';
+                });
+            }
+        });
+
+        // 초기 상태 평가
+        refreshSubmit();
+    });
+</script>
+</body>
+</html>

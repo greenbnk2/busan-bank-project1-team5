@@ -2,7 +2,6 @@ package kr.co.wave.dto.card;
 
 import kr.co.wave.entity.card.AnnualFee;
 import kr.co.wave.entity.card.Benefit;
-import kr.co.wave.entity.card.Card;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AdminCardListDTO {
+public class CardWithInfoDTO {
     CardDTO card;
     List<Benefit> benefitList;
     List<AnnualFee> annualFeeList;

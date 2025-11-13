@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/member/card/register4.css}">
+</head>
+<body>
+<div th:replace="~{common/product_header :: product_header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <section class="idv-wrap">
+                <h1 class="idv-title">본인 확인을 진행해 주세요</h1>
+
+                <!-- 탭 -->
+                <div class="idv-tabs">
+                    <button class="idv-tab on" data-target="resident">주민등록증</button>
+                    <button class="idv-tab" data-target="driver">운전면허증</button>
+                </div>
+
+                <!-- 주민등록증 폼 -->
+                <form id="formResident" class="idv-form">
+                    <!-- 이미지 영역 -->
+                    <div class="idv-sample">
+                        <img src="https://www.hyundaicard.com/docfiles/resources/pc/images/card/img_card_id.png"
+                             alt="주민등록증 예시" class="idv-sample-img">
+                    </div>
+
+                    <div class="form-item">
+                        <label for="rrn-issue">발급일자</label>
+                        <input id="rrn-issue" type="text" inputmode="numeric" maxlength="8" placeholder="예시) 20220101" />
+                        <div class="underline"></div>
+                    </div>
+
+                    <button type="button" id="btnRrnSubmit" class="btn-submit" disabled>확인</button>
+                </form>
+
+                <!-- 운전면허증 폼 -->
+                <form id="formDriver" class="idv-form" style="display:none;">
+                    <!-- 이미지 영역 -->
+                    <div class="idv-sample">
+                        <img src="https://www.hyundaicard.com/docfiles/resources/pc/images/card/img_card_drive.png"
+                             alt="주민등록증 예시" class="idv-sample-img">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-item">
+                            <label for="drv-org">발급기관</label>
+                            <div class="select-like">
+                                <select id="drv-org">
+                                    <option value="">선택</option>
+                                    <option>서울(11)</option>
+                                    <option>부산(12)</option>
+                                    <option>대구(13)</option>
+                                    <option>인천(14)</option>
+                                    <option>경기(28)</option>
+                                    <option>제주(39)</option>
+                                </select>
+                                <span class="chev">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <label>면허번호</label>
+                            <div class="inline-field">
+                                <input id="drv-num8" type="text" inputmode="numeric" maxlength="8" placeholder="면허번호 8자리" />
+                                <span class="dash">-</span>
+                                <input id="drv-tail2" type="text" inputmode="numeric" maxlength="2" class="secret-input"
+                                       aria-label="면허번호 뒤 2자리" />
+                            </div>
+                            <div class="underline"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label for="drv-serial">일련번호</label>
+                        <input id="drv-serial" type="text" inputmode="numeric" maxlength="6" placeholder="일련번호" />
+                        <div class="underline"></div>
+                    </div>
+
+                    <button type="button" id="btnDrvSubmit" class="btn-submit" disabled>확인</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</main>
+<script>
+    /* 헤더/푸터 로드(선택) */
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('../common/product_header.html').then(r => r.text()).then(h => {
+            document.getElementById('header').innerHTML = h;
+        });
+        fetch('../common/footer.html').then(r => r.text()).then(h => {
+            document.getElementById('footer').innerHTML = h;
+        });
+
+        /* 탭 전환: 하나만 표시 */
+        const tabs = document.querySelectorAll('.idv-tab');
+        const formResident = document.getElementById('formResident');
+        const formDriver = document.getElementById('formDriver');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('on'));
+                tab.classList.add('on');
+
+                const target = tab.dataset.target;
+                if (target === 'resident') {
+                    formResident.style.display = '';
+                    formDriver.style.display = 'none';
+                } else {
+                    formResident.style.display = 'none';
+                    formDriver.style.display = '';
+                }
+                refreshButtons();
+            });
+        });
+
+        /* 입력 제한 & 버튼 활성화 로직 */
+        const rrnIssue = document.getElementById('rrn-issue');
+        const btnRrn = document.getElementById('btnRrnSubmit');
+
+        const org = document.getElementById('drv-org');
+        const num8 = document.getElementById('drv-num8');
+        const tail2 = document.getElementById('drv-tail2');
+        const serial = document.getElementById('drv-serial');
+        const btnDrv = document.getElementById('btnDrvSubmit');
+
+        function onlyDigits(el, max) {
+            el.addEventListener('input', () => {
+                el.value = el.value.replace(/\D/g, '').slice(0, max);
+                refreshButtons();
+            });
+        }
+
+        if (rrnIssue) onlyDigits(rrnIssue, 8);
+        if (num8) onlyDigits(num8, 8);
+        if (tail2) onlyDigits(tail2, 2);
+        if (serial) onlyDigits(serial, 6);
+
+        [serial, org].forEach(el => {
+            if (!el) return;
+            el.addEventListener('input', refreshButtons);
+            el.addEventListener('change', refreshButtons);
+        });
+
+        function refreshButtons() {
+            // 주민등록증: 발급일자 8자리 입력
+            const rrnOk = rrnIssue && rrnIssue.value.length === 8;
+            if (btnRrn) btnRrn.disabled = !rrnOk;
+
+            // 운전면허증: 발급기관 선택, 번호 8자리 + 뒤 2자리, 일련번호 존재
+            const drvOk = (org && org.value) &&
+                (num8 && num8.value.length === 8) &&
+                (tail2 && tail2.value.length === 2) &&
+                (serial && serial.value.trim().length > 0);
+            if (btnDrv) btnDrv.disabled = !drvOk;
+        }
+
+        refreshButtons();
+    });
+</script>
+</body>
+</html>

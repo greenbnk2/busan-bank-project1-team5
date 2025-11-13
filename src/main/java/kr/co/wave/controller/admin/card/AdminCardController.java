@@ -1,7 +1,6 @@
 package kr.co.wave.controller.admin.card;
 
-import kr.co.wave.dto.card.AdminCardListDTO;
-import kr.co.wave.dto.card.CardDTO;
+import kr.co.wave.dto.card.CardWithInfoDTO;
 import kr.co.wave.dto.card.CardRequestDTO;
 import kr.co.wave.entity.config.Category;
 import kr.co.wave.service.card.CardService;
@@ -18,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class CardController {
+public class AdminCardController {
 
     private final CardService cardService;
     private final CategoryService categoryService;
@@ -31,12 +30,13 @@ public class CardController {
                            @RequestParam(defaultValue = "desc") String direction,
                            Model model) {
 
-        Page<AdminCardListDTO> cardList = cardService.getCardWithInfoAllBySearch(searchType, keyword, page, 10);
+        Page<CardWithInfoDTO> cardList = cardService.getCardWithInfoAllBySearch(searchType, keyword, page, 10);
 
         model.addAttribute("cardList", cardList);
         return "admin/card/list";
     }
 
+    /*
     @GetMapping("/admin/card/view")
     public String cardView(@RequestParam String cardId, Model model) {
 
@@ -44,6 +44,17 @@ public class CardController {
 
         model.addAttribute("card", card);
         return "admin/card/list";
+    }
+    */
+
+
+    @GetMapping("/admin/card/view")
+    public String cardView(@RequestParam String cardId, Model model) {
+
+        CardWithInfoDTO card = cardService.getCardWithInfoById(Integer.parseInt(cardId));
+
+        model.addAttribute("cardItem", card);
+        return "admin/card/view";
     }
 
 
@@ -58,6 +69,7 @@ public class CardController {
 
     @PostMapping("/admin/card/register")
     public void cardRegister(CardRequestDTO cardRequestDTO) {
+
         cardService.registerCard(cardRequestDTO);
     }
 

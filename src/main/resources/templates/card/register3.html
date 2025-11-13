@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/member/card/register3.css}">
+</head>
+<body>
+<div th:replace="~{common/product_header :: product_header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <section class="verify-wrap">
+                <h1 class="verify-title"><strong>사용자</strong> 님, 본인인증을 진행해 주세요.</h1>
+
+                <!-- 인증수단 탭 -->
+                <div class="method-tabs">
+                    <button class="tab on">휴대폰</button>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- 약관 -->
+                <section class="terms">
+                    <button type="button" class="terms-head" id="termsToggle">
+                    <span class="left">
+                        <span class="bullet">✓</span>
+                        (필수)휴대폰 인증 약관 동의
+                    </span>
+                        <span class="chev">›</span>
+                    </button>
+                    <div class="terms-body" id="termsBody">
+                        <ul>
+                            <li>개인정보 수집 및 이용 동의</li>
+                            <li>고유식별정보 처리 동의</li>
+                            <li>통신사 이용약관 동의</li>
+                            <li>서비스 이용약관 동의</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 휴대폰 번호 -->
+                <div class="form-item phone-line">
+                    <label for="phone">휴대폰번호</label>
+                    <div class="inline-field">
+                        <input id="phone" type="text" inputmode="numeric" maxlength="11" placeholder="숫자만 입력해 주세요.">
+                        <button type="button" class="btn-ghost" id="reqBtn">재요청</button>
+                    </div>
+                    <div class="underline"></div>
+                </div>
+
+                <!-- 인증번호 -->
+                <div class="form-item code-line">
+                    <label for="code">인증번호 6자리</label>
+                    <div class="inline-field">
+                        <input id="code" type="text" inputmode="numeric" maxlength="6" placeholder="">
+                        <span class="timer" id="timer">02:58</span>
+                    </div>
+                    <div class="underline"></div>
+                </div>
+
+                <!-- 안내 -->
+                <ul class="notes">
+                    <li>인증번호를 발송했습니다.(유효 시간 3분)</li>
+                    <li>인증번호가 오지 않는 경우 입력한 정보가 정확한지 확인해 주세요.</li>
+                    <li><u>본인 인증에 사용한 휴대폰 번호로 회원정보가 자동 변경 · 저장됩니다.</u></li>
+                </ul>
+
+                <!-- 제출 -->
+                <button class="btn-submit" id="submitBtn" disabled>확인</button>
+            </section>
+        </div>
+    </div>
+</main>
+<div th:replace="~{common/footer :: footer}"></div>
+<script> // 헤더푸터, 약관여닫기 등 js
+/* header/footer 로드 (선택) */
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('../common/product_header.html').then(r => r.text()).then(h => {
+        document.getElementById('header').innerHTML = h;
+    });
+    fetch('../common/footer.html').then(r => r.text()).then(h => {
+        document.getElementById('footer').innerHTML = h;
+    });
+
+    /* 탭 */
+    document.querySelectorAll('.method-tabs .tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.method-tabs .tab').forEach(b => b.classList.remove('on'));
+            btn.classList.add('on');
+            // 실제론 탭에 따라 다른 폼 보여주면 됨
+        });
+    });
+
+    /* 약관 열기/닫기 */
+    const tBtn = document.getElementById('termsToggle');
+    const tBody = document.getElementById('termsBody');
+    tBtn.addEventListener('click', () => {
+        const open = tBody.style.maxHeight;
+        if (open) {
+            tBody.style.maxHeight = null;
+            tBtn.classList.remove('open');
+        } else {
+            tBody.style.maxHeight = tBody.scrollHeight + 'px';
+            tBtn.classList.add('open');
+        }
+    });
+
+    /* 휴대폰: 숫자만/11자리 */
+    const phone = document.getElementById('phone');
+    phone.addEventListener('input', function () {
+        let v = this.value.replace(/\D/g, '').slice(0, 11);
+        this.value = v;
+    });
+
+    /* 인증번호: 숫자만/6자리 + 버튼 활성화 */
+    const code = document.getElementById('code');
+    const submit = document.getElementById('submitBtn');
+    code.addEventListener('input', function () {
+        let v = this.value.replace(/\D/g, '').slice(0, 6);
+        this.value = v;
+        submit.disabled = (v.length !== 6);
+    });
+
+    /* 타이머 (3분) */
+    let left = 178; // 02:58 (예시 시작값)
+    const timerEl = document.getElementById('timer');
+    let timer = setInterval(() => {
+        const m = String(Math.floor(left / 60)).padStart(2, '0');
+        const s = String(left % 60).padStart(2, '0');
+        timerEl.textContent = `${m}:${s}`;
+        if (left-- <= 0) {
+            clearInterval(timer);
+            submit.disabled = true;
+            timerEl.textContent = "00:00";
+        }
+    }, 1000);
+
+    /* 재요청: 타이머 리셋 */
+    document.getElementById('reqBtn').addEventListener('click', () => {
+        clearInterval(timer);
+        left = 180;
+        timer = setInterval(() => {
+            const m = String(Math.floor(left / 60)).padStart(2, '0');
+            const s = String(left % 60).padStart(2, '0');
+            timerEl.textContent = `${m}:${s}`;
+            if (left-- <= 0) {
+                clearInterval(timer);
+                submit.disabled = true;
+                timerEl.textContent = "00:00";
+            }
+        }, 1000);
+    });
+});
+</script>
+
+<script> // 휴대폰 인증 js(보이기만)
+document.addEventListener('DOMContentLoaded', () => {
+    const head = document.getElementById('termsToggle');     // .terms-head
+    const body = document.getElementById('termsBody');
+    const left = head.querySelector('.left');                // 텍스트+동그라미 영역
+    const bullet = head.querySelector('.bullet');            // 동그라미
+    const chev = head.querySelector('.chev');                // 화살표
+    const code = document.getElementById('code');            // 인증번호
+    const submit = document.getElementById('submitBtn');     // 확인 버튼
+
+    // 버튼 활성화 조건: '필수 약관 체크' && '인증번호 6자리'
+    function refreshSubmit() {
+        const termsChecked = bullet.classList.contains('on');
+        const codeOk = code.value.replace(/\D/g, '').length === 6;
+        submit.disabled = !(termsChecked && codeOk);
+    }
+
+    // 왼쪽(동그라미/문구) 클릭 → 체크 토글
+    left.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const on = bullet.classList.toggle('on');
+        head.setAttribute('aria-checked', on ? 'true' : 'false');
+        refreshSubmit();
+    });
+
+    // 오른쪽 화살표만 접고/펼치기
+    chev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const opened = body.style.maxHeight;
+        if (opened) {
+            body.style.maxHeight = null;
+            head.classList.remove('open');
+        } else {
+            body.style.maxHeight = body.scrollHeight + 'px';
+            head.classList.add('open');
+        }
+    });
+
+    // 인증번호 입력 변화 시에도 버튼 활성화 재평가
+    code.addEventListener('input', refreshSubmit);
+
+    // 초기 상태
+    head.setAttribute('role', 'switch');
+    head.setAttribute('aria-checked', 'false');
+    refreshSubmit();
+});
+</script>
+</body>
+</html>

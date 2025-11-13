@@ -10,7 +10,7 @@ public class CardRequestDTO {
     private String name;
     private String engName;
     private String type;
-    private Boolean isCompany;
+    private boolean isCompany;
     private String description;
 
     private List<String> category;
@@ -22,4 +22,7 @@ public class CardRequestDTO {
 
     private List<String> annualFeeName;
 
+    public void setIsCompany(boolean isCompany) {
+        this.isCompany = isCompany;
+    }
 }

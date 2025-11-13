@@ -1,13 +1,192 @@
-#header-container{
-    border-bottom: 2px solid #CB2B11;
+:root {
+    --header-h: 74px;
+    --border-color: #ddd;
+    --accent: #111;
+    --font: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont;
 }
 
-#header-wrap {
-    max-width: 1200px; /* 가로 크기 1200px */
-    margin: 0 auto; /* 가운데 정렬 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-#header-wrap img {
-    width: 100px;
-    height: auto;
+body {
+    font-family: 'Apple SD Gothic Neo', 'Spoqa', sans-serif, system-ui;
+    min-height: 900px;
+}
+
+/* ===== 헤더 기본 ===== */
+.header {
+    position: fixed;
+    /* 스크롤 시 상단에 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+}
+
+.header.scrolled {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: var(--header-h);
+    gap: 100px;
+    /* 얘네는 네가 쓰던 거 그대로 */
+    padding-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* ===== 로고 ===== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-main {
+    padding-top: 5px;
+    line-height: 22px;
+}
+
+.logo-main img {
+    display: block;
+    width: 150px;
+}
+
+/* ===== nav_menu (1차 메뉴) ===== */
+.nav_menu {
+    display: flex;
+    flex: 1;
+}
+
+.nav_menu>li {
+    list-style: none;
+    position: static;
+    /* 메가메뉴가 화면 전체로 내려오게 */
+}
+
+.nav_menu>li>a {
+    display: block;
+    padding: 0 20px;
+    font-size: 20px;
+    color: #111;
+    font-weight: 500;
+    line-height: 22px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav_menu>li:hover>a,
+.nav_menu>li:focus-within>a {
+    font-weight: 700;
+}
+
+.nav_menu>li:hover::after,
+.nav_menu>li:focus-within::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -25px;
+    width: 100%;
+    height: 3px;
+    background: #000;
+}
+
+/* ===== 우측 유틸 ===== */
+.util {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #000;
+    border-radius: 999px;
+    padding: 4px 12px;
+    min-width: 220px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 12px;
+}
+
+.all-nav-btn {
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* ===== 메가메뉴 ===== */
+.mega-panel {
+    position: absolute;
+    left: 0;
+    top: var(--header-h);
+    /* 헤더 바로 아래 */
+    width: 100vw;
+    /* 화면 전체 가로 */
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    display: none;
+    z-index: 50;
+    min-height: 250px;
+    /* 내려온 흰 영역 높이 */
+}
+
+.nav_menu>li:hover .mega-panel,
+.nav_menu>li:focus-within .mega-panel {
+    display: block;
+}
+
+.mega-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    padding: 28px 20px 36px;
+}
+
+.mega-col {
+    min-width: 120px;
+}
+
+.mega-col h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.mega-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.mega-col a {
+    text-decoration: none;
+    color: #222;
+    font-size: 13px;
+}
+
+.mega-col a:hover {
+    text-decoration: underline;
 }

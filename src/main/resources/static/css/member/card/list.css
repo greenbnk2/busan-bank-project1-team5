@@ -1,0 +1,161 @@
+/* ===== 본문 ===== */
+.main-content {
+    max-width: 1080px;
+    margin: 140px auto;
+}
+
+.list-wrapper {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 카드 페이지 래퍼 */
+.card-page {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* 필터 영역 */
+.card-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 36px;
+    justify-content: center;
+}
+
+.filter-btn {
+    border: none;
+    background: #f4f4f4;
+    padding: 6px 18px 7px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .12s ease;
+}
+
+.filter-btn.active {
+    background: #CB2B11;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 리스트 타이틀 */
+.list-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* 카드 리스트 */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* 개별 카드 행 */
+.card-item {
+    display: flex;
+    gap: 18px;
+    background: #fff;
+    border: 1px solid #ebedf0;
+    border-radius: 14px;
+    padding: 16px 18px;
+    align-items: center;
+    transition: box-shadow .12s ease;
+}
+
+.card-item:hover {
+    box-shadow: 0 3px 18px rgba(0, 0, 0, .03);
+}
+
+/* 썸네일 */
+.card-thumb {
+    width: 66px;
+    height: 108px;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #ddd;
+    flex: 0 0 66px;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 본문 텍스트 */
+.card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.card-desc {
+    font-size: 12px;
+    line-height: 1.35;
+    color: #555;
+    margin-bottom: 8px;
+    max-width: 600px;
+}
+
+.card-tagline {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+/* 우측 액션 */
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.detail-btn {
+    border: none;
+    background: #f7f7f7;
+    border-radius: 999px;
+    padding: 6px 14px 7px;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* 비어 있을 때 */
+.empty-msg {
+    padding: 40px 0 60px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+
+/* 반응형 */
+@media (max-width: 720px) {
+    .card-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-actions {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 1024px) {
+    html {
+        zoom: 125%;
+    }
+}

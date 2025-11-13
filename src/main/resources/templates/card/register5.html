@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/member/card/register5.css}">
+</head>
+<body>
+<div th:replace="~{common/product_header :: product_header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <section class="extra-wrap">
+                <h1 class="extra-title">카드 신청을 위해 추가 정보 확인이 필요합니다.</h1>
+
+                <p class="extra-desc">
+                    [특정 금융거래정보의 보고 및 이용 등에 관한 법률 제5조의2](고객확인의무)에 따라, 고객의 신원 확인을 위한
+                    고객 정보(직업, 자금 등)를 수집합니다. 고객님이 제공한 정보는 동법의 용도 외 목적으로 사용되지 않습니다.
+                    다만 정보 제공을 거부하거나 정보 검증이 충분히 수행되지 않을 경우에는 금융거래가 제한될 수 있음을 안내드립니다.
+                </p>
+
+                <!-- 직업구분 -->
+                <div class="field">
+                    <label class="field-label" for="job">직업구분</label>
+                    <div class="select-like">
+                        <select id="job">
+                            <option value="">선택</option>
+                            <option>직장인</option>
+                            <option>개인사업자</option>
+                            <option>프리랜서</option>
+                            <option>전문직</option>
+                            <option>학생</option>
+                            <option>무직/기타</option>
+                        </select>
+                        <span class="chev">▼</span>
+                    </div>
+                </div>
+
+                <!-- 고위험직업 확인 -->
+                <div class="field">
+                    <div class="field-head">
+                        <label class="field-label" for="riskjob">고위험직업 확인</label>
+                        <span class="info" title="금융범죄/테러자금조달 위험이 높은 업종 여부 확인">i</span>
+                    </div>
+                    <div class="select-like">
+                        <select id="riskjob">
+                            <option value="">선택</option>
+                            <option>해당사항없음</option>
+                            <option>환전/귀금속/보석류 취급</option>
+                            <option>도박/유흥/불법 컨텐츠 관련</option>
+                            <option>기타 고위험 직업군</option>
+                        </select>
+                        <span class="chev">▼</span>
+                    </div>
+                </div>
+
+                <!-- 자금의 원천 -->
+                <div class="field">
+                    <div class="field-head">
+                        <label class="field-label" for="fund">자금의 원천</label>
+                        <span class="info" title="카드 결제 자금의 주된 출처">i</span>
+                    </div>
+                    <div class="select-like">
+                        <select id="fund">
+                            <option value="">선택</option>
+                            <option>근로소득</option>
+                            <option>사업소득</option>
+                            <option>금융소득</option>
+                            <option>퇴직금/연금</option>
+                            <option>부동산 처분대금</option>
+                            <option>기타</option>
+                        </select>
+                        <span class="chev">▼</span>
+                    </div>
+                </div>
+
+                <!-- 거래의 목적 -->
+                <div class="field">
+                    <div class="field-head">
+                        <label class="field-label" for="purpose">거래의 목적</label>
+                        <span class="info" title="카드 사용의 주된 목적">i</span>
+                    </div>
+                    <div class="select-like">
+                        <select id="purpose">
+                            <option value="">선택</option>
+                            <option>생활비(물품구매, 세금납부 등)</option>
+                            <option>사업상 지출</option>
+                            <option>해외결제/여행</option>
+                            <option>온라인 구독/콘텐츠</option>
+                            <option>기타</option>
+                        </select>
+                        <span class="chev">▼</span>
+                    </div>
+                </div>
+
+                <button type="button" id="submitBtn" class="btn-submit" disabled>확인</button>
+            </section>
+        </div>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 헤더/푸터 로드 (네 공통 로더 패턴)
+        fetch('../common/product_header.html')
+            .then(r => r.text()).then(h => {
+            document.getElementById('header').innerHTML = h;
+            const headerEl = document.querySelector('.header');
+            if (headerEl) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 10) headerEl.classList.add('scrolled');
+                    else headerEl.classList.remove('scrolled');
+                });
+            }
+        });
+        fetch('../common/footer.html')
+            .then(r => r.text()).then(h => document.getElementById('footer').innerHTML = h);
+
+        // 모든 select가 선택되어야 버튼 활성화
+        const selects = Array.from(document.querySelectorAll('.select-like select'));
+        const submit = document.getElementById('submitBtn');
+
+        const refresh = () => {
+            const ok = selects.every(s => s.value && s.value.trim().length > 0);
+            submit.disabled = !ok;
+        };
+        selects.forEach(s => ['change', 'input'].forEach(ev => s.addEventListener(ev, refresh)));
+        refresh();
+
+        // (선택) 제출 클릭 시 값 확인
+        submit.addEventListener('click', () => {
+            const data = {
+                job: document.getElementById('job').value,
+                riskjob: document.getElementById('riskjob').value,
+                fund: document.getElementById('fund').value,
+                purpose: document.getElementById('purpose').value
+            };
+            console.log('제출 데이터:', data);
+            // TODO: 서버 연동 시 fetch/axios로 전송
+            alert('입력이 완료되었습니다.');
+        });
+    });
+</script>
+</body>
+</html>

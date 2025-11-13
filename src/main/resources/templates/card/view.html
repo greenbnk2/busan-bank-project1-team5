@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/member/card/view.css}">
+</head>
+<body>
+<div th:replace="~{common/product_header :: product_header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <div class="detail-wrap">
+                <section class="card-top">
+                    <!-- 왼쪽 카드 -->
+                    <div class="card-top-left">
+                        <div class="card-preview">
+                            <img src="https://item.kakaocdn.net/do/8e9c5b6084a4f06c14baf8341edc9062f43ad912ad8dd55b04db6a64cddaf76d"
+                                 alt="카드 이미지">
+                        </div>
+                    </div>
+
+                    <!-- 오른쪽 설명 -->
+                    <div class="card-top-right">
+                        <div class="top-head">
+                            <h1 class="card-title">듀.. 가나디 <br>
+                                Ganadi the due.. </h1>
+                        </div>
+                        <p class="card-sub">계획한 모든 일상에 따라오는 할인</p>
+
+                        <div class="top-benefits">
+                            <p><span>외식 · 배달 · 편의점</span> <strong>10% 할인</strong></p>
+                            <p><span>쇼핑 · 주유 · 생활</span> <strong>5~10% 할인</strong></p>
+                            <p><span>공과금 · 디지털구독</span> <strong>10~20% 할인</strong></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 연회비 박스 -->
+                <div class="annual-box">
+                    <div class="annual-top">
+                        <span class="annual-title">연회비</span>
+                        <a href="javascript:void(0)" class="annual-arrow" id="openFee">›</a>
+                    </div>
+                    <ul class="annual-rows">
+                        <li>
+                            <span class="annual-type">Visa</span>
+                            <span class="annual-fee-value">본인 300,000원</span>
+                        </li>
+                        <li>
+                            <span class="annual-type">국내전용</span>
+                            <span class="annual-fee-value">본인 300,000원</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 카드 발급 유의사항 -->
+                <section class="card-notice">
+                    <header class="card-notice-head" id="cardNoticeToggle">
+                        <h3>카드발급 유의사항</h3>
+                        <button type="button" class="card-notice-btn" aria-expanded="false">
+                            <span class="tri"></span>
+                        </button>
+                    </header>
+
+                    <div class="card-notice-body" id="cardNoticeBody">
+                        <ul>
+                            <li>연회비는 기본연회비와 서비스연회비를 합산해 카드별로 청구됩니다.</li>
+                            <li>가족카드 연회비는 없습니다. (가족카드 단독 발급 시 연회비가 부과될 수 있습니다.)</li>
+                            <li>후불교통 기능이 있는 카드로만 신청 가능합니다.</li>
+                            <li>해외겸용(Mastercard)은 컨택리스 결제를 지원합니다.</li>
+                        </ul>
+                    </div>
+                </section>
+
+
+                <!-- 안내 박스 -->
+                <section class="benefit-section">
+                    <div class="benefit-grid">
+                        <article class="benefit-card">
+                            <h4>Time Plan 서비스</h4>
+                            <ul>
+                                <li>DAY 10% 할인 : 카페 / 음식점</li>
+                                <li>NIGHT 10% 할인 : 편의점 / 배달앱</li>
+                            </ul>
+                            <span class="card-more">›</span>
+                        </article>
+
+                        <article class="benefit-card">
+                            <h4>Daily Plan 서비스</h4>
+                            <ul>
+                                <li>쇼핑 10% 할인 : 마트 / 온라인쇼핑 / 잡화</li>
+                                <li>이동 5% 할인 : 주유 / 카셰어링 / 택시</li>
+                                <li>생활 5% 할인 : 병원·약국 / 미용실 / 온라인서점</li>
+                            </ul>
+                            <span class="card-more">›</span>
+                        </article>
+
+                        <article class="benefit-card">
+                            <h4>Plan Day 서비스</h4>
+                            <ul>
+                                <li>매월 1일 Time Plan, Daily Plan 서비스 2배 할인(서비스당 1회)</li>
+                            </ul>
+                            <span class="card-more">›</span>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- 카드 비교 섹션 -->
+                <section class="card-compare-wrap">
+                    <div class="compare-title">
+                        <h2>이 카드랑 비교해 보세요.</h2>
+                        <p>비교할 카드를 선택하면 오른쪽에 표시됩니다.</p>
+                    </div>
+
+                    <div class="compare-body">
+                        <!-- 현재 카드 -->
+                        <div class="compare-card current-card" id="currentCard">
+                            <p class="label">현재 보고 있는 카드</p>
+                            <div class="card-box"
+                                 data-card-img="https://i.namu.wiki/i/IAJvonqqxo949GavmMtyQOX05yvPs8vXZpJWZ5orEB4ZUMzsEUpj3D6osRLF8WbcXVbpB05ZGwriavHWsSGRbg.webp"
+                                 data-card-name="삼성카드 BIZ 6 V2" data-card-benefit="대표 혜택: 비즈니스, 주유, 통신"
+                                 data-card-benefits="비즈니스 업종 10%|주유 5%|통신요금 5%">
+                                <!-- 데이터 임시 채워둠, 타임리프 변환 시 삭제 -->
+                            </div>
+                        </div>
+
+                        <div class="compare-plus">+</div>
+
+                        <!-- 비교 카드 -->
+                        <div class="compare-card target-card" id="targetCard">
+                            <p class="label">비교할 카드 선택</p>
+                            <button class="card-box empty" id="openModalBtn" type="button">
+                                아래에서 카드를 선택해주세요.
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 카드 비교 결과 섹션 -->
+                    <section class="benefit-compare" id="benefitCompare" style="display: none;">
+                        <div class="benefit-compare-grid">
+                            <div class="benefit-column" id="currentBenefits">
+                                <h4>현재 카드</h4>
+                                <ul class="benefit-list">
+                                    <li class="placeholder">위 카드 정보에서 불러오는 중...</li>
+                                </ul>
+                            </div>
+                            <div class="benefit-column" id="targetBenefits">
+                                <h4>비교할 카드</h4>
+                                <ul class="benefit-list">
+                                    <li class="placeholder">오른쪽 카드 선택 시 표시됩니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                </section>
+
+
+                <!-- 부가 서비스 변경 섹션 -->
+                <section class="card-notice" id="extraService">
+                    <header class="card-notice-head">
+                        <h3>부가서비스 변경 가능 사유</h3>
+                        <button type="button" class="card-notice-btn" aria-expanded="false">
+                            <span class="tri"></span>
+                        </button>
+                    </header>
+
+                    <div class="card-notice-body">
+                        <p class="notice-text">
+                            * 카드를 이용하는 경우 제공되는 포인트 및 할인혜택 등의 부가서비스는 카드 신규 출시 이후 다음 사유 중 어느 하나에 해당하는 경우 외에는 변경할 수 없습니다. (단,
+                            회원의 권익을 증진하거나 부담을 완화하는 경우는 제외)
+                            카드사가 부가서비스를 변경하는 경우에는 변경 사유, 변경 내용을 다음에 정하는 기간에 따라 서면교부, 우편 또는 전자우편, 전화 또는 팩스, 휴대폰 메시지 또는 이에 준하는
+                            전자적 의사표시 중 서로 다른 2가지 이상의 방법으로 고지하여 드립니다.
+                        </p>
+                        <ol class="notice-list">
+                            <li>① 카드사의 휴업·파산·경영상의 위기 등에 따른 불가피한 경우 : 사유발생 즉시</li>
+                            <li>② 제휴업체의 휴업·파산·경영상의 위기로 인해 불가피하게 해당 부가서비스를 축소·변경하는 경우 : 사유발생 즉시</li>
+                            <li>③ 제휴업체와의 계약 해지로 인해 동일한 부가서비스 제공이 곤란한 경우 : 사유발생 즉시</li>
+                            <li>④ 부가서비스를 3년 이상 제공한 상태에서 해당 부가서비스로 인해 상품의 수익성이 현저히 낮아진 경우 : 부가서비스 변경 6개월 전부터 매월</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- 필수 안내사항 섹션 -->
+                <section class="must-guide">
+                    <h3>필수 안내 사항</h3>
+                    <ul>
+                        <li>
+                            연체이자율 : 회원별·이용상품별 정상이자율 + 3%p (최고 연 20.0%)
+                            <ul>
+                                <li>연체 발생 시점에 정상 이자율이 없는 경우 아래와 같이 적용</li>
+                                <li>① 일시불 거래 연체 시 : 거래 발생 시점의 최소 기간(2개월) 유이자할부 이자율</li>
+                                <li>② 무이자할부 거래 연체 시 : 거래 발생 시점의 동일한 할부 계약기간 유이자할부 이자율</li>
+                                <li>③ 그 외의 경우 : 상법상 상사법정이율과 상호금융 가계자금대출금리 중 높은 이자율</li>
+                                <li>※ 가계자금대출금리 : 한국은행에서 매월 발표하는 가장 최근의 비은행 금융기관 가중평균대출금리(신규 대출 기준)</li>
+                            </ul>
+                        </li>
+                        <li>금융상품 이용 전 상품설명서, 약관을 통해 이용조건을 확인해 주시기 바랍니다.</li>
+                        <li>필요 이상으로 신용카드를 발급 및 이용하실 경우 개인신용평점, 이용한도 등에 영향을 미칠 수 있습니다.</li>
+                        <li>상환 능력에 비해 신용카드 사용액이 과도할 경우 귀하의 개인신용평점이 하락할 수 있습니다.</li>
+                        <li>개인신용평점 하락 시 금융거래 관련 불이익이 발생할 수 있습니다.</li>
+                        <li>일정 기간 원리금을 연체할 경우, 모든 원리금을 변제할 의무가 발생할 수 있습니다.</li>
+                        <li>금융소비자는 해당 상품 또는 서비스에 대해 설명을 받을 권리가 있습니다.</li>
+                        <li>신용카드 남용은 가계경제에 위험이 됩니다.</li>
+                        <li>심의필 : 여신금융협회 심의필 제 2025 – Ch1 – 1444020</li>
+                        <li>카드 출시일자 : 2025-07-02</li>
+                    </ul>
+                </section>
+
+                <!-- 하단 고정 버튼 -->
+                <div class="floating-apply">
+                    <button type="button" class="btn-main">카드신청</button>
+                    <button type="button" class="btn-sub">뒤로가기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="fee-modal" id="feeModal"><!-- 연회비 모달창-->
+    <div class="fee-modal-dim" id="feeDim"></div>
+
+    <div class="fee-modal-box">
+        <div class="fee-modal-header">
+            <h2>연회비</h2>
+            <button type="button" class="fee-modal-close" id="feeClose">✕</button>
+        </div>
+
+        <div class="fee-modal-body">
+            <div class="fee-item">
+                <h3>국내외겸용(Visa Signature) 300,000원</h3>
+                <p class="fee-sub">(기본연회비 100,000원 + 제휴연회비 200,000원)</p>
+                <p class="fee-sub">가족카드 100,000원(기본연회비 0원 + 제휴연회비 100,000원)</p>
+            </div>
+
+            <div class="fee-line"></div>
+
+            <div class="fee-item">
+                <h3>국내전용 300,000원</h3>
+                <p class="fee-sub">(기본연회비 100,000원 + 제휴연회비 200,000원)</p>
+                <p class="fee-sub">가족카드 100,000원(기본연회비 0원 + 제휴연회비 100,000원)</p>
+            </div>
+
+            <ul class="fee-notice">
+                <li>카드 연회비(기본연회비 + 제휴연회비)는 카드 발급 시 선청구되며, 보유 카드별로 청구</li>
+                <li>기본연회비는 카드의 발행, 배송 등 발급에 소요된 비용으로, 발급 첫 해에 카드 해지 시에도 반환되지 않음</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card-modal-overlay" id="cardModal"><!-- 카드비교 모달 -->
+    <div class="card-modal">
+        <div class="card-modal-header">
+            <h3>비교할 카드 선택</h3>
+            <button class="close-modal" id="closeModalBtn" type="button">×</button>
+        </div>
+        <div class="card-modal-body">
+            <!-- 카드 1 -->
+            <button class="modal-card-item" data-card-name="삼성카드 탭탭 O" data-card-benefit="커피/스트리밍 특화"
+                    data-card-benefits="카페 20%|스트리밍 20%|배달앱 5%"
+                    data-card-img="https://i.namu.wiki/i/IAJvonqqxo949GavmMtyQOX05yvPs8vXZpJWZ5orEB4ZUMzsEUpj3D6osRLF8WbcXVbpB05ZGwriavHWsSGRbg.webp">
+
+                <div class="modal-card-thumb">
+                    <img src="https://i.namu.wiki/i/IAJvonqqxo949GavmMtyQOX05yvPs8vXZpJWZ5orEB4ZUMzsEUpj3D6osRLF8WbcXVbpB05ZGwriavHWsSGRbg.webp"
+                         alt="삼성카드 탭탭 O" />
+                </div>
+                <div class="modal-card-info">
+                    <span class="modal-card-name">삼성카드 탭탭 O</span>
+                    <span class="modal-card-benefit">커피/스트리밍 특화</span>
+                </div>
+            </button>
+
+            <!-- 카드 2 -->
+            <button class="modal-card-item" data-card-name="삼성카드 미니멀" data-card-benefit="교통/편의점"
+                    data-card-benefits="대중교통 10%|편의점 5%|통신요금 3%"
+                    data-card-img="https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif">
+
+                <div class="modal-card-thumb">
+                    <img src="https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif"
+                         alt="삼성카드 미니멀" />
+                </div>
+                <div class="modal-card-info">
+                    <span class="modal-card-name">삼성카드 미니멀</span>
+                    <span class="modal-card-benefit">교통/편의점</span>
+                </div>
+            </button>
+
+            <!-- 카드 3 -->
+            <button class="modal-card-item" data-card-name="삼성카드 주유 플러스" data-card-benefit="주유 특화"
+                    data-card-benefits="주유 10%|세차 5%"
+                    data-card-img="https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif">
+
+                <div class="modal-card-thumb">
+                    <img src="https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif"
+                         alt="삼성카드 주유 플러스" />
+                </div>
+                <div class="modal-card-info">
+                    <span class="modal-card-name">삼성카드 주유 플러스</span>
+                    <span class="modal-card-benefit">주유 특화</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script> // 헤더 푸터 연결
+
+document.addEventListener('DOMContentLoaded', function () {
+    // header 로드
+    fetch('../common/header.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('header').innerHTML = html;
+
+            // 스크롤시 헤더 고정 클래스
+            const headerEl = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    headerEl.classList.add('scrolled');
+                } else {
+                    headerEl.classList.remove('scrolled');
+                }
+            });
+        });
+
+    // footer 로드
+    fetch('../common/footer.html')
+        .then(res => res.text())
+        .then(html => document.getElementById('footer').innerHTML = html);
+});
+</script>
+
+<script> // 모달창 JS
+document.addEventListener('DOMContentLoaded', function () {
+    const openBtn = document.getElementById('openFee');
+    const modal = document.getElementById('feeModal');
+    const dim = document.getElementById('feeDim');
+    const closeBtn = document.getElementById('feeClose');
+
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('show');
+        });
+    }
+
+    [dim, closeBtn].forEach(el => {
+        el.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+    });
+});
+</script>
+
+<script> // 카드 유의사항 / 부가서비스 아코디언 JS
+document.addEventListener('DOMContentLoaded', function () {
+    // 페이지에 있는 모든 카드 유의사항/부가서비스 아코디언을 다 잡는다
+    const noticeSections = document.querySelectorAll('.card-notice');
+
+    noticeSections.forEach(section => {
+        const head = section.querySelector('.card-notice-head');
+        const body = section.querySelector('.card-notice-body');
+        const btn = section.querySelector('.card-notice-btn');
+
+        head.addEventListener('click', function () {
+            const opened = body.style.maxHeight && body.style.maxHeight !== '0px';
+
+            if (opened) {
+                body.style.maxHeight = '0px';
+                btn.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+            } else {
+                body.style.maxHeight = body.scrollHeight + 'px';
+                btn.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+});
+</script>
+
+<script> // 카드 비교 모달+결과창 JS
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* ===== 공통 함수 ===== */
+    function renderCardBox(boxEl, data) {
+        const { img, name, benefit } = data;
+        const thumbHtml = img
+            ? `<img src="${img}" alt="${name || ''}" class="card-img">`
+            : `<div class="card-thumb">${(name || 'C').charAt(0)}</div>`;
+
+        boxEl.classList.remove('empty');
+        boxEl.innerHTML = `
+      ${thumbHtml}
+      ${name ? `<h3 class="card-name">${name}</h3>` : ''}
+      ${benefit ? `<p class="card-benefit">${benefit}</p>` : ''}
+    `;
+    }
+
+    function renderBenefits(listEl, benefitsStr) {
+        listEl.innerHTML = '';
+        if (!benefitsStr) {
+            listEl.innerHTML = `<li class="placeholder">혜택 정보가 없습니다.</li>`;
+            return;
+        }
+        const arr = benefitsStr.split('|').map(s => s.trim()).filter(Boolean);
+        arr.forEach(b => {
+            const li = document.createElement('li');
+            li.textContent = b;
+            listEl.appendChild(li);
+        });
+    }
+
+    /* ===== 요소 가져오기 ===== */
+    const modal = document.getElementById('cardModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+
+    const currentBox = document.querySelector('#currentCard .card-box');
+    const targetBox = document.querySelector('#targetCard .card-box');
+
+    const currentBenefitsUl = document.querySelector('#currentBenefits .benefit-list');
+    const targetBenefitsUl = document.querySelector('#targetBenefits .benefit-list');
+    const benefitCompareSec = document.getElementById('benefitCompare');
+
+    /* ===== 페이지 처음에 현재 카드 채우기 ===== */
+    if (currentBox) {
+        renderCardBox(currentBox, {
+            img: currentBox.dataset.cardImg || '',
+            name: currentBox.dataset.cardName || '',
+            benefit: currentBox.dataset.cardBenefit || ''
+        });
+        renderBenefits(currentBenefitsUl, currentBox.dataset.cardBenefits || '');
+    }
+
+    /* ===== 모달 열기/닫기 ===== */
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    /* ===== 모달에서 카드 선택 ===== */
+    if (modal) {
+        modal.addEventListener('click', function (e) {
+            // 배경 클릭 시 닫기
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                return;
+            }
+
+            const item = e.target.closest('.modal-card-item');
+            if (!item) return;
+
+            const name = item.dataset.cardName;
+            const benefit = item.dataset.cardBenefit;
+            const img = item.dataset.cardImg;
+            const benefitsStr = item.dataset.cardBenefits || '';
+
+            // 오른쪽 카드 박스 채우기
+            renderCardBox(targetBox, { img, name, benefit });
+
+            // 혜택 비교 오른쪽 채우기
+            renderBenefits(targetBenefitsUl, benefitsStr);
+
+            // ✅ 이 순간에만 비교 섹션 보여주기
+            if (benefitCompareSec) {
+                benefitCompareSec.style.display = 'block';
+            }
+
+            // 모달 닫기
+            modal.style.display = 'none';
+        });
+    }
+
+});
+</script>
+</html>

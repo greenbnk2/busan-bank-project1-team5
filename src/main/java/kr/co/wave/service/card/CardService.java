@@ -8,7 +8,6 @@ import kr.co.wave.entity.card.Card;
 import kr.co.wave.repository.card.AnnualFeeRepository;
 import kr.co.wave.repository.card.BenefitRepository;
 import kr.co.wave.repository.card.CardRepository;
-import kr.co.wave.repository.config.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -17,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,13 +29,15 @@ public class CardService {
     private final BenefitRepository benefitRepository;
     private final ModelMapper modelMapper; // Entity와 DTO를 변환해주는 객체
 
+    // 필요없는데 혹시나 남겨둠
     public Page<CardDTO> getCardAllBySearch(String searchType, String keyword, int page, int size){
         String st = (searchType == null) ? "" : searchType.trim();
         String kw = (keyword == null) ? "" : keyword.trim();
         Pageable pageable = PageRequest.of(page, size);
         return cardRepository.findCardAllBySearch(st, kw, pageable);
     }
-
+    
+    // 필요 없어질 예정
     public CardDTO getCardById(int cardId){
         Optional<Card> card = cardRepository.findById(cardId);
         if(card.isPresent()){
@@ -46,38 +46,25 @@ public class CardService {
         return null;
     }
 
-    /*
-    // 카드 정보 가져오기
-    public Page<CardDTO> getCardAllBySearch2(String searchType, String keyword, int page, int size){
-        String st = (searchType == null) ? "" : searchType.trim();
-        String kw = (keyword == null) ? "" : keyword.trim();
-        Pageable pageable = PageRequest.of(page, size);
+    @Transactional
+    public CardWithInfoDTO getCardWithInfoById(int cardId) {
+        Card card = cardRepository.findById(cardId).get();
 
-        List<AdminCardListDTO> adminCardListDTOS = new ArrayList<>();
+        CardWithInfoDTO cardWithInfoDTO = new CardWithInfoDTO();
+        cardWithInfoDTO.setCard(modelMapper.map(card, CardDTO.class));
 
-        // 카드 정보
-        List<Card> cardList = cardRepository.findAll();
+        List<Benefit> benefits = benefitRepository.findByCard_CardId(card.getCardId());
+        cardWithInfoDTO.setBenefitList(benefits);
 
-        for(Card card : cardList){
-            AdminCardListDTO adminCardListDTO = new AdminCardListDTO();
-            adminCardListDTO.setCard(card);
+        List<AnnualFee> annualFees = annualFeeRepository.findByCard_CardId(card.getCardId());
+        cardWithInfoDTO.setAnnualFeeList(annualFees);
 
-            // 혜택 정보
-            List<Benefit> benefitList = benefitRepository.findByCardId(card.getCardId());
-            adminCardListDTO.setBenefitList(benefitList);
-
-            // 연회비 정보
-            List<AnnualFee> annualFeeList = annualFeeRepository.findByCardId(card.getCardId());
-            adminCardListDTO.setAnnualFeeList(annualFeeList);
-
-            adminCardListDTOS.add(adminCardListDTO);
-        }
-
-        return cardRepository.findCardAllBySearch(st, kw, pageable);
+        return cardWithInfoDTO;
     }
-    */
 
-    public Page<AdminCardListDTO> getCardWithInfoAllBySearch(String searchType, String keyword, int page, int size) {
+
+    @Transactional
+    public Page<CardWithInfoDTO> getCardWithInfoAllBySearch(String searchType, String keyword, int page, int size) {
         // 검색어/타입 공백 처리
         String st = (searchType == null) ? "" : searchType.trim();
         String kw = (keyword == null) ? "" : keyword.trim();
@@ -87,10 +74,10 @@ public class CardService {
         Page<CardDTO> cardPage = cardRepository.findCardAllBySearch(st, kw, pageable);
 
         // 각 카드에 혜택 / 연회비 정보 붙이기
-        List<AdminCardListDTO> adminCardList = new ArrayList<>();
+        List<CardWithInfoDTO> adminCardList = new ArrayList<>();
 
         for (CardDTO cardDTO : cardPage.getContent()) {
-            AdminCardListDTO dto = new AdminCardListDTO();
+            CardWithInfoDTO dto = new CardWithInfoDTO();
 
             // 카드 기본정보
             dto.setCard(cardDTO);
@@ -119,7 +106,7 @@ public class CardService {
                 .name(cardRequestDTO.getName())
                 .engName(cardRequestDTO.getEngName())
                 .type(cardRequestDTO.getType())
-                .isCompany(cardRequestDTO.getIsCompany())
+                .isCompany(cardRequestDTO.isCompany())
                 .description(cardRequestDTO.getDescription())
                 .status("활성")
                 .build();

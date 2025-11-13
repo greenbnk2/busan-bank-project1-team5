@@ -1,10 +1,105 @@
 <header th:fragment="header">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
-    <div id="header-container">
-        <div id="header-wrap">
-            <h1 class="logo-busan">
-                <img th:src="@{/images/logo.png}" alt="로고">
-            </h1>
+    <div class="header-inner">
+        <div class="logo">
+            <div class="logo-main">
+                <a href="#">
+                    <img src="https://www.busanbank.co.kr/resource/img/tit/h1_busanbank_new.png" alt="">
+                </a>
+            </div>
+        </div>
+
+        <!-- 1차 메뉴: hover하면 아래 .mega-panel이 열리는 구조 -->
+        <ul class="nav_menu">
+            <li title="menu1">
+                <a href="/" class="menu_title">마이</a>
+                <!-- 임시 메뉴 하위 영역 -->
+                <div class="mega-panel">
+                    <div class="mega-inner">
+                        <div class="mega-col">
+                            <h4>카드 이용 내역</h4>
+                            <ul>
+                                <li><a href="#">이용 대금 명세서</a></li>
+                                <li><a href="#">최근 이용 내역</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>이용 금액 결제</h4>
+                            <ul>
+                                <li><a href="#">즉시 결제</a></li>
+                                <li><a href="#">분할 결제</a></li>
+                                <li><a href="#">결제 내역</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li title="menu2">
+                <a href="/" class="menu_title">혜택</a>
+                <div class="mega-panel">
+                    <div class="mega-inner">
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <a href="/" class="menu_title">카드</a>
+                <div class="mega-panel">
+                    <div class="mega-inner">
+                        <div class="mega-col">
+                            <h4>카드신청</h4>
+                            <ul>
+                                <li><a href="#">체크카드</a></li>
+                                <li><a href="#">신용카드</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <a href="/" class="menu_title">고객지원</a>
+                <div class="mega-panel">
+                    <div class="mega-inner">
+                        <div class="mega-col">
+                            <h4>인증 센터</h4>
+                            <ul>
+                                <li><a href="#">카드본인확인서비스</a></li>
+                                <li><a href="#">보안프로그램 설치 안내</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>기타 안내</h4>
+                            <ul>
+                                <li><a href="#">카드 종합 이용 안내</a></li>
+                                <li><a href="#">고객 이용 약관 안내</a></li>
+                                <li><a href="#">웹사이트 이용 안내</a></li>
+                                <li><a href="#">상품공시실 / 자료실</a></li>
+                                <li><a href="#">뉴스 / 공지</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="util">
+            <div class="search-box">
+                <span class="search-ico">🔍</span>
+                <input type="text" placeholder="카드, 메뉴, 혜택을 검색해 보세요">
+            </div>
+            <button class="all-nav-btn" id="allNavOpen" aria-label="전체 메뉴 열기">☰</button>
         </div>
     </div>
 </header>
+
+<script>
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>

@@ -1,8 +1,108 @@
-#footer-container{
-    border-top: 2px solid #CB2B11;
+.site-footer {
+    border-top: 1px solid #e5e5e5;
+    background: #fff;
+    padding: 20px 0 26px;
+    font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont;
+    font-size: 13px;
+    color: #222;
 }
 
-#footer-wrap {
-    max-width: 1200px; /* 가로 크기 1200px */
-    margin: 0 auto; /* 가운데 정렬 */
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* 위쪽 링크줄 */
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #1b1b1b;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.footer-links a:first-child {
+    color: #1b5ac2;
+    /* 첫번째만 파란색처럼 */
+    font-weight: 600;
+}
+
+/* 가운데 영역 */
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.footer-tel {
+    font-size: 13px;
+    color: #111;
+}
+
+.footer-tel .footer-bar {
+    margin: 0 6px;
+    color: #999;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: #777;
+}
+
+.footer-sns {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.footer-sns a {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    text-decoration: none;
+    color: #000;
+}
+
+/* 오른쪽 드롭다운 버튼들 */
+.footer-right {
+    display: flex;
+    gap: 10px;
+}
+
+.foot-select button {
+    border: 1px solid #dcdfe3;
+    background: #fff;
+    border-radius: 6px;
+    padding: 8px 32px 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    position: relative;
+}
+
+.foot-select .arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: #000;
 }

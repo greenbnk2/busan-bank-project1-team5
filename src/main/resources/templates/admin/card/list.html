@@ -20,7 +20,7 @@
                             <option value="" th:selected="${st == ''}">전체</option>
                             <option value="name" th:selected="${st == 'name'}">상품명</option>
                             <option value="engName" th:selected="${st == 'engName'}">영어명</option>
-                            <option value="type" th:selected="${st == 'type'}">타입</option>
+                            <option value="type" th:selected="${st == 'type'}">카드유형</option>
                         </select>
                     </div>
 
@@ -79,14 +79,14 @@
                     <tr th:each="cardItem, stat : ${cardList.content}">
                         <td>[[${cardList.totalElements - (cardList.number * cardList.size + stat.index)}]]</td>
                         <td>
-                            <a th:href="@{#}">[[${cardItem.card.name}]] ([[${cardItem.card.engName}]])</a>
+                            <a th:href="@{/admin/card/view(cardId=${cardItem.card.cardId})}">[[${cardItem.card.name}]] ([[${cardItem.card.engName}]])</a>
                         </td>
                         <td>[[${cardItem.card.type}]]</td>
                         <!-- 혜택 -->
                         <td>
                             <ul>
                                 <li th:each="benefit : ${cardItem.benefitList}">
-                                    [[${benefit.benefitDescription}]]
+                                    [[${benefit.benefitCategory}]] [[${benefit.value}]] [[${benefit.unit}]] [[${benefit.benefitType}]]
                                 </li>
                             </ul>
                         </td>

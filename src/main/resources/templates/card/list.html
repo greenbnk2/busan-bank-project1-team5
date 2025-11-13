@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/member/card/list.css}">
+</head>
+<body>
+<div th:replace="~{common/product_header :: product_header}"></div>
+<main>
+    <div class="main-container">
+        <div id="main-content">
+            <section class="card-page">
+                <!-- 필터 -->
+                <div class="card-filter" id="filterArea">
+                    <button class="filter-btn active" data-filter="all">추천</button>
+                    <button class="filter-btn" data-filter="cashback">캐시백이벤트</button>
+                    <button class="filter-btn" data-filter="overseas">해외·마일리지</button>
+                    <button class="filter-btn" data-filter="new">NEW</button>
+                    <button class="filter-btn" data-filter="samsung">삼성카드</button>
+                    <button class="filter-btn" data-filter="taptap">taptap</button>
+                    <button class="filter-btn" data-filter="premium">프리미엄</button>
+                    <button class="filter-btn" data-filter="mart">마트·편의점</button>
+                    <button class="filter-btn" data-filter="car">주유·자동차</button>
+                    <button class="filter-btn" data-filter="car">주유·자동차</button>
+                    <button class="filter-btn" data-filter="car">주유·자동차</button>
+                    <button class="filter-btn" data-filter="car">주유·자동차</button>
+                    <button class="filter-btn" data-filter="car">주유·자동차</button>
+                    <button class="filter-btn" data-filter="car">주유·자동차</button>
+
+                    <!--
+                    ★ 타임리프 버전 예시 (JS 안 쓰고 서버에서 필터링할 때)
+                    - 컨트롤러에서 ?category=... 받아서 다시 목록 내려주는 구조
+                    - ${param.category} 로 현재 선택된 필터를 active 처리
+                    <a th:href="@{/cards(category='all')}"
+                       th:class="'filter-btn ' + (${param.category}=='all' ? 'active' : '')">추천</a>
+                    <a th:href="@{/cards(category='cashback')}"
+                       th:class="'filter-btn ' + (${param.category}=='cashback' ? 'active' : '')">캐시백이벤트</a>
+                    <a th:href="@{/cards(category='overseas')}"
+                       th:class="'filter-btn ' + (${param.category}=='overseas' ? 'active' : '')">해외·마일리지</a>
+                    -->
+                </div>
+
+                <div class="list-wrapper">
+                    <h2 class="list-title" id="listTitle">추천 카드</h2>
+
+                    <!-- 리스트 -->
+                    <div class="card-list" id="cardList">
+                        <!-- 스프링 할 때 주석 지우셈
+                        <th:block th:each="card : ${cards}">
+                            <article class="card-item" th:data-category="${card.categories}">
+                                <div class="card-thumb">
+                                    <img th:src="${card.imageUrl}" th:alt="${card.name}">
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-name" th:text="${card.name}">카드 이름</h3>
+                                    <p class="card-desc" th:text="${card.description}">설명</p>
+                                    <p class="card-tagline" th:text="${card.tagline}">태그라인</p>
+                                </div>
+                                <div class="card-actions">
+                                    <a class="detail-btn" th:href="@{/card/{id}(id=${card.id})}">자세히 보기</a>
+                                </div>
+                            </article>
+                        </th:block>
+                        -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+<div th:replace="~{common/footer :: footer}"></div>
+<script> // 헤더 푸터 연결
+document.addEventListener('DOMContentLoaded', function () {
+    // header 로드
+    fetch('../common/header.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('header').innerHTML = html;
+
+            // 헤더가 실제로 DOM에 들어온 뒤에 스크롤 이벤트 달기
+            const headerEl = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    headerEl.classList.add('scrolled');
+                } else {
+                    headerEl.classList.remove('scrolled');
+                }
+            });
+        });
+
+    // footer 로드
+    fetch('../common/footer.html')
+        .then(res => res.text())
+        .then(html => document.getElementById('footer').innerHTML = html);
+});
+</script>
+
+<!-- 2) ★★★ 나중에 스프링/타임리프로 데이터 뿌릴 때 '이 아래 전체'는 지워도 됩니다 ★★★ -->
+<script>
+    // 카드 데이터 (임시)
+    const cards = [
+        {
+            id: "card01",
+            name: "삼성 iD SELECT ON 카드",
+            desc: "온라인(패션/쇼핑) 10% 결제할인, OTT/디지털콘텐츠 5% 결제할인",
+            tag: "연회비 100% 캐시백 이벤트 진행중",
+            img: "https://static11.samsungcard.com/wcms/home/scard/image/personal/IDON_AAP1731.gif",
+            link: "#",
+            categories: ["all", "cashback", "samsung", "new"]
+        },
+        {
+            id: "card02",
+            name: "삼성 iD SELECT ALL 카드",
+            desc: "아파트 관리비/통신요금/교육 10% 할인, 온라인쇼핑/주유 7% 할인",
+            tag: "디지털콘텐츠/주유 최대 7% 적립",
+            img: "https://static11.samsungcard.com/wcms/home/scard/image/personal/DN_AAP1742.gif",
+            link: "#",
+            categories: ["all", "cashback", "samsung"]
+        },
+        {
+            id: "card03",
+            name: "삼성카드 taptap O",
+            desc: "대중교통/통신 10% 할인, CGV·쿠팡 최대 5,000원 결제할인",
+            tag: "생활 필수 할인",
+            img: "https://static11.samsungcard.com/wcms/home/scard/image/personal/DN_AAP1767.gif",
+            link: "#",
+            categories: ["all", "taptap", "mart"]
+        },
+        {
+            id: "card04",
+            name: "해외 여행 스페셜 카드",
+            desc: "해외 이용 수수료 0%, 항공 마일리지 적립, 공항 라운지 이용",
+            tag: "여행 좋아하는 분께",
+            img: "https://static11.samsungcard.com/wcms/home/scard/image/personal/b_AAP1483.png",
+            link: "#",
+            categories: ["all", "overseas"]
+        },
+        {
+            id: "card05",
+            name: "프리미엄 Signature",
+            desc: "컨시어지, 특급 호텔, 골프장 그린피 할인",
+            tag: "연 1회 공항 라운지 무료",
+            img: "https://i.namu.wiki/i/IAJvonqqxo949GavmMtyQOX05yvPs8vXZpJWZ5orEB4ZUMzsEUpj3D6osRLF8WbcXVbpB05ZGwriavHWsSGRbg.webp",
+            link: "#",
+            categories: ["all", "premium"]
+        },
+        {
+            id: "card06",
+            name: "드라이버 전용 오일/주유 카드",
+            desc: "주유 150원/L 할인, 스피드메이트 엔진오일 최대 30% 할인",
+            tag: "차량 유지비 줄이기",
+            img: "https://cdnu.www.shinhancard.com/pconts/images/banner/20250320641363_hotbn.png",
+            link: "#",
+            categories: ["all", "car", "cashback"]
+        },
+        {
+            id: "card07",
+            name: "드라이버 전용 오일/주유 카드",
+            desc: "주유 150원/L 할인, 스피드메이트 엔진오일 최대 30% 할인",
+            tag: "차량 유지비 줄이기",
+            img: "https://cdnu.www.shinhancard.com/pconts/images/banner/20250320641363_hotbn.png",
+            link: "#",
+            categories: ["all", "car", "cashback"]
+        }
+    ];
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const cardListEl = document.getElementById("cardList");
+        const filterArea = document.getElementById("filterArea");
+        const listTitle = document.getElementById("listTitle");
+
+        function renderCards(filterKey = "all") {
+            cardListEl.innerHTML = "";
+
+            const filtered = cards.filter(card => card.categories.includes(filterKey));
+
+            const activeBtn = document.querySelector(".filter-btn.active");
+            listTitle.textContent = activeBtn ? activeBtn.textContent + " 카드" : "카드 목록";
+
+            if (filtered.length === 0) {
+                cardListEl.innerHTML = '<div class="empty-msg">해당 조건의 카드가 없습니다.</div>';
+                return;
+            }
+
+            filtered.forEach(card => {
+                const item = document.createElement("article");
+                item.className = "card-item";
+                item.innerHTML = `
+                    <div class="card-thumb">
+                        <img src="${card.img}" alt="${card.name}">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-name">${card.name}</h3>
+                        <p class="card-desc">${card.desc}</p>
+                        <p class="card-tagline">${card.tag}</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="detail-btn" data-link="${card.link}">자세히 보기</button>
+                    </div>
+                `;
+                cardListEl.appendChild(item);
+            });
+
+            cardListEl.querySelectorAll(".detail-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const url = btn.dataset.link;
+                    if (url && url !== "#") {
+                        window.location.href = url;
+                    } else {
+                        alert("이 카드 상세 페이지는 아직 연결되지 않았습니다 🙂");
+                    }
+                });
+            });
+        }
+
+        // 필터 클릭
+        filterArea.addEventListener("click", e => {
+            const target = e.target;
+            if (!target.classList.contains("filter-btn")) return;
+
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            target.classList.add("active");
+
+            const key = target.dataset.filter;
+            renderCards(key);
+        });
+
+        // 초기 표시
+        renderCards("all");
+    });
+</script>
+<!-- ★★★ 여기까지가 나중에 서버 렌더링으로 바꾸면 없어져도 되는 영역 ★★★ -->
+</body>
+</html>

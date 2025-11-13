@@ -26,8 +26,7 @@
                 </select> <br>
 
                 <label>
-                    <input type="hidden" name="isCompany" value="0">
-                    <input type="checkbox" name="isCompany" value="1"> 기업
+                    <input type="checkbox" name="isCompany" value="true"> 기업
                 </label>
 
                 <!-- 연회비 -->
@@ -48,7 +47,7 @@
                         <select name="category" class="category" required>
                             <option value="" disabled selected hidden>카테고리 선택</option>
                             <option th:each="category : ${categoryList}"
-                                    th:value="${category.categoryId}"
+                                    th:value="${category.name}"
                                     th:text="${category.name}"></option>
                         </select>
                         <select name="benefitType" class="benefitType" required>
