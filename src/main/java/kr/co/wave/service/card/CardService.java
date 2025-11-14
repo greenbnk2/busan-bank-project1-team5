@@ -108,7 +108,7 @@ public class CardService {
                 .type(cardRequestDTO.getType())
                 .isCompany(cardRequestDTO.isCompany())
                 .description(cardRequestDTO.getDescription())
-                .status("활성")
+                .status("비활성")
                 .build();
 
         System.out.println(card.toString());
