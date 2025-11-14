@@ -7,7 +7,7 @@
     <script th:src="@{/js/common/aside.js}"></script>
 </head>
 <body>
-<div th:replace="~{common/header :: header}"></div>
+<div th:replace="~{admin/common/header :: header}"></div>
 <main>
     <div class="main-container">
         <div th:replace="~{common/aside :: aside}"></div>
@@ -103,7 +103,7 @@
                         <td>[[${cardItem.card.status}]]</td>
                         <td>[[${#temporals.format(cardItem.card.createdAt, 'yyyy-MM-dd')}]]</td>
                         <td>[[${#temporals.format(cardItem.card.updatedAt, 'yyyy-MM-dd')}]]</td>
-                        <td><button>관리</button></td>
+                        <td><button>수정</button> <button>활성화</button> <button>삭제</button></td>
                     </tr>
                 </table>
             </div>
@@ -146,6 +146,6 @@
         </div>
     </div>
 </main>
-<div th:replace="~{common/footer :: footer}"></div>
+<div th:replace="~{admin/common/footer :: footer}"></div>
 </body>
 </html>
