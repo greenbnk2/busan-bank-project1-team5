@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MemberDTO {
-    private String memId;
-    private String password;
-    private String name;
-    private String role;
+        private String memId;
+        private String password;
+        private String name;
+        private String role;
 }
