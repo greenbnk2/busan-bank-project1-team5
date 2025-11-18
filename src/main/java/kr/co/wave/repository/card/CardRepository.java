@@ -36,4 +36,17 @@ public interface CardRepository extends JpaRepository<Card, Integer> {
     Page<CardDTO> findCardAllBySearch(@Param("searchType") String searchType,
                                       @Param("keyword") String keyword,
                                       Pageable pageable);
+    @Query(
+            value = """
+                      select new kr.co.wave.dto.card.CardDTO(
+                         c.cardId, c.name, c.engName, c.type, c.isCompany, c.description, c.thumbnail, c.background, c.status, c.createdAt, c.updatedAt
+                      )
+                      from Card c
+                      where c.status = '활성'
+                      order by c.cardId desc
+                    """
+    )
+    Page<CardDTO> findCardAllBySearch2(@Param("searchType") String searchType,
+                                      @Param("keyword") String keyword,
+                                      Pageable pageable);
 }

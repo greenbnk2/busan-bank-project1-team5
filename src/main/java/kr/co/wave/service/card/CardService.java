@@ -69,7 +69,7 @@ public class CardService {
     }
 
 
-    // 카드 전체 페이지 타입으로 가져오기 (혜택, 연회비 포함)
+    // 카드 전체 페이지 타입으로 가져오기 (혜택, 연회비 포함) // admin 용
     @Transactional
     public Page<CardWithInfoDTO> getCardWithInfoAllBySearch(String searchType, String keyword, int page, int size) {
         // 검색어/타입 공백 처리
@@ -92,6 +92,59 @@ public class CardService {
             // 혜택 목록
             List<Benefit> benefits = benefitRepository.findByCard_CardId(cardDTO.getCardId());
             dto.setBenefitList(benefits);
+
+            // 추가 11.17 박효빈 혜택 카테고리 - Thymeleaf에서 처리 못하는 부분 service에서 해결
+            List<String> categoryList = benefits.stream()
+                    .map(Benefit::getBenefitCategory)
+                    .toList();
+            dto.setCategoryString(String.join(",", categoryList));
+
+
+            // 연회비 목록
+            List<AnnualFee> annualFees = annualFeeRepository.findByCard_CardId(cardDTO.getCardId());
+            dto.setAnnualFeeList(annualFees);
+
+            CardApprovalDTO cardApprovalDTO = cardApprovalRepository.findCardApprovalPendingByCardId(cardDTO.getCardId());
+            if(cardApprovalDTO != null){
+                dto.setApprovalStatus("결재진행중");
+            } else dto.setApprovalStatus("");
+
+            adminCardList.add(dto);
+        }
+
+        // Page 객체로 다시 감싸서 반환 (검색결과, 페이지 수 그대로 유지)
+        return new PageImpl<>(adminCardList, pageable, cardPage.getTotalElements());
+    }
+
+    @Transactional // 사용자 페이지용 status='활성'만가져오기
+    public Page<CardWithInfoDTO> getCardWithInfoAllBySearch2(String searchType, String keyword, int page, int size) {
+        // 검색어/타입 공백 처리
+        String st = (searchType == null) ? "" : searchType.trim();
+        String kw = (keyword == null) ? "" : keyword.trim();
+        Pageable pageable = PageRequest.of(page, size);
+
+        // DB에서 검색 + 페이징된 카드 목록 가져오기
+        Page<CardDTO> cardPage = cardRepository.findCardAllBySearch2(st, kw, pageable);
+
+        // 각 카드에 혜택 / 연회비 정보 붙이기
+        List<CardWithInfoDTO> adminCardList = new ArrayList<>();
+
+        for (CardDTO cardDTO : cardPage.getContent()) {
+            CardWithInfoDTO dto = new CardWithInfoDTO();
+
+            // 카드 기본정보
+            dto.setCard(cardDTO);
+
+            // 혜택 목록
+            List<Benefit> benefits = benefitRepository.findByCard_CardId(cardDTO.getCardId());
+            dto.setBenefitList(benefits);
+
+            // 추가 11.17 박효빈 혜택 카테고리 - Thymeleaf에서 처리 못하는 부분 service에서 해결
+            List<String> categoryList = benefits.stream()
+                    .map(Benefit::getBenefitCategory)
+                    .toList();
+            dto.setCategoryString(String.join(",", categoryList));
+
 
             // 연회비 목록
             List<AnnualFee> annualFees = annualFeeRepository.findByCard_CardId(cardDTO.getCardId());

@@ -11,7 +11,7 @@
     padding: 0 10px;
 }
 
-/* 카드형 컨테이너 – product_register6 과 톤 맞춤 */
+/* 카드형 컨테이너 – 다른 회원가입 페이지들과 톤 맞춤 */
 .addr-wrap {
     background: #fff;
     border: 1px solid #eee;
@@ -62,13 +62,9 @@
     outline: none;
 }
 
+/* 밑줄 */
 .underline {
     height: 2px;
-    background: #d3d3d3;
-}
-
-.field input:focus+.underline,
-.field .row+.underline {
     background: #d3d3d3;
 }
 
@@ -96,7 +92,7 @@
     margin: 6px 0 12px;
 }
 
-/* 확인 버튼 – 톤 맞춤 */
+/* 확인 버튼 – 프로젝트 공통 컬러(#CB2B11) */
 .btn-submit {
     width: 100%;
     height: 56px;

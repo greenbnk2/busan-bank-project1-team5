@@ -18,4 +18,7 @@ public class CardWithInfoDTO {
     List<Benefit> benefitList;
     List<AnnualFee> annualFeeList;
     String approvalStatus;
+
+    // JS 카테고리별 버튼 필터링 위해 추가
+    private String categoryString;
 }

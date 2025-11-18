@@ -4,7 +4,7 @@
     }
 }
 
-.main-content {
+.content {
     max-width: 800px;
     margin: 80px auto;
     padding: 0 10px;
@@ -57,37 +57,7 @@
     margin: 14px 0 18px;
 }
 
-.carrier-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 18px;
-}
-
-.carrier-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-}
-
-.carrier {
-    height: 48px;
-    border: 1.6px solid #d1d5db;
-    border-radius: 12px;
-    background: #fff;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.carrier.small {
-    font-weight: 700;
-}
-
-.carrier.on {
-    border-color: #111;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, .04) inset;
-}
-
+/* 약관 박스 */
 .terms {
     background: #f6f6f6;
     border-radius: 14px;
@@ -115,13 +85,12 @@
     font-weight: 700;
 }
 
-/* 약관 체크 동그라미 기본(미체크) */
+/* 약관 체크 동그라미 */
 .terms-head .bullet {
     width: 22px;
     height: 22px;
     border-radius: 999px;
     border: 1.6px solid #111;
-    /* 테두리만 보이는 비어있는 원 */
     background: transparent;
     color: #fff;
     display: grid;
@@ -130,17 +99,15 @@
     transition: all .15s;
 }
 
-/* 체크 상태 */
 .terms-head .bullet.on {
     background: #111;
-    /* 꽉 찬 원 */
 }
 
 .terms-head .bullet.on::after {
     content: "✓";
-    /* 체크 마크 */
 }
 
+/* 화살표 */
 .terms-head .chev {
     font-size: 20px;
     color: #555;
@@ -152,13 +119,20 @@
     transform: rotate(90deg);
 }
 
+/* 스르륵 내려오는 본문 */
 .terms-body {
     overflow: hidden;
     max-height: 0;
-    transition: max-height .25s ease;
     background: #fff;
     border-top: 1px solid #eee;
     padding: 0 16px;
+    transition: max-height .25s ease, padding .25s ease;
+}
+
+.terms-body.open {
+    max-height: 300px;
+    /* 내용에 맞게 넉넉한 값 */
+    padding: 12px 16px 14px;
 }
 
 .terms-body ul {
@@ -171,6 +145,7 @@
     font-size: 12px;
 }
 
+/* 나머지 폼/버튼은 그대로 유지 */
 .form-item {
     margin: 18px 0 8px;
 }
@@ -210,7 +185,7 @@
 }
 
 .underline {
-    height: 2px;
+    height: 1px;
     background: #111;
     margin-top: 3px;
 }

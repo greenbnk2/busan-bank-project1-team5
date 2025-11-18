@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -35,13 +34,13 @@ public class AdminConfigController {
     }
 
     // 약관관리
-    @GetMapping("/admin/config/policy")
+    @GetMapping("/admin/config/policy/list")
     public String adminConfigPolicy(Model model) {
 
         List<TermsDTO> termsList = termsService.getTermsAll();
         model.addAttribute("termsList", termsList);
 
-        return "admin/config/policy";
+        return "admin/config/policy/list";
     }
 
     // 카테고리
@@ -62,7 +61,13 @@ public class AdminConfigController {
 
         System.out.println(termsDTO);
         termsService.updateTerms(termsDTO);
-        return "redirect:/admin/config/policy";
+        return "redirect:/admin/config/policy/list";
+    }
+
+    // 약관 등록
+    @GetMapping("/admin/config/policy/register")
+    public String adminConfigRegister() {
+        return "admin/config/policy/register";
     }
 
 }

@@ -16,23 +16,29 @@
 
                     <div class="card-top-left">
                         <div class="card-preview">
-                            <img src="https://item.kakaocdn.net/do/8e9c5b6084a4f06c14baf8341edc9062f43ad912ad8dd55b04db6a64cddaf76d"
-                                 alt="카드 이미지">
+                            <img th:src="@{${cardItem.card.background != null ? '/' + cardItem.card.background : '/' + cardItem.card.thumbnail}}"
+                                 th:alt="${cardItem.card.name}">
                         </div>
                     </div>
 
                     <!-- 오른쪽 설명 -->
                     <div class="card-top-right">
                         <div class="top-head">
-                            <h1 class="card-title">듀.. 가나디 <br>
-                                Ganadi the due.. </h1>
+                            <h1 class="card-title">
+                                [[${cardItem.card.name}]]<br>
+                                [[${cardItem.card.engName}]]
+                                 </h1>
                         </div>
-                        <p class="card-sub">계획한 모든 일상에 따라오는 할인</p>
+                        <p class="card-sub" th:text="${cardItem.card.description}"></p>
 
                         <div class="top-benefits">
-                            <p><span>외식 · 배달 · 편의점</span> <strong>10% 할인</strong></p>
-                            <p><span>쇼핑 · 주유 · 생활</span> <strong>5~10% 할인</strong></p>
-                            <p><span>공과금 · 디지털구독</span> <strong>10~20% 할인</strong></p>
+                            <p th:each="b, stat : ${cardItem.benefitList}" th:if="${stat.index <3}">
+                            <!-- 혜택 카테고리 -->
+                                <span>[[${b.benefitCategory}]]</span>
+                                <strong>
+                                    [[${b.value}]] [[${b.unit}]] [[${b.benefitType}]]
+                                </strong>
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -44,13 +50,8 @@
                         <a href="javascript:void(0)" class="annual-arrow" id="openFee">›</a>
                     </div>
                     <ul class="annual-rows">
-                        <li>
-                            <span class="annual-type">Visa</span>
-                            <span class="annual-fee-value">본인 300,000원</span>
-                        </li>
-                        <li>
-                            <span class="annual-type">국내전용</span>
-                            <span class="annual-fee-value">본인 300,000원</span>
+                        <li th:each="fee:${cardItem.annualFeeList}">
+                            <span class="annual-type">[[${fee.annualName}]]</span>
                         </li>
                     </ul>
                 </div>

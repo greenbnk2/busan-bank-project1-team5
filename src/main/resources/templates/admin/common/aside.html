@@ -1,9 +1,12 @@
 <aside th:fragment="aside">
     <link rel="stylesheet" th:href="@{/css/admin/common/aside.css}">
-    <nav id="aside-container">
-        <ul>
+    <nav id="aside-container" >
+        <ul class="aside-ul">
             <li>
-                <img th:src="@{/images/메뉴 아이콘.svg}" alt="aside tap icon">
+                <a th:href="@{#}" class="active menu-title">
+                    <img th:src="@{/images/메뉴 아이콘.svg}" alt="aside tap icon">
+                    <span></span>
+                </a>
             </li>
 
             <li>
@@ -12,9 +15,9 @@
                     <span>상품관리</span>
                 </a>
                 <ul class="submenu">
-                    <li><a th:href="@{/admin/product/list}">상품목록</a></li>
+                    <li><a th:href="@{/admin/product/list}" class="submenu-a">상품목록</a></li>
                     <!-- <li><a th:href="@{/admin/product/register}">상품등록</a></li>  등록은 목록에서 '등록'버튼을 통해 접근 가능-->
-                    <li><a th:href="@{#}">상품가입현황</a></li>
+                    <li><a th:href="@{#}" class="submenu-a">상품가입현황</a></li>
                 </ul>
             </li>
 
@@ -24,7 +27,7 @@
                     <span>고객관리</span>
                 </a>
                 <ul class="submenu">
-                    <li><a th:href="@{/admin/member/list}">회원목록</a></li>
+                    <li><a th:href="@{/admin/member/list}" class="submenu-a">회원목록</a></li>
                 </ul>
             </li>
 
@@ -34,54 +37,45 @@
                     <span>운영관리</span>
                 </a>
                 <ul class="submenu">
-                    <li><a th:href="@{#}"></a></li>
+                    <li><a th:href="@{#}" class="submenu-a">관리자 목록</a></li>
                 </ul>
             </li>
 
             <li>
-                <a th:href="@{#}" class="active menu-title">
+                <a th:href="@{#}" class="active menu-title" >
                     <img th:src="@{/images/관리자_고객센터.svg}" alt="고객센터 아이콘">
                     <span>고객센터</span>
                 </a>
                 <ul class="submenu">
-                    <li><a th:href="@{#}">게시판목록</a></li>
-                    <li><a th:href="@{#}">상품 문의 게시판</a></li>
+                    <li><a th:href="@{#}" class="submenu-a">게시판목록</a></li>
+                    <li><a th:href="@{#}" class="submenu-a">상품문의목록</a></li>
                 </ul>
             </li>
 
             <li>
-                <a th:href="@{#}" class="active menu-title" data-resize-btn="">
+                <a th:href="@{#}" class="active menu-title" >
                     <img th:src="@{/images/관리자_기본설정.svg}" alt="환경설정아이콘">
                     <span>기본설정</span>
                 </a>
                 <ul class="submenu">
-                    <li><a th:href="@{/admin/config/basic}">기본설정</a></li>
-                    <li><a th:href="@{/admin/config/banner}">배너관리</a></li>
-                    <li><a th:href="@{/admin/config/policy}">약관관리</a></li>
-                    <li><a th:href="@{#}">검색어관리</a></li>
-                    <li><a th:href="@{#}">알림설정</a></li>
-                    <li><a th:href="@{/admin/config/category}">카테고리</a></li>
-                    <li><a th:href="@{/admin/config/version}">버전설정</a></li>
+                    <li><a th:href="@{/admin/config/basic}" class="submenu-a">기본설정</a></li>
+                    <li><a th:href="@{/admin/config/banner}" class="submenu-a">배너관리</a></li>
+                    <li><a th:href="@{/admin/config/policy}" class="submenu-a">약관관리</a></li>
+                    <li><a th:href="@{#}" class="submenu-a">검색어관리</a></li>
+                    <li><a th:href="@{#}" class="submenu-a">알림설정</a></li>
+                    <li><a th:href="@{/admin/config/category}" class="submenu-a">카테고리</a></li>
+                    <li><a th:href="@{/admin/config/version}" class="submenu-a">버전설정</a></li>
                 </ul>
             </li>
 
-            <!-- 고정 switch -->
+            <!-- 확장 고정 switch -->
             <li class="aside-switch">
-                <label><input type="checkbox" role="switch"></label>
-                <span></span>
+                <a th:href="@{#}" >
+                    <label><input type="checkbox" role="switch"></label>
+                    <span></span>
+                </a>
             </li>
 
         </ul>
     </nav>
 </aside>
-
-<script>
-    const resizeBtn = document.querySelector('[data-resize-btn]');// 크기 조정 버튼을 선택하는 상수 정의
-
-    // 클릭 이벤트가 감지될 때마다 호출되는 함수 설정을 위해 // 이벤트 리스터 추가
-    resizeBtn.addEventListener('click', function (e) {
-        e.preventDefault(); // a태그의 기본 동작을 차단
-        document.body.classList.toggle('sb-expanded'); // 대화형 CSS 클래스 토글
-
-    });
-</script>

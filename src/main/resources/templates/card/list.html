@@ -17,17 +17,73 @@
 
             <section class="card-page">
 
-                <!-- 필터 버튼 -->
+                <!-- 필터 버튼 -> 체크 박스 변경-->
                 <div class="card-filter" id="filterArea">
-                    <button class="filter-btn active" data-filter="all">추천</button>
-                    <button class="filter-btn" data-filter="cashback">캐시백이벤트</button>
-                    <button class="filter-btn" data-filter="overseas">해외·마일리지</button>
-                    <button class="filter-btn" data-filter="new">NEW</button>
-                    <button class="filter-btn" data-filter="samsung">삼성카드</button>
-                    <button class="filter-btn" data-filter="taptap">taptap</button>
-                    <button class="filter-btn" data-filter="premium">프리미엄</button>
-                    <button class="filter-btn" data-filter="mart">마트·편의점</button>
-                    <button class="filter-btn" data-filter="car">주유·자동차</button>
+                    <!-- ★ label에 filter-btn 클래스를 줘서 기존 버튼 스타일 그대로 사용 -->
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="여행">
+                        <span>여행</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="쇼핑">
+                        <span>쇼핑</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="도서">
+                        <span>도서</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="음식">
+                        <span>음식</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="주유">
+                        <span>주유</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="포인트/캐쉬백/마일리지">
+                        <span>포인트/캐쉬백/마일리지</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="무이자할부">
+                        <span>무이자할부</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="놀이공원">
+                        <span>놀이공원</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="통신/인터넷">
+                        <span>통신/인터넷</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="APT관리비할인">
+                        <span>APT관리비할인</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="후불교통기능/교통할인">
+                        <span>후불교통기능/교통할인</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="기타">
+                        <span>기타</span>
+                    </label>
+
+                    <label class="filter-btn">
+                        <input type="checkbox" class="filter-checkbox" data-filter="VIP">
+                        <span>VIP</span>
+                    </label>
                 </div>
 
                 <div class="list-wrapper">
@@ -40,7 +96,8 @@
                         <!-- ★ 타임리프 카드 반복 ★ -->
                         <th:block th:each="item : ${cards}">
 
-                            <article class="card-item">
+                            <article class="card-item"
+                                     th:data-category="${item.categoryString}">
 
                                 <!-- 카드 이미지 -->
                                 <div class="card-thumb">
@@ -59,7 +116,7 @@
                                 <!-- 상세보기 -->
                                 <div class="card-actions">
                                     <a class="detail-btn"
-                                       th:href="@{/card/view(cardId=${item.card.cardId})}">
+                                       th:href="@{/card/view2(cardId=${item.card.cardId})}">
                                         자세히 보기
                                     </a>
                                 </div>
@@ -103,6 +160,86 @@
                     footerWrapper.innerHTML = html;
                 }
             });
+    });
+</script>
+
+<script>
+    // 카드 필터링 JS (체크박스 다중 선택 버전)
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1) 체크박스들 전부 가져오기
+        const checkboxes = document.querySelectorAll(".filter-checkbox");
+        // 2) 카드들 전부 가져오기
+        const cards = document.querySelectorAll(".card-item");
+        // 3) 제목 요소
+        const listTitle = document.getElementById("listTitle");
+
+        // 🔹 필터 적용 함수 (체크박스 상태가 바뀔 때마다 호출)
+        function applyFilter() {
+            // 1. 선택된 카테고리 목록 만들기
+            const selectedCategories = Array.from(checkboxes)
+                .filter(cb => cb.checked)                              // 체크된 것만
+                .map(cb => cb.getAttribute("data-filter"));            // data-filter 값 배열로
+
+            // 2. 카드 보여주기 / 숨기기 + 보이는 카드 개수 세기
+            let visibleCount = 0; // 화면에 보여지는 카드 개수
+
+            cards.forEach(card => {
+                const categoryData = card.getAttribute("data-category") || ""; // "여행,음식,주유" 이런 문자열
+
+                // 아무것도 선택 안 했으면 전체 보여주기
+                if (selectedCategories.length === 0) {
+                    card.style.display = "";
+                    visibleCount++;        // 보여주니까 +1
+                    return;
+                }
+
+                // 하나라도 포함되면 보여주기 (OR 조건)
+                const shouldShow = selectedCategories.some(cat => categoryData.includes(cat));
+
+                if (shouldShow) {
+                    card.style.display = "";
+                    visibleCount++;        // 보여주는 카드면 +1
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // 3. 제목 변경: "선택된 N개의 카드"
+            if (listTitle) {
+
+                if (selectedCategories.length ===0) {
+                    // 체크 카드 모두 미선택 -> "추천카드" (임시)
+                    listTitle.textContent = "추천 카드"
+
+                }else if (visibleCount === 0) {
+                    // 필터는 선택됐는데, 조건에 맞는 카드가 하나도 없을 때
+                    listTitle.textContent = "조건에 맞는 카드가 없습니다";
+                } else {
+                    listTitle.textContent = `선택된 ${visibleCount}개의 카드`;
+                    // 예: 선택된 3개의 카드
+                }
+            }
+
+            // 4. 체크된 체크박스의 label에 active 클래스 달아주기 (스타일용)
+            checkboxes.forEach(cb => {
+                const label = cb.closest(".filter-btn");
+                if (!label) return;
+
+                if (cb.checked) {
+                    label.classList.add("active");
+                } else {
+                    label.classList.remove("active");
+                }
+            });
+        }
+
+        // 🔹 체크박스 change 이벤트에 필터 함수 연결
+        checkboxes.forEach(cb => {
+            cb.addEventListener("change", applyFilter);
+        });
+
+        // 🔹 첫 로드 시 한 번 전체 보여주기
+        applyFilter();
     });
 </script>
 

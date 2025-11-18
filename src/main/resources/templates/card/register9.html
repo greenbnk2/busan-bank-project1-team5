@@ -20,17 +20,17 @@
 
     <main class="content">
         <section class="addr-wrap">
-            <h1 class="addr-title">입력된 자택 주소가 맞는지 확인해 주세요.</h1>
+            <h1 class="addr-title">카드 수령 주소 입력</h1>
 
-            <div class="addr-desc">카드를 수령하실 <strong>자택 주소</strong>를 입력해 주세요.</div>
+            <div class="addr-desc">카드를 수령하실 <strong>주소</strong>를 입력해 주세요.</div>
 
             <!-- 우편번호 -->
             <div class="field">
                 <label for="zip" class="label">우편번호</label>
                 <div class="row">
                     <input id="zip" type="text" inputmode="numeric" maxlength="5" readonly
-                        placeholder="주소 검색으로 자동 입력" />
-                    <button type="button" class="btn-search" id="btnSearch" aria-label="주소 검색">🔍</button>
+                        placeholder="" />
+                    <button type="button" class="btn-search" id="btnSearch" aria-label="주소 검색">주소 검색</button>
                 </div>
                 <div class="underline"></div>
             </div>
@@ -38,14 +38,14 @@
             <!-- 기본주소 -->
             <div class="field">
                 <label for="addr1" class="label">기본주소</label>
-                <input id="addr1" type="text" readonly placeholder="주소 검색으로 자동 입력" />
+                <input id="addr1" type="text" readonly placeholder="" />
                 <div class="underline"></div>
             </div>
 
             <!-- 상세주소 -->
             <div class="field">
                 <label for="addr2" class="label">상세주소</label>
-                <input id="addr2" type="text" placeholder="동/호수, 건물, 층 등을 입력해 주세요." />
+                <input id="addr2" type="text" placeholder="상세주소를 입력해주세요" />
                 <div class="underline"></div>
             </div>
 
@@ -60,7 +60,6 @@
     <div id="footer"></div>
 
     <script>
-        // 공통 헤더/푸터 로드
         document.addEventListener('DOMContentLoaded', () => {
             fetch('../common/product_header.html')
                 .then(r => r.text()).then(h => {
@@ -73,6 +72,7 @@
                         });
                     }
                 });
+
             fetch('../common/footer.html')
                 .then(r => r.text()).then(h => document.getElementById('footer').innerHTML = h);
         });
@@ -81,15 +81,15 @@
         function openPostcode() {
             new daum.Postcode({
                 oncomplete: function (data) {
-                    // 기본 주소(도로명 우선, 없으면 지번)
                     const road = data.roadAddress || '';
                     const jibun = data.jibunAddress || '';
                     const base = road || jibun;
 
-                    // 참고항목(건물명/법정동 등)
                     let extra = '';
                     if (data.bname && /[동|로|가]$/g.test(data.bname)) extra += data.bname;
-                    if (data.buildingName && data.apartment === 'Y') extra += (extra ? ', ' : '') + data.buildingName;
+                    if (data.buildingName && data.apartment === 'Y')
+                        extra += (extra ? ', ' : '') + data.buildingName;
+
                     const fullBase = extra ? `${base} (${extra})` : base;
 
                     document.getElementById('zip').value = data.zonecode || '';
@@ -104,23 +104,23 @@
         const zip = document.getElementById('zip');
         const addr1 = document.getElementById('addr1');
         const addr2 = document.getElementById('addr2');
-        const btn = document.getElementById('btnConfirm');
+        const btnConfirm = document.getElementById('btnConfirm');
 
+        // 🔥 검색 버튼에서만 주소창 열기
         document.getElementById('btnSearch').addEventListener('click', openPostcode);
-        zip.addEventListener('click', openPostcode);
-        addr1.addEventListener('click', openPostcode);
 
         // 상세주소 입력 시 버튼 활성화
         function validate() {
             const ok =
                 zip.value.trim().length > 0 &&
-                addr1.value.trim().length > 0;   // addr2는 체크하지 않음
-            btn.disabled = !ok;
+                addr1.value.trim().length > 0;
+            btnConfirm.disabled = !ok;
         }
+
         addr2.addEventListener('input', validate);
 
-        // 제출 (데모)
-        btn.addEventListener('click', () => {
+        // 저장
+        btnConfirm.addEventListener('click', () => {
             const payload = {
                 zip: zip.value.trim(),
                 addr1: addr1.value.trim(),
@@ -128,9 +128,9 @@
             };
             console.log('배송지:', payload);
             alert('주소가 저장되었습니다.');
-            // TODO: 실제 저장 로직 추가 (fetch/axios)
         });
     </script>
+
 </body>
 
 </html>

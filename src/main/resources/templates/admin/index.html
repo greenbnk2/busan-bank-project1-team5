@@ -9,13 +9,12 @@
     -->
 
     <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
-    <script th:src="@{/js/admin/common/aside.js}"></script>
 </head>
+<body>
 <div th:replace="~{admin/common/header :: header}"></div>
-<body class="sb-expanded"> <!-- class="sb-expanded" 대화형 사용자 경험으로 전환하는데 사용됨 -->
+        <div th:replace="~{admin/common/aside :: aside}"></div>
 <main>
     <div class="main-container">
-        <div th:replace="~{admin/common/aside :: aside}"></div>
         <div id="main-content">
 
             <h1>예시 제목</h1>
@@ -23,44 +22,15 @@
                 "제1조 (목적) 본 약관은 [사이트 이름]이 제공하는 모든 서비스(이하 '서비스')의 이용 조건 및 절차, 기타 필요한 사항을 규정함을 목적으로 합니다. 이용자는 본 약관에 동의함으로써 서비스를 이용할 수 있으며, 관련 법령을 준수해야 합니다. 본 약관에 명시되지 않은 사항에 대해서는 관계 법령 및 상관례에 따릅니다."
             </p>
 
-            <div class="palceholder">
-                <div class="ph-1"></div>
-                <div class="ph-2"></div>
-                <div class="ph-3"></div>
-                <div class="ph-4"></div>
-                <div class="ph-5"></div>
-                <div class="ph-6"></div>
-                <div class="ph-7"></div>
-                <div class="ph-8"></div>
-            </div>
-
             <!--
                 상품 현황 통계 정보
                 관리 메뉴 카테고리
             -->
-            <!-- 문의사항
-            <div class="qna">
-                <h1> 문의 사항 </h1>
-                <table>
-                    <thead>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>날짜</th>
-                    <th>답변여부</th>
-                    </thead>
-                    <tr th:each="qna : ${qnAList}">
-                        <td>[[${qna.qnaId}]]</a></td>
-                        <td><a th:href="@{/qna/view/{id}(id=${qna.qnaId})}">[[${qna.title}]]</a></td>
-                        <td>[[${qna.writer}]]</td>
-                        <td>[[${qna.createdAt}]]</td>
-                        <td>[[${qna.isAnswered}]]</td>
-                    </tr>
-                </table>
-            </div> -->
+
         </div>
     </div>
 </main>
 <div th:replace="~{admin/common/footer :: footer}"></div>
+<script th:src="@{/js/admin/common/aside.js}"></script>
 </body>
 </html>

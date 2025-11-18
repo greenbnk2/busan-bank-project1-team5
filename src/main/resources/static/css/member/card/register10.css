@@ -1,0 +1,98 @@
+@media (min-width: 1024px) {
+    html {
+        zoom: 125%;
+    }
+}
+
+/* 공통 레이아웃 */
+.content {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 10px;
+}
+
+/* 카드형 박스 */
+.complete-wrap {
+    max-width: 695px;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .03);
+    padding: 40px 24px 32px;
+    text-align: center;
+}
+
+/* 동그라미 체크 아이콘 */
+.complete-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 24px;
+    border-radius: 999px;
+    background: #CB2B11;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+/* 카드명 */
+.complete-card-name {
+    margin: 0 0 8px;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+/* "신청이 완료되었습니다." */
+.complete-main-text {
+    margin: 0 0 10px;
+    font-size: 17px;
+    color: #111827;
+}
+
+/* ✅ 신청일시 */
+.complete-date {
+    margin: 0 0 150px;
+    font-size: 13px;
+    color: #4b5563;
+}
+
+.complete-date .date-value {
+    font-weight: 600;
+}
+
+/* 하단 안내 문구 */
+.complete-sub-text {
+    margin: 0 0 30px;
+    font-size: 13px;
+    color: #4b5563;
+}
+
+/* 확인 버튼 – 공통 메인 컬러 */
+.btn-confirm {
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-radius: 18px;
+    background: #CB2B11;
+    color: #fff;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 모바일 */
+@media (max-width: 600px) {
+    .complete-wrap {
+        padding: 32px 18px 26px;
+    }
+
+    .complete-card-name {
+        font-size: 22px;
+    }
+
+    .complete-main-text {
+        font-size: 16px;
+    }
+}

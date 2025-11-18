@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
+</head>
+<div th:replace="~{admin/common/header :: header}"></div>
+<body>
+<main>
+    <div class="main-container">
+        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div id="main-content">
+
+            <form th:action="@{/admin/config/policy/register}" method="post">
+            <label>약관명</label>
+            <input type="text">
+
+            <label>약관내용</label>
+            <input type="text">
+
+            <label>약관파일</label>
+            <input type="file" id="termsFile" accept="application/pdf">  <!-- PDF 파일만 업로드 가능하게 제한 -->
+            </form>
+            <div id="preview">
+                <p>파일 미리보기</p>
+                <p id="fileName">파일명 : -</p>
+                <p id="fileSize">크기 : -</p>
+                <p id="fileType">형식 : -</p>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+<script>
+    document.getElementById("termsFile").addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        document.getElementById("fileName").textContent = "파일명 : " + file.name;
+        document.getElementById("fileSize").textContent = "크기 : " + (file.size / 1024).toFixed(2) + " KB";
+        document.getElementById("fileType").textContent = "형식 : " + file.type;
+    });
+</script>
+</body>
+</html>

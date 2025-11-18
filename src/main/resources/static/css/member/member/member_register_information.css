@@ -1,0 +1,172 @@
+@media (min-width: 1024px) {
+    html {
+        zoom: 125%;
+    }
+}
+
+.content {
+    max-width: 800px;
+    margin: 120px auto;
+    padding: 0 10px;
+}
+
+/* 전체 래퍼 */
+.apply-form-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 695px;
+    margin: auto;
+}
+
+/* 카드 박스 */
+.apply-form-box {
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid #eee;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .03);
+    padding: 26px 24px 24px;
+}
+
+.apply-form-header {
+    position: relative;
+    padding-bottom: 18px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+.apply-form-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0;
+    width: 100%;
+}
+
+.apply-form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 폼 공통 */
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-item label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-item input {
+    border: none;
+    border-bottom: 1px solid #d3d3d3;
+    padding: 8px 0;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-item input:focus {
+    border-bottom-color: #000;
+}
+
+.form-2col {
+    display: flex;
+    gap: 16px;
+}
+
+.form-2col .form-item {
+    flex: 1;
+}
+
+/* 도움글 */
+.field-help {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* 비밀번호 확인 메시지 */
+.pw-message {
+    min-height: 16px;
+}
+
+.pw-message.ok {
+    color: #16a34a;
+    /* 초록 */
+}
+
+.pw-message.error {
+    color: #dc2626;
+    /* 빨강 */
+}
+
+/* 주민등록번호 */
+.rrn-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rrn-front,
+.rrn-back {
+    border: none;
+    border-bottom: 1px solid #d3d3d3;
+    padding: 6px 0;
+    font-size: 14px;
+    outline: none;
+}
+
+.rrn-front:focus,
+.rrn-back:focus {
+    border-bottom-color: #000;
+}
+
+.rrn-front {
+    width: 140px;
+}
+
+.rrn-back {
+    width: 110px;
+}
+
+/* 주민번호 뒤 마스킹 */
+.secret-input {
+    -webkit-text-security: disc;
+}
+
+/* 하단 버튼 영역 */
+.agree-section {
+    margin-top: 24px;
+}
+
+/* 확인 버튼 */
+.btn-submit {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 14px;
+    background: #d4d4d4;
+    color: #fff;
+    font-weight: 800;
+    cursor: not-allowed;
+    font-size: 17px;
+}
+
+.btn-submit:not(:disabled) {
+    background: #CB2B11;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .form-2col {
+        flex-direction: column;
+    }
+
+    .apply-form-header h1 {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+}

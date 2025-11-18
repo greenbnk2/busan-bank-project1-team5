@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카드 신청 완료</title>
+
+    <!-- 공통 헤더/푸터 -->
+    <link rel="stylesheet" href="../css/common/product_header_style.css" />
+    <link rel="stylesheet" href="../css/common/footer_style.css" />
+
+    <!-- 완료 페이지 전용 CSS -->
+    <link rel="stylesheet" href="../css/product/product_register10.css" />
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main class="content">
+        <section class="complete-wrap">
+            <!-- 동그라미 체크 -->
+            <div class="complete-icon">✓</div>
+
+            <!-- 카드명 -->
+            <h1 class="complete-card-name">~~카드명~~</h1>
+            <p class="complete-main-text">신청이 완료되었습니다.</p>
+
+            <!-- ✅ 신청일시 (새로 추가된 부분) -->
+            <p class="complete-date">
+                신청일시&nbsp;
+                <span class="date-value">2025-11-17 14:32</span>
+                <!-- 여기만 서버값/자바스크립트로 바꿔 끼우면 됨 -->
+            </p>
+
+            <!-- 배송 안내 -->
+            <p class="complete-sub-text">
+                신청하신 카드는 <strong>4영업일 이내</strong> 배송됩니다.
+            </p>
+
+            <!-- 확인 버튼 -->
+            <button type="button" class="btn-confirm" id="btnConfirm">확인</button>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 헤더/푸터 로드
+            fetch('../common/product_header.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('header').innerHTML = html;
+                    const headerEl = document.querySelector('.header');
+                    if (headerEl) {
+                        window.addEventListener('scroll', () => {
+                            if (window.scrollY > 10) headerEl.classList.add('scrolled');
+                            else headerEl.classList.remove('scrolled');
+                        });
+                    }
+                });
+
+            fetch('../common/footer.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('footer').innerHTML = html;
+                });
+
+            // 확인 버튼 클릭 시 이동 (경로는 프로젝트에 맞게 수정)
+            document.getElementById('btnConfirm').addEventListener('click', () => {
+                // 예: 메인으로
+                window.location.href = '/';
+            });
+
+            // ▼ 필요하면 JS로 신청일시 세팅 (예시)
+            // const dateSpan = document.querySelector('.date-value');
+            // dateSpan.textContent = '2025-11-17 14:32'; // 서버 값/템플릿으로 대체
+        });
+    </script>
+
+</body>
+
+</html>

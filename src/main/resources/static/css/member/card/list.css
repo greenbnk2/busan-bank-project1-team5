@@ -36,6 +36,13 @@
     cursor: pointer;
     transition: .12s ease;
 }
+/* 진짜 체크박스는 숨김 */
+.filter-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
 .filter-btn.active {
     background: #CB2B11;
