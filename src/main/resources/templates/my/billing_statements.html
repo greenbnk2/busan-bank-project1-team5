@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이용내역 명세서</title>
+
+    <!-- 공통 헤더/푸터 스타일 -->
+    <link rel="stylesheet" href="../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../static/css/common/footer.css">
+
+    <!-- 이 페이지 전용 스타일 -->
+    <link rel="stylesheet" href="../../static/css/member/my/billing_statements.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main class="content statement-content">
+
+        <!-- 상단: 월 선택 + 총 사용금액 + 카드선택 -->
+        <section class="statement-top">
+            <div class="statement-title-wrap">
+                <!-- 월 선택 영역 -->
+                <div class="month-select">
+                    <button type="button" class="month-select-trigger" id="btnMonthSelect">
+                        <h1 class="statement-title" id="monthTitleText">
+                            12월 15일 명세서 (예정)
+                        </h1>
+                        <span class="month-arrow-icon"></span>
+                    </button>
+
+                    <!-- 드롭다운 -->
+                    <div class="month-dropdown" id="monthDropdown">
+                        <button type="button" class="month-option month-option-active" data-title="12월 15일 명세서 (예정)">
+                            <span class="month-year">2025</span>
+                            <span class="month-label">12월 15일 (예정)</span>
+                            <span class="month-check">✔</span>
+                        </button>
+
+                        <button type="button" class="month-option" data-title="11월 15일 명세서">
+                            <span class="month-year">2025</span>
+                            <span class="month-label">11월 15일</span>
+                            <span class="month-check">✔</span>
+                        </button>
+
+                        <button type="button" class="month-option" data-title="10월 15일 명세서">
+                            <span class="month-year">2025</span>
+                            <span class="month-label">10월 15일</span>
+                            <span class="month-check">✔</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="statement-top-actions">
+                    <button type="button" class="icon-btn" aria-label="엑셀 저장"><img src="	https://www.hyundaicard.com/docfiles/resources/pc/images/common/icon/w32/ico_paperDown.png"></button>
+                    <button type="button" class="icon-btn" aria-label="인쇄"><img src="https://www.hyundaicard.com/docfiles/resources/pc/images/common/icon/w32/ico_print.png"></button>
+                </div>
+            </div>
+            <div class="statement-summary-row">
+                <!-- 왼쪽 : 기간 내 총 사용금액 -->
+                <div class="summary-left">
+                    <p class="summary-total-label">기간 내 총 사용 금액</p>
+                    <p class="summary-total-amount">
+                        <span class="amount-number">0</span><span class="amount-unit">원</span>
+                    </p>
+                    <p class="summary-period">25.11.04 ~ 25.12.03</p>
+                </div>
+
+                <!-- 오른쪽 : 카드 선택 -->
+                <div class="summary-right">
+                    <p class="card-select-title">카드 선택</p>
+
+                    <details class="card-select">
+                        <summary class="card-select-summary">
+                            <div class="card-selected">
+                                <div class="card-thumb card-color-1"></div>
+                                <div class="card-selected-info">
+                                    <span class="card-selected-name">현대카드M CHECK</span>
+                                    <span class="card-selected-number">110********0</span>
+                                </div>
+                            </div>
+                            <span class="card-select-arrow">▼</span>
+                        </summary>
+
+                        <div class="card-select-list">
+                            <button type="button" class="card-option">
+                                <div class="card-thumb card-color-1"></div>
+                                <div class="card-option-info">
+                                    <span class="card-option-name">현대카드M CHECK</span>
+                                    <span class="card-option-number">110********0</span>
+                                </div>
+                            </button>
+
+                            <button type="button" class="card-option">
+                                <div class="card-thumb card-color-2"></div>
+                                <div class="card-option-info">
+                                    <span class="card-option-name">NICHIYA PLATINUM</span>
+                                    <span class="card-option-number">5200****1234</span>
+                                </div>
+                            </button>
+
+                            <button type="button" class="card-option">
+                                <div class="card-thumb card-color-3"></div>
+                                <div class="card-option-info">
+                                    <span class="card-option-name">BNK MARKET CARD</span>
+                                    <span class="card-option-number">4700****7777</span>
+                                </div>
+                            </button>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <hr class="statement-divider">
+        </section>
+
+        <!-- 하단: 이용내역 + 결제요약 정보 -->
+        <section class="statement-body">
+
+            <!-- 왼쪽: 이용내역 -->
+            <section class="usage-history">
+                <header class="usage-header">
+                    <div class="usage-header-left">
+                        <h2 class="section-title">이용내역</h2>
+                        <div class="usage-sort">
+                            <button type="button" class="sort-btn sort-active" data-sort="recent">최신순</button>
+                            <span class="sort-divider">|</span>
+                            <button type="button" class="sort-btn" data-sort="amount">고액순</button>
+                        </div>
+                    </div>
+
+                    <!-- 필터 아이콘 버튼 -->
+                    <button type="button" class="filter-btn" id="btnFilter" aria-label="필터 설정">
+                        <span class="filter-icon"></span>
+                    </button>
+                </header>
+
+                <!-- 필터 패널 -->
+                <div class="usage-filter-panel" id="usageFilterPanel">
+                    <!-- 이용 지역 -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">이용 지역</h3>
+                        <div class="filter-chip-row" data-select="single">
+                            <button type="button" class="filter-chip filter-chip-active">전체</button>
+                            <button type="button" class="filter-chip">국내</button>
+                            <button type="button" class="filter-chip">해외</button>
+                        </div>
+                    </div>
+
+                    <!-- 이용 구분 -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">이용 구분</h3>
+                        <div class="filter-chip-row" data-select="single">
+                            <button type="button" class="filter-chip filter-chip-active">전체</button>
+                            <button type="button" class="filter-chip">일시불</button>
+                            <button type="button" class="filter-chip">할부</button>
+                        </div>
+                    </div>
+
+                    <button type="button" class="filter-apply-btn">적용</button>
+                </div>
+
+                <!-- 이용내역 헤더 -->
+                <div class="usage-list-head">
+                    <span class="usage-count">총 3건</span>
+                    <span class="usage-total">9,100원</span>
+                </div>
+
+                <!-- 이용내역 리스트 -->
+                <ul class="usage-list">
+                    <li class="usage-item">
+                        <div class="usage-item-main">
+                            <div class="usage-item-left">
+                                <p class="usage-merchant">씨유수비사거리점</p>
+                                <p class="usage-meta">
+                                    현대카드M CHECK · 25.11.18 · 18:26 · 일시불
+                                </p>
+                            </div>
+                            <p class="usage-amount">5,100원</p>
+                        </div>
+                    </li>
+
+                    <li class="usage-item">
+                        <div class="usage-item-main">
+                            <div class="usage-item-left">
+                                <p class="usage-merchant">패스오더 - 주식회사 페이타랩</p>
+                                <p class="usage-meta">
+                                    현대카드M CHECK · 25.11.18 · 08:38 · 일시불
+                                </p>
+                            </div>
+                            <p class="usage-amount">2,000원</p>
+                        </div>
+                    </li>
+
+                    <li class="usage-item">
+                        <div class="usage-item-main">
+                            <div class="usage-item-left">
+                                <p class="usage-merchant">패스오더 - 주식회사 페이타랩</p>
+                                <p class="usage-meta">
+                                    현대카드M CHECK · 25.11.17 · 08:37 · 일시불
+                                </p>
+                            </div>
+                            <p class="usage-amount">2,000원</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 오른쪽: 결제요약 정보 -->
+            <section class="payment-summary">
+                <h2 class="section-title">결제요약 정보</h2>
+
+                <div class="payment-card">
+                    <div class="payment-card-header">
+                        <span class="payment-card-title">결제요약 정보</span>
+                        <div class="payment-total">
+                            <span class="payment-total-label">총 결제 금액</span>
+                            <span class="payment-total-amount">0원</span>
+                        </div>
+                    </div>
+
+                    <dl class="payment-info-list">
+                        <div class="payment-info-row">
+                            <dt>결제계좌</dt>
+                            <dd>선납운영(?) 110********0</dd>
+                        </div>
+                        <div class="payment-info-row">
+                            <dt>대상카드</dt>
+                            <dd>현대카드M CHECK 470*</dd>
+                        </div>
+                        <div class="payment-info-row">
+                            <dt>작성기준일</dt>
+                            <dd>25.11.18</dd>
+                        </div>
+                    </dl>
+
+                    <div class="payment-links">
+                        <a href="#" class="payment-link">카드 이용 안내</a>
+                        <span class="link-divider">|</span>
+                        <a href="#" class="payment-link">결제 계좌 변경</a>
+                        <span class="link-divider">|</span>
+                        <a href="#" class="payment-link">전월 한도 확인</a>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 공통 헤더 로드
+            fetch('../common/header.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('header').innerHTML = html;
+                    const headerEl = document.querySelector('.header');
+                    if (headerEl) {
+                        window.addEventListener('scroll', () => {
+                            if (window.scrollY > 10) headerEl.classList.add('scrolled');
+                            else headerEl.classList.remove('scrolled');
+                        });
+                    }
+                });
+
+            // 공통 푸터 로드
+            fetch('../common/footer.html')
+                .then(res => res.text())
+                .then(html => document.getElementById('footer').innerHTML = html);
+
+            // 필터 패널 토글
+            const filterBtn = document.getElementById('btnFilter');
+            const filterPanel = document.getElementById('usageFilterPanel');
+
+            if (filterBtn && filterPanel) {
+                filterBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    filterPanel.classList.toggle('open');
+                });
+
+                document.addEventListener('click', function (e) {
+                    if (!filterPanel.contains(e.target) && e.target !== filterBtn) {
+                        filterPanel.classList.remove('open');
+                    }
+                });
+            }
+
+            // 필터칩 단일 선택
+            document.querySelectorAll('.filter-chip-row[data-select="single"]').forEach(function (row) {
+                row.addEventListener('click', function (e) {
+                    const btn = e.target.closest('.filter-chip');
+                    if (!btn) return;
+
+                    row.querySelectorAll('.filter-chip').forEach(function (chip) {
+                        chip.classList.remove('filter-chip-active');
+                    });
+                    btn.classList.add('filter-chip-active');
+                });
+            });
+
+            // 최신순 / 고액순 정렬 탭
+            const sortContainer = document.querySelector('.usage-sort');
+            if (sortContainer) {
+                sortContainer.addEventListener('click', function (e) {
+                    const btn = e.target.closest('.sort-btn');
+                    if (!btn) return;
+
+                    sortContainer.querySelectorAll('.sort-btn').forEach(b => {
+                        b.classList.remove('sort-active');
+                    });
+                    btn.classList.add('sort-active');
+
+                    const sortType = btn.dataset.sort;  // 'recent' or 'amount'
+                    console.log('정렬 변경:', sortType);
+                    // TODO: sortType에 따라 실제 정렬 로직 추가
+                });
+            }
+            // 카드 선택 드롭다운: 옵션 클릭 시 상단 선택 영역 변경
+            const cardSelect = document.querySelector('.card-select');
+            if (cardSelect) {
+                const selectedNameEl = cardSelect.querySelector('.card-selected-name');
+                const selectedNumberEl = cardSelect.querySelector('.card-selected-number');
+                const selectedThumbEl = cardSelect.querySelector('.card-selected .card-thumb');
+
+                cardSelect.querySelectorAll('.card-option').forEach(option => {
+                    option.addEventListener('click', function (e) {
+                        e.preventDefault(); // 폼 전송 방지
+
+                        const optionNameEl = option.querySelector('.card-option-name');
+                        const optionNumberEl = option.querySelector('.card-option-number');
+                        const optionThumbEl = option.querySelector('.card-thumb');
+
+                        // 1) 텍스트 변경
+                        selectedNameEl.textContent = optionNameEl.textContent;
+                        selectedNumberEl.textContent = optionNumberEl.textContent;
+
+                        // 2) 카드 색상 클래스 변경 (card-color-* 만 교체)
+                        selectedThumbEl.classList.forEach(c => {
+                            if (c.startsWith('card-color-')) {
+                                selectedThumbEl.classList.remove(c);
+                            }
+                        });
+                        optionThumbEl.classList.forEach(c => {
+                            if (c.startsWith('card-color-')) {
+                                selectedThumbEl.classList.add(c);
+                            }
+                        });
+
+                        // 3) 드롭다운 닫기
+                        cardSelect.open = false;
+                    });
+                });
+            }
+
+            // 월 선택 드롭다운
+            const monthTrigger = document.getElementById('btnMonthSelect');
+            const monthDropdown = document.getElementById('monthDropdown');
+            const monthTitleText = document.getElementById('monthTitleText');
+
+            if (monthTrigger && monthDropdown && monthTitleText) {
+                // 토글 열기/닫기
+                monthTrigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const isOpen = monthDropdown.classList.toggle('open');
+                    monthTrigger.classList.toggle('open', isOpen);
+                });
+
+                // 옵션 선택
+                monthDropdown.querySelectorAll('.month-option').forEach(option => {
+                    option.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        // 제목 텍스트 변경
+                        const title = option.dataset.title;
+                        if (title) {
+                            monthTitleText.textContent = title;
+                        }
+
+                        // 선택 표시 변경
+                        monthDropdown.querySelectorAll('.month-option')
+                            .forEach(o => o.classList.remove('month-option-active'));
+                        option.classList.add('month-option-active');
+
+                        // 닫기
+                        monthDropdown.classList.remove('open');
+                        monthTrigger.classList.remove('open');
+
+                        // TODO: 여기서 선택된 달에 맞춰 실제 데이터 재조회 로직 추가
+                        // ex) const selectedValue = option.dataset.value;
+                    });
+                });
+
+                // 바깥 클릭 시 닫기
+                document.addEventListener('click', function (e) {
+                    if (!monthDropdown.contains(e.target) && e.target !== monthTrigger) {
+                        monthDropdown.classList.remove('open');
+                        monthTrigger.classList.remove('open');
+                    }
+                });
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

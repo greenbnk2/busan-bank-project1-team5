@@ -1,0 +1,691 @@
+/* 공통 content + 명세서 레이아웃 기본 */
+.content.statement-content {
+    max-width: 1200px;
+    margin: 150px auto 120px;
+    padding: 0 24px 80px;
+    box-sizing: border-box;
+}
+
+/* ───── 상단 영역 ───── */
+
+.statement-top {
+    margin: 32px 0;
+}
+
+.statement-title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.statement-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.month-select-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    font-size: 16px;
+}
+
+.month-arrow {
+    display: inline-block;
+    transform: translateY(1px);
+}
+
+.statement-top-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    border: 1px solid #d8d8d8;
+    background: #fff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    height: 50px;
+}
+
+.icon-btn img{
+    height: 35px;
+}
+
+/* 총 사용금액 + 카드 선택 행 */
+
+.statement-summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: stretch;
+    margin-bottom: 24px;
+}
+
+.summary-left {
+    flex: 1;
+}
+
+.summary-total-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.summary-total-amount {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.summary-total-amount .amount-unit {
+    font-size: 18px;
+    margin-left: 4px;
+}
+
+.summary-period {
+    font-size: 13px;
+    color: #777;
+}
+
+/* 카드 선택 영역 */
+
+.summary-right {
+    width: 360px;
+}
+
+.card-select-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.card-select {
+    border-radius: 16px;
+    border: 1px solid #e1e1e1;
+    background: #fafafa;
+    padding: 10px 14px;
+    position: relative;
+}
+
+.card-select[open] {
+    background: #fafafa;
+    border-color: #e1e1e1;
+}
+
+.card-select>summary {
+    list-style: none;
+}
+
+.card-select>summary::-webkit-details-marker {
+    display: none;
+}
+
+.card-select-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 12px;
+}
+
+.card-selected {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-thumb {
+    width: 40px;
+    height: 64px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #111, #444);
+}
+
+.card-selected-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.card-selected-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.card-selected-number {
+    font-size: 12px;
+    color: #777;
+}
+
+.card-select-arrow {
+    font-size: 13px;
+    color: #555;
+}
+
+/* 드롭다운 카드 리스트 */
+
+.card-select-list {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-option {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.card-option:hover {
+    background: rgba(203, 43, 17, 0.06);
+    border-radius: 10px;
+    padding-left: 6px;
+}
+
+.card-option-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 13px;
+}
+
+.card-option-name {
+    font-weight: 500;
+}
+
+.card-option-number {
+    font-size: 12px;
+    color: #777;
+}
+
+/* 카드 색상 샘플 */
+.card-color-1 {
+    background: linear-gradient(135deg, #111, #333);
+}
+
+.card-color-2 {
+    background: linear-gradient(135deg, #cb2b11, #ff7b5a);
+}
+
+.card-color-3 {
+    background: linear-gradient(135deg, #222b55, #6c87ff);
+}
+
+.statement-divider {
+    border: none;
+    border-top: 1px solid #e3e3e3;
+    margin: 16px 0 24px;
+}
+
+/* ───── 하단: 이용내역 + 결제요약 ───── */
+
+.statement-body {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+/* 왼쪽 이용내역 카드 */
+
+.usage-history {
+    position: relative;
+    /* 필터 패널 기준 */
+    flex: 1;
+    background: #fafafa;
+    border-radius: 20px;
+    padding: 24px 28px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.usage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.usage-header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+/* 정렬 탭 */
+
+.usage-sort .sort-btn {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 13px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.usage-sort .sort-btn.sort-active {
+    font-weight: 600;
+    color: #111;
+}
+
+.sort-divider {
+    margin: 0 6px;
+    color: #d0d0d0;
+}
+
+/* 필터 아이콘 버튼 */
+
+.filter-btn {
+    border-radius: 50%;
+    border: 1px solid #b5b5b5;
+    background: #fff;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.filter-icon {
+    position: relative;
+    width: 14px;
+    height: 10px;
+}
+
+.filter-icon::before,
+.filter-icon::after,
+.filter-icon span {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1.6px;
+    background: #111;
+    border-radius: 4px;
+}
+
+.filter-icon::before {
+    top: 0;
+}
+
+.filter-icon::after {
+    bottom: 0;
+}
+
+.filter-icon span {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 필터 패널 */
+
+.usage-filter-panel {
+    position: absolute;
+    top: 64px;
+    right: 24px;
+    width: 265px;
+    padding: 18px 18px 20px;
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    font-size: 13px;
+    display: none;
+    z-index: 20;
+}
+
+.usage-filter-panel.open {
+    display: block;
+}
+
+.filter-group+.filter-group {
+    margin-top: 18px;
+}
+
+.filter-title {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.filter-chip-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    min-width: 70px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: 1px solid #d2d2d2;
+    background: #f9f9f9;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.filter-chip-active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.filter-apply-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 0;
+    border-radius: 8px;
+    border: none;
+    background: #111;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter-apply-btn:hover {
+    opacity: 0.9;
+}
+
+/* 이용내역 상단 요약 */
+
+.usage-list-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    margin: 12px 0;
+}
+
+.usage-count {
+    color: #444;
+}
+
+.usage-total {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* 이용내역 리스트 */
+
+.usage-list {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0 0;
+    border-top: 1px solid #e1e1e1;
+}
+
+.usage-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.usage-item:last-child {
+    border-bottom: none;
+}
+
+.usage-item-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.usage-item-left {
+    flex: 1;
+}
+
+.usage-merchant {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.usage-meta {
+    font-size: 12px;
+    color: #777;
+}
+
+.usage-amount {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* 모바일에서 줄바꿈 대응 */
+@media (max-width: 600px) {
+    .usage-item-main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .usage-amount {
+        margin-top: 4px;
+    }
+}
+
+/* 오른쪽 결제 요약 */
+
+.payment-summary {
+    width: 380px;
+}
+
+.payment-card {
+    background: #ffe3e3;
+    border-radius: 20px;
+    padding: 24px 22px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+.payment-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 22px;
+}
+
+.payment-card-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.payment-total-label {
+    font-size: 13px;
+    color: #666;
+    margin-right: 6px;
+}
+
+.payment-total-amount {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.payment-info-list {
+    margin: 0;
+    padding: 16px 16px 14px;
+    border-radius: 16px;
+    background: #fff;
+    font-size: 13px;
+}
+
+.payment-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.payment-info-row:last-child {
+    margin-bottom: 0;
+}
+
+.payment-info-row dt {
+    color: #777;
+}
+
+.payment-info-row dd {
+    margin: 0;
+    font-weight: 500;
+}
+
+.payment-links {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.payment-link {
+    text-decoration: none;
+    color: #cb2b11;
+}
+
+.payment-link:hover {
+    text-decoration: underline;
+}
+
+.link-divider {
+    margin: 0 6px;
+    color: #aaa;
+}
+
+/* 반응형 : 태블릿 이하 */
+@media (max-width: 960px) {
+    .statement-summary-row {
+        flex-direction: column;
+    }
+
+    .summary-right {
+        width: 100%;
+    }
+
+    .statement-body {
+        flex-direction: column;
+    }
+
+    .payment-summary {
+        width: 100%;
+    }
+}
+
+/* ───── 상단 월 선택 드롭다운 ───── */
+
+.month-select {
+    position: relative;
+    display: inline-block;
+}
+
+.month-select-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* 기존 statement-title 스타일 재사용 */
+.month-select-trigger .statement-title {
+    margin: 0;
+}
+
+/* 작은 삼각형 화살표 */
+.month-arrow-icon {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #111;
+    transition: transform 0.2s;
+}
+
+/* 열렸을 때 화살표 뒤집기 */
+.month-select-trigger.open .month-arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* 드롭다운 박스 */
+.month-dropdown {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: 8px;
+    width: 260px;
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    padding: 4px 0;
+    box-sizing: border-box;
+    display: none;
+    z-index: 40;
+}
+
+/* 열렸을 때 */
+.month-dropdown.open {
+    display: block;
+}
+
+/* 옵션 한 줄 */
+.month-option {
+    width: 100%;
+    border: none;
+    background: #fff;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.month-option:hover {
+    background: #f5f5f5;
+}
+
+.month-year {
+    width: 48px;
+    font-size: 13px;
+    color: #666;
+}
+
+.month-label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.month-check {
+    font-size: 14px;
+    opacity: 0;
+}
+
+/* 선택된 줄만 체크 표시 */
+.month-option.month-option-active .month-check {
+    opacity: 1;
+}

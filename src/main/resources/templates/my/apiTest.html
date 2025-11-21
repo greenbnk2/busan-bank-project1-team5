@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kakao Map</title>
+</head>
+<body>
+<div id="map" style="width:1000px;height:800px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02766b043924c4c57b57f6ffcfdc6e95"></script>
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+
+    var center = {lat: 33.451000, lng: 126.570667}; // 하트 중심
+    var locations = [];
+
+    for (var t = 0; t <= Math.PI*2; t += 0.4) {
+        // 하트 수식 (0~2π)
+        var x = 16 * Math.pow(Math.sin(t), 3);
+        var y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+
+        // 지도용으로 좌표 스케일/위치 변환
+        var lat = center.lat + y * 0.0005; // 0.0005는 스케일 조절
+        var lng = center.lng + x * 0.0005;
+
+        locations.push({lat: lat, lng: lng});
+    }
+
+    // 마커 찍기 (순서 표시)
+    // 마커 찍기 (순서 표시용 커스텀 오버레이)
+    for (var i = 0; i < locations.length; i++) {
+        var content = '<div style="padding:4px 8px; background:#4a90e2; color:white; border-radius:4px;">' + (i+1) + '</div>';
+
+        var customOverlay = new kakao.maps.CustomOverlay({
+            position: new kakao.maps.LatLng(locations[i].lat, locations[i].lng),
+            content: content,
+            yAnchor: 1
+        });
+
+        customOverlay.setMap(map);
+    }
+
+    // 폴리라인 그리기
+    var linePath = locations.map(function(loc) {
+        return new kakao.maps.LatLng(loc.lat, loc.lng);
+    });
+
+    var polyline = new kakao.maps.Polyline({
+        path: linePath,        // 선을 구성하는 좌표배열
+        strokeWeight: 3,       // 선 두께
+        strokeColor: '#FF0000',// 선 색
+        strokeOpacity: 0.7,    // 불투명도
+        strokeStyle: 'solid'   // 선 스타일
+    });
+
+    polyline.setMap(map); // 지도에 선 표시
+
+</script>
+</script>
+</body>
+</html>

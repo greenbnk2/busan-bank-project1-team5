@@ -1,0 +1,461 @@
+/* 공통 레이아웃 – 메인 페이지와 톤 맞춤 */
+.content {
+    max-width: 1200px;
+    margin: 150px auto;
+    padding: 0 10px;
+}
+
+/* ===== 상단 세션 바 ===== */
+.myp-session-bar {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #111827;
+    gap: 10px;
+}
+
+.myp-session-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.link-name {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #111827;
+}
+
+.myp-session-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-session-extend {
+    border: 1px solid #e5e7eb;
+    background: #CB2B11;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.session-timer {
+    font-weight: 600;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* 공통 카드 박스 */
+.myp-box {
+    background: #fff;
+    border: 1px solid #e4e8f0;
+    border-radius: 18px;
+    padding: 20px 22px 18px;
+    box-sizing: border-box;
+}
+
+/* 박스 헤더 공통 */
+.myp-box-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.myp-box-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.myp-box-title-sm {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.myp-link-small {
+    font-size: 11px;
+    color: #6b7280;
+    text-decoration: none;
+}
+
+/* ===== 메인 2컬럼 (환영 + 카드 정보) ===== */
+.myp-main-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+/* 왼쪽 환영 박스 */
+.myp-greeting {
+    min-height: 220px;
+}
+
+.hello-text {
+    font-size: 18px;
+    margin: 0 0 4px;
+}
+
+.hello-sub {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.myp-greeting-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.acct-main-info {
+    font-size: 13px;
+    color: #111827;
+}
+
+.acct-bank {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.acct-number {
+    margin-bottom: 10px;
+    color: #4b5563;
+}
+
+.acct-balance-label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+.acct-balance {
+    font-size: 18px;
+}
+
+.acct-extra {
+    font-size: 11px;
+    color: #6b7280;
+    text-align: right;
+    line-height: 1.5;
+}
+
+/* 오른쪽 카드 정보 컬럼 */
+.myp-side-col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* 카드 정보 박스 */
+.myp-card-info-body {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 33px;
+}
+
+.myp-card-visual {
+    flex: 0 0 90px;
+    display: flex;
+    justify-content: center;
+}
+
+.myp-card-sample {
+    width: 70px;
+    height: 110px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #111827, #4b5563);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
+}
+
+.myp-card-text {
+    flex: 1;
+    font-size: 13px;
+}
+
+.myp-card-name {
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.myp-card-benefit-label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+.myp-card-benefit {
+    font-size: 15px;
+}
+
+/* 결제 예정금액 박스 상단 내용 */
+.myp-pay-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.pay-col {
+    flex: 1;
+}
+
+.pay-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.pay-sub {
+    font-size: 11px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.pay-amount {
+    font-size: 16px;
+}
+
+/* ===== 중간 행: 혜택 + (결제 예정 금액 + 최근 이용 금액) ===== */
+.myp-middle-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+/* 이번 달 받은 혜택 박스 */
+.myp-benefit {
+    /* 예전 margin-bottom 제거 → 중간 행에서 간격 관리 */
+    margin-bottom: 0;
+}
+
+.myp-benefit-body {
+    min-height: 120px;
+    border-radius: 12px;
+    background: #f9fafb;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* 결제 예정 박스 하단의 최근 이용 금액 */
+.myp-pay-recent {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #edf0f5;
+}
+
+.myp-pay-recent-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.myp-pay-recent-text {
+    font-size: 12px;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ===== 하단 2분할 ===== */
+.myp-bottom-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 3 → 2 컬럼 */
+    gap: 18px;
+}
+
+.myp-bottom-box {
+    min-height: 140px;
+}
+
+/* 메뉴 리스트 */
+.myp-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    font-size: 13px;
+}
+
+.myp-menu-list li+li {
+    margin-top: 4px;
+}
+
+.myp-menu-list a {
+    text-decoration: none;
+    color: #111827;
+}
+
+/* 내용 placeholder 공통 */
+.placeholder-text {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+    .myp-main-row {
+        grid-template-columns: 1fr;
+    }
+
+    .myp-greeting-body {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .acct-extra {
+        text-align: left;
+    }
+
+    .myp-middle-row {
+        grid-template-columns: 1fr;
+    }
+
+    .myp-bottom-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 최근 이용내역 리스트 (결제 박스 안) */
+.recent-usage-list {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+}
+
+.recent-usage-item {
+    padding: 6px 0;
+}
+
+.recent-usage-item+.recent-usage-item {
+    border-top: 1px solid #f3f4f6;
+    /* 위/아래 살짝 구분선 */
+}
+
+.recent-usage-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.recent-usage-left {
+    flex: 1;
+}
+
+/* 결제명 */
+.recent-merchant {
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 2px;
+}
+
+/* 사용카드 · 날짜 · 시간 · 결제방법 */
+.recent-meta {
+    font-size: 11px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* 금액 */
+.recent-amount {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.recent-amount .won {
+    margin-left: 2px;
+    font-size: 12px;
+}
+
+/* 모바일에서 줄바꿈 대응 */
+@media (max-width: 900px) {
+    .recent-usage-main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .recent-amount {
+        margin-top: 2px;
+    }
+}
+
+/* 카드 정보 슬라이더 */
+.myp-card-info {
+    position: relative;
+}
+
+.card-slider {
+    position: relative;
+    width: 100%;
+}
+
+/* 슬라이드 하나 */
+.card-slide {
+    display: none;
+    align-items: center;
+    gap: 16px;
+}
+
+/* 현재 보이는 슬라이드 */
+.card-slide-active {
+    display: flex;
+}
+
+/* 카드 색상 다양화 (선택) */
+.card-color-1 {
+    background: linear-gradient(145deg, #111827, #4b5563);
+}
+
+.card-color-2 {
+    background: linear-gradient(145deg, #cb2b11, #ff8a5a);
+}
+
+.card-color-3 {
+    background: linear-gradient(145deg, #1f2937, #6366f1);
+}
+
+/* 좌우 네비게이션 버튼 */
+.card-slider-nav {
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
+    display: flex;
+    gap: 4px;
+}
+
+.card-nav-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-nav-btn:hover {
+    background: #f3f4f6;
+}

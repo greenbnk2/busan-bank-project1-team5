@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카드 신청 완료</title>
+
+    <!-- 공통 헤더/푸터 -->
+    <link rel="stylesheet" href="../css/common/product_header_style.css" />
+    <link rel="stylesheet" href="../css/common/footer_style.css" />
+
+    <!-- 완료 페이지 전용 CSS -->
+    <link rel="stylesheet" href="../css/product/product_register10.css" />
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main class="content">
+        <section class="complete-wrap">
+            <!-- 동그라미 체크 -->
+            <div class="complete-icon">✓</div>
+
+            <!-- 카드명 -->
+            <h1 class="complete-card-name">체크카드</h1>
+            <p class="complete-main-text">신청이 완료되었습니다.</p>
+
+            <!-- 신청일시 -->
+            <p class="complete-date">
+                신청일시
+                <span class="date-value">2025-11-17 14:32</span>
+                <!-- 서버/템플릿 값으로 교체 -->
+            </p>
+
+            <!-- ▼ 추가: 혜택 선택 영역 -->
+            <section class="benefit-section">
+                <h2 class="benefit-title">고객님의 최근 관심사를 선택해주세요</h2>
+
+                <div class="benefit-grid">
+                    <button type="button" class="benefit-option">주유</button>
+                    <button type="button" class="benefit-option">건강</button>
+                    <button type="button" class="benefit-option">여행</button>
+                    <button type="button" class="benefit-option">문화생활</button>
+                </div>
+
+                <!-- 흠흠흠 -->
+            </section>
+
+            <!-- 배송 안내 -->
+            <p class="complete-sub-text">
+                신청하신 카드는 <strong>4영업일 이내</strong> 배송됩니다.
+            </p>
+
+            <!-- 확인 버튼 -->
+            <button type="button" class="btn-confirm" id="btnConfirm">확인</button>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 헤더/푸터 로드
+            fetch('../common/product_header.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('header').innerHTML = html;
+                    const headerEl = document.querySelector('.header');
+                    if (headerEl) {
+                        window.addEventListener('scroll', () => {
+                            if (window.scrollY > 10) headerEl.classList.add('scrolled');
+                            else headerEl.classList.remove('scrolled');
+                        });
+                    }
+                });
+
+            fetch('../common/footer.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('footer').innerHTML = html;
+                });
+
+            // 확인 버튼 클릭 시 이동 (경로는 프로젝트에 맞게 수정)
+            document.getElementById('btnConfirm').addEventListener('click', () => {
+                // TODO: 원하는 페이지 경로로 변경
+                window.location.href = '/';
+            });
+
+            // 혜택 선택 버튼 토글
+            const benefitButtons = document.querySelectorAll('.benefit-option');
+            benefitButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 여러 개 선택 가능 (토글)
+                    btn.classList.toggle('selected');
+
+                    // 만약 "사용안함"만 단독 선택하게 하고 싶으면
+                    // 아래처럼 추가 로직 넣으면 됨 (지금은 주석 처리)
+                    /*
+                    if (btn.textContent.trim() === '사용안함') {
+                        // 사용안함 클릭 시 나머지 해제
+                        benefitButtons.forEach(b => {
+                            if (b !== btn) b.classList.remove('selected');
+                        });
+                    } else {
+                        // 다른 혜택 클릭 시 '사용안함' 해제
+                        benefitButtons.forEach(b => {
+                            if (b.textContent.trim() === '사용안함') {
+                                b.classList.remove('selected');
+                            }
+                        });
+                    }
+                    */
+                });
+            });
+
+            // ▼ 필요하면 JS로 신청일시 세팅 (예시)
+            // const dateSpan = document.querySelector('.date-value');
+            // dateSpan.textContent = '2025-11-17 14:32'; // 서버/템플릿 값으로 교체
+        });
+    </script>
+
+</body>
+
+</html>

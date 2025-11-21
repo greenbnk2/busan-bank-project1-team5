@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../static/css/member/my/index.css">
+    <link rel="stylesheet" href="../../static/css/common/footer.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main class="content">
+
+        <!-- 상단 세션·유저 바 -->
+        <section class="myp-session-bar">
+            <div class="myp-session-left">
+                <!-- 실제로는 로그인 사용자 이름으로 바인딩 -->
+                <button type="button" class="link-name" id="btnUserInfo">홍길동님</button>
+            </div>
+            <div class="myp-session-right">
+                <button type="button" class="btn-session-extend" id="btnExtend">로그인 연장</button>
+                <span class="session-timer" id="sessionTimer">09:58</span>
+            </div>
+        </section>
+
+        <!-- 메인 2컬럼 영역 (왼쪽 환영 + 오른쪽 카드 정보) -->
+        <section class="myp-main-row">
+            <!-- 왼쪽: 환영 + 주거래 계좌 -->
+            <section class="myp-box myp-greeting">
+                <header class="myp-box-head">
+                    <div class="myp-box-title">
+                        <p class="hello-text"><strong>홍길동</strong>님 반갑습니다!</p>
+                        <p class="hello-sub">주거래 계좌 현황을 확인해 보세요.</p>
+                    </div>
+                    <a href="#" class="myp-link-small">자세히 보기</a>
+                </header>
+
+                <div class="myp-greeting-body">
+                    <div class="acct-main-info">
+                        <p class="acct-bank">BNK Personality 통장</p>
+                        <p class="acct-number">123-4567-8901-23</p>
+                        <p class="acct-balance-label">계좌 잔액</p>
+                        <p class="acct-balance"><strong>1,234,567</strong>원</p>
+                    </div>
+                    <div class="acct-extra">
+                        <p>최근 입출금 내역, 자동이체 정보 등</p>
+                        <p>상세 화면에서 더 확인할 수 있어요.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 오른쪽: 카드 정보 컬럼 -->
+            <aside class="myp-side-col">
+
+                <!-- 카드 모형 + 카드명 + 혜택 요약 -->
+                <section class="myp-box myp-card-info">
+                    <header class="myp-box-head">
+                        <h2 class="myp-box-title-sm">카드 정보</h2>
+                        <a href="#" class="myp-link-small">자세히 보기</a>
+                    </header>
+
+                    <div class="myp-card-info-body">
+
+                        <!-- 슬라이더 영역 -->
+                        <div class="card-slider" id="cardSlider">
+                            <!-- 1번 카드 -->
+                            <div class="card-slide card-slide-active">
+                                <div class="myp-card-visual">
+                                    <div class="myp-card-sample card-color-1"></div>
+                                </div>
+                                <div class="myp-card-text">
+                                    <p class="myp-card-name">NICHIYA 체크카드</p>
+                                    <p class="myp-card-benefit-label">이번 달 카드 혜택 금액</p>
+                                    <p class="myp-card-benefit"><strong>35,000</strong>원 할인</p>
+                                </div>
+                            </div>
+
+                            <!-- 2번 카드 -->
+                            <div class="card-slide">
+                                <div class="myp-card-visual">
+                                    <div class="myp-card-sample card-color-2"></div>
+                                </div>
+                                <div class="myp-card-text">
+                                    <p class="myp-card-name">BNK MARKET 카드</p>
+                                    <p class="myp-card-benefit-label">이번 달 카드 혜택 금액</p>
+                                    <p class="myp-card-benefit"><strong>12,500</strong>원 할인</p>
+                                </div>
+                            </div>
+
+                            <!-- 3번 카드 -->
+                            <div class="card-slide">
+                                <div class="myp-card-visual">
+                                    <div class="myp-card-sample card-color-3"></div>
+                                </div>
+                                <div class="myp-card-text">
+                                    <p class="myp-card-name">HYUNDAI PLATINUM</p>
+                                    <p class="myp-card-benefit-label">이번 달 카드 혜택 금액</p>
+                                    <p class="myp-card-benefit"><strong>89,000</strong>원 할인</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 좌우 화살표 -->
+                        <div class="card-slider-nav">
+                            <button type="button" class="card-nav-btn" id="btnCardPrev" aria-label="이전 카드">‹</button>
+                            <button type="button" class="card-nav-btn" id="btnCardNext" aria-label="다음 카드">›</button>
+                        </div>
+                    </div>
+                </section>
+
+
+            </aside>
+        </section>
+
+        <!-- 중간: 이번 달 받은 혜택 + (결제 예정 금액 + 최근 이용 금액) -->
+        <section class="myp-middle-row">
+
+            <!-- 왼쪽: 이번 달 받은 혜택 -->
+            <section class="myp-box myp-benefit">
+                <header class="myp-box-head">
+                    <h2 class="myp-box-title">이번 달 받은 혜택</h2>
+                    <a href="#" class="myp-link-small">자세히 보기</a>
+                </header>
+
+                <div class="myp-benefit-body">
+                    <!-- 나중에 그래프/리스트 들어갈 자리 -->
+                    <p class="placeholder-text">이번 달 주유 / 마트 / 스트리밍 등에서 받은 혜택을 요약해서 보여주는 영역입니다.</p>
+                </div>
+            </section>
+
+            <!-- 오른쪽: 결제 예정 금액 + 최근 이용 금액 한 박스 -->
+            <section class="myp-box myp-pay-info">
+                <header class="myp-box-head">
+                    <h2 class="myp-box-title-sm">결제 예정 금액</h2>
+                    <a href="#" class="myp-link-small">자세히 보기</a>
+                </header>
+
+                <div class="myp-pay-body">
+                    <div class="pay-col">
+                        <p class="pay-label">이번 달</p>
+                        <p class="pay-sub">오늘 납부 시</p>
+                        <p class="pay-amount"><strong>702,530</strong>원</p>
+                    </div>
+                    <div class="pay-col">
+                        <p class="pay-label">다음 달</p>
+                        <p class="pay-sub">12월 13일</p>
+                        <p class="pay-amount"><strong>425,409</strong>원</p>
+                    </div>
+                </div>
+
+                <!-- 아래쪽: 최근 이용 금액 섹션 추가 -->
+                <div class="myp-pay-recent">
+                    <h3 class="myp-pay-recent-title">최근 이용내역 (최대 3건)</h3>
+
+                    <!-- 최대 3건 노출 -->
+                    <ul class="recent-usage-list">
+                        <!-- 1건 -->
+                        <li class="recent-usage-item">
+                            <div class="recent-usage-main">
+                                <div class="recent-usage-left">
+                                    <p class="recent-merchant">씨유수비사거리점</p>
+                                    <p class="recent-meta">
+                                        현대카드M CHECK · 25.11.18 · 18:26 · 일시불
+                                    </p>
+                                </div>
+                                <p class="recent-amount">
+                                    5,100<span class="won">원</span>
+                                </p>
+                            </div>
+                        </li>
+
+                        <!-- 2건 -->
+                        <li class="recent-usage-item">
+                            <div class="recent-usage-main">
+                                <div class="recent-usage-left">
+                                    <p class="recent-merchant">패스오더 - 주식회사 페이타랩</p>
+                                    <p class="recent-meta">
+                                        현대카드M CHECK · 25.11.18 · 08:38 · 일시불
+                                    </p>
+                                </div>
+                                <p class="recent-amount">
+                                    2,000<span class="won">원</span>
+                                </p>
+                            </div>
+                        </li>
+
+                        <!-- 3건 -->
+                        <li class="recent-usage-item">
+                            <div class="recent-usage-main">
+                                <div class="recent-usage-left">
+                                    <p class="recent-merchant">패스오더 - 주식회사 페이타랩</p>
+                                    <p class="recent-meta">
+                                        현대카드M CHECK · 25.11.17 · 08:37 · 일시불
+                                    </p>
+                                </div>
+                                <p class="recent-amount">
+                                    2,000<span class="won">원</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+
+        </section>
+
+        <!-- 하단 2분할 섹션 (설정·문의 / 내 상품 가입 정보) -->
+        <section class="myp-bottom-row">
+            <!-- 설정·문의 메뉴 -->
+            <section class="myp-box myp-bottom-box">
+                <header class="myp-box-head">
+                    <h2 class="myp-box-title-sm">설정·문의</h2>
+                </header>
+                <ul class="myp-menu-list">
+                    <li><a href="#">문의내역</a></li>
+                    <li><a href="#">사용자 정보 수정</a></li>
+                    <li><a href="#">비밀번호 수정</a></li>
+                    <li><a href="#">회원탈퇴</a></li>
+                    <li><a href="#">기타</a></li>
+                </ul>
+            </section>
+
+            <!-- 내 상품 가입 정보 -->
+            <section class="myp-box myp-bottom-box">
+                <header class="myp-box-head">
+                    <h2 class="myp-box-title-sm">내 상품 가입 정보</h2>
+                    <a href="#" class="myp-link-small">자세히 보기</a>
+                </header>
+                <div class="myp-products-body">
+                    <p class="placeholder-text">보유 카드, 대출, 예금 등 가입 상품 목록이 여기에 표시됩니다.</p>
+                </div>
+            </section>
+        </section>
+
+    </main>
+    <div id="footer"></div>
+
+    <script>
+        // 헤더/푸터 로드 (index와 동일 패턴)
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../common/header.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('header').innerHTML = html;
+                    const headerEl = document.querySelector('.header');
+                    if (headerEl) {
+                        window.addEventListener('scroll', () => {
+                            if (window.scrollY > 10) headerEl.classList.add('scrolled');
+                            else headerEl.classList.remove('scrolled');
+                        });
+                    }
+                });
+
+            fetch('../common/footer.html')
+                .then(res => res.text())
+                .then(html => document.getElementById('footer').innerHTML = html);
+
+            // 이름 클릭 → 기본정보 페이지 이동 (실제 URL로 교체)
+            document.getElementById('btnUserInfo').addEventListener('click', () => {
+                // TODO: 사용자 기본정보 페이지 경로로 변경
+                window.location.href = '/member/info';
+            });
+
+            // 로그인 연장 버튼 (실제 세션 연장은 서버 연동 필요)
+            document.getElementById('btnExtend').addEventListener('click', () => {
+                // TODO: 세션 연장 API 호출
+                alert('로그인 시간이 연장되었습니다. (데모)');
+            });
+
+            // 카드 정보 슬라이더
+            const slider = document.getElementById('cardSlider');
+            const btnPrev = document.getElementById('btnCardPrev');
+            const btnNext = document.getElementById('btnCardNext');
+
+            if (slider && btnPrev && btnNext) {
+                const slides = Array.from(slider.querySelectorAll('.card-slide'));
+                let cardIndex = 0;
+
+                function showCard(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('card-slide-active', i === index);
+                    });
+                }
+
+                btnPrev.addEventListener('click', () => {
+                    cardIndex = (cardIndex - 1 + slides.length) % slides.length;
+                    showCard(cardIndex);
+                });
+
+                btnNext.addEventListener('click', () => {
+                    cardIndex = (cardIndex + 1) % slides.length;
+                    showCard(cardIndex);
+                });
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
