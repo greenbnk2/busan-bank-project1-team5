@@ -1,10 +1,13 @@
 /*
     날짜 : 2025-11-16
     내용 : admin aside CSS
-    이름 : 이수연
+    참고 : mainContainer.css에 전역 리셋 및 기본설정 있음
 */
-/* 대화형 사용자 경험으로 전환하는데 사용됨 */
-/* 사이드바의 초기 너비를 설정하는 CSS 변수 */
+/*  =================================================
+    대화형 사용자 경험으로 전환하는데 사용됨
+    사이드바의 초기 너비 및 body와의 공간을 설정하는 CSS 변수
+    =================================================
+*/
 body {
     --sb-width: 5rem;
 }
@@ -14,6 +17,11 @@ body.sb-expanded{
     --sb-width: 10rem;
 }
 
+/*.main-content {*/
+/*    padding-left: var(--sb-width); !* 사이드바 너비만큼 왼쪽 여백을 확보하여 콘텐츠가 겹치지 않게 함 *!*/
+/*}*/
+
+/* ====== 본격 aside CSS ================================================================ */
 aside {
     position: fixed;
     inset: 0 auto 0 0; /* 위치 고정 & height: 100%를 의미 */
@@ -22,7 +30,8 @@ aside {
     width: var(--sb-width); /* 새로 정의도니 변수로 변경 */
     background-color: #262626;
     transition: width 0.5s ease-in-out; /* 변화에 대한 애니메이션 적용 */
-    overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤바 생성 */
+    overflow-y: auto;   /* 내용이 넘칠 경우 세로 스크롤바 생성 */
+    z-index: 1000;      /* 다른 콘텐츠보다 위에 오도록 설정 */
 }
 
 #aside-container {
@@ -96,7 +105,7 @@ aside {
 /* ===== 2차 카테고리 CSS =============================== */
 #aside-container .menu-title.active-menu {
     background-color: #CB2B11; /* 2차 메뉴와 동일한 배경색 */
-    border-radius: 0.5rem 0 0 0; /* 상단 모서리만 둥글게 */
+    border-radius: 2rem 0 0 0; /* 상단 모서리만 둥글게 */
 }
 
 .submenu {
@@ -104,7 +113,7 @@ aside {
     padding: 0;
     margin: 0;
     background-color: #cb2b11;
-    border-radius: 0 0 0.5rem 0;
+    border-radius: 0 0 2rem 0;
     overflow: hidden;
     max-height: 0;  /* 높이를 0으로 설정하고 내용 숨김 */
     transition: max-height 0.5s ease-out; /* 애니메이션 적용 */
@@ -122,6 +131,11 @@ aside {
 
     transition: background-color 0.2s; /* 호버 애니메이션 */
 }
+
+.submenu-a:last-child {
+    margin-bottom: 5px;
+}
+
 
 /* 굵은 구분선 (강조 표시) 및 배경색 적용 */
 
@@ -147,16 +161,23 @@ aside {
 
 /* === aside가 확장되었을 때 ============================== */
 main, header, footer {
-    margin-left: 10rem; /* 사이드바가 펼쳐졌을 때의 영역 */
-    padding: 1rem 1rem;
     transition: margin-left 0.5s ease-in-out; /* 효과를 미세하게 조정하기 위해 전환을 적용 */
+    margin-left: 5rem;
 }
 
 /* 768px 보다 큰 화면에서는 여배이 앞서 정의한 변수 값에 따라 동적으로 조정 (768px보다 작으면 main영역으로 올라가게 함, 충분한 너비이면 main을 밀어냄.)*/
 @media (min-width: 768px) {
     main, header, footer {
-        margin-left: var(--sb-width);
+        margin-left: 5rem;
     }
+
+    /* Switch로 고정될 때 body에 추가할 클래스 (예: sb-pinned)를 사용 */
+    body.sb-pinned main,
+    body.sb-pinned header,
+    body.sb-pinned footer {
+        margin-left: var(--sb-width); /* 고정되었을 때만 왼쪽 여백(10rem)을 확보 */
+    }
+
 }
 
 

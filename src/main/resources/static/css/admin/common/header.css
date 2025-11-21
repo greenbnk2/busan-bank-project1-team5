@@ -1,13 +1,73 @@
+/*
+    날짜 : 2025-11-18
+    내용 : admin header CSS
+    참고 : mainContainer.css에 전역 리셋 및 기본설정 있음
+*/
+header {
+    background-color: white;
+    width: auto;
+    height: 70px;
+    padding: 0 1rem;
+}
+
 #header-container{
-    border-bottom: 2px solid #CB2B11;
+    width: 100%;
+    height: 100%;
 }
 
 #header-wrap {
-    max-width: 1200px; /* 가로 크기 1200px */
-    margin: 0 auto; /* 가운데 정렬 */
+    display: flex; /* 내부 정렬 편하게 하려고 권장 */
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
 }
 
-#header-wrap img {
-    width: 100px;
-    height: auto;
+.admin-logo img {
+    width: auto;
+    height: 48px;
+}
+
+.header-icons {
+    flex-shrink: 0; /* 절대 줄어들지 않도록 */
+}
+
+.header-icons a {
+    text-decoration: none; /* 앵커 태그의 밑줄 제거 */
+}
+
+.header-icons img{
+    width: 30px;
+    height: 30px;
+    margin: 20px;
+    vertical-align: middle; /* 세로 가운데에 오도록 */
+}
+
+/* ====== 검색 영역 ====== */
+.search-box {
+    max-width: 600px;
+    min-width: 400px;
+    position: relative; /* 박스를 기준점으로 잡기 */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #FCEFEF;
+}
+
+.search-box input {
+    width: 550px;
+    height: 40px;
+    margin-left: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    outline: none; /* 선택사항 : 클릭했을 때 나타나는 포거스 */
+    cursor: pointer;
+}
+.search-box img {
+    position: absolute; /* 오른쪽에 고정 */
+    right: 7px;
+    width: 26px;
+    height: 26px;
+    margin: 7px;
 }

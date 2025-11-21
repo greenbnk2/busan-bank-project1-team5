@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
-    <script th:src="@{/js/common/aside.js}"></script>
+    <title>Approval</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonActionBarTable.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
 </head>
 <body>
 <div th:replace="~{admin/common/header :: header}"></div>
+<div th:replace="~{admin/common/aside :: aside}"></div>
 <main>
     <div class="main-container">
-        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div th:replace="~{admin/common/mainHeader :: mainHeader}"></div>
         <div id="main-content">
-            <!-- 검색 -->
-            <div class="search-form">
+            <!-- 주요 액션 영역 -->
+            <div class="action-bar">
+                <!-- 등록버튼 -->
+                <!-- 검색 -->
                 <form method="get" th:action="@{/admin/card/list}">
                     <div th:with="st=${param.searchType != null ? param.searchType[0] : ''}">
                         <select name="searchType" id="searchType">
@@ -22,12 +26,10 @@
                         </select>
                     </div>
 
-                    <input type="text" id="keyword" name="keyword" placehaolder="검색어"
+                    <input type="text" id="keyword" name="keyword" placeholder="검색어"
                            th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
 
-                    <button type="submit">
-                        <img th:src="@{/images/magnifier.png}" alt="돋보기"/>
-                    </button>
+                    <button type="submit" class="btn search-btn">검색</button>
                 </form>
             </div>
 
@@ -60,35 +62,36 @@
             <div class="content">
                 <table>
                     <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>카드번호</th>
-                        <th>사유</th>
-                        <th>요청일</th>
-                        <th>결재일</th>
-                        <th>상태</th>
-                        <th>관리</th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>카드번호</th>
+                            <th>사유</th>
+                            <th>요청일</th>
+                            <th>결재일</th>
+                            <th>상태</th>
+                            <th>관리</th>
+                        </tr>
                     </thead>
-
-                    <!-- 페이지 객체의 content 리스트를 반복 -->
-                    <tr th:each="approval, stat : ${cardApprovalList.content}">
-                        <td>[[${cardApprovalList.totalElements - (cardApprovalList.number * cardApprovalList.size + stat.index)}]]</td>
-                        <td>
-                            [[${approval.cardId}]]
-                        </td>
-                        <td>[[${approval.reason}]]</td>
-                        <td>[[${#temporals.format(approval.requestedAt, 'yyyy-MM-dd')}]]</td>
-                        <td>[[${#temporals.format(approval.approvedAt, 'yyyy-MM-dd')}]]</td>
-                        <td>[[${approval.status}]]</td>
-                        <td th:if="${approval.status == '대기'}">
-                            <a th:href="@{/admin/approval/card/approval(cardId=${approval.approvalId})}">승인</a> <br>
-                            <a th:href="@{/admin/approval/card/rejection(cardId=${approval.approvalId})}">반려</a> <br>
-                        </td>
-                        <td th:unless="${approval.status == '대기' }">
-                            <a>결재완료 - [[${approval.status}]]</a>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <!-- 페이지 객체의 content 리스트를 반복 -->
+                        <tr th:each="approval, stat : ${cardApprovalList.content}">
+                            <td>[[${cardApprovalList.totalElements - (cardApprovalList.number * cardApprovalList.size + stat.index)}]]</td>
+                            <td>
+                                [[${approval.cardId}]]
+                            </td>
+                            <td>[[${approval.reason}]]</td>
+                            <td>[[${#temporals.format(approval.requestedAt, 'yyyy-MM-dd')}]]</td>
+                            <td>[[${#temporals.format(approval.approvedAt, 'yyyy-MM-dd')}]]</td>
+                            <td>[[${approval.status}]]</td>
+                            <td th:if="${approval.status == '대기'}">
+                                <a th:href="@{/admin/approval/card/approval(cardId=${approval.approvalId})}">승인</a> <br>
+                                <a th:href="@{/admin/approval/card/rejection(cardId=${approval.approvalId})}">반려</a> <br>
+                            </td>
+                            <td th:unless="${approval.status == '대기' }">
+                                <a>결재완료 - [[${approval.status}]]</a>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 

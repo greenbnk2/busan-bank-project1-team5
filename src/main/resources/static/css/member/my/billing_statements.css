@@ -689,3 +689,33 @@
 .month-option.month-option-active .month-check {
     opacity: 1;
 }
+
+/* 이용내역 더보기 버튼 */
+.usage-more-wrap {
+    margin-top: 8px;
+    text-align: center;
+}
+
+.usage-more-btn {
+    min-width: 180px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: none;
+    background: #CB2B11;      /* 프로젝트 메인 빨간색 */
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.usage-more-btn:hover {
+    background: #a0210d;      /* 살짝 어두운 빨간색 */
+}
+
+.usage-more-btn:disabled {
+    background: #e5e5e5;
+    color: #999;
+    cursor: default;
+    box-shadow: none;
+}

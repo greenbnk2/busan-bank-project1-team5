@@ -23,25 +23,13 @@ public class Member {
     @Column(name = "MEM_ID")
     private String memId;
 
-    @Column(name = "NAME")
-    private String name;
-
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "NAME")
+    private String name;
+
     @Column(name = "ROLE")
     private String role;
-
-    @Column(name = "RRN")
-    private String rrn;
-
-    @Column(name = "EMAIL")
-    private String email;
-
-    @Column(name = "ADDRESS")
-    private String address;
-
-    @Column(name = "DE_ADDRESS")
-    private String deAddress;
 
 }

@@ -8,11 +8,11 @@ spring:
     resources:
       static-locations:
         - classpath:/static/
-        - file:uploads/
+        - file:./uploads/
   application:
     name: wave
   datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    driver-class-name: oracle.jdbc.OracleDriver
     hikari:
       auto-commit: true
       connection-timeout: 20000
@@ -22,7 +22,7 @@ spring:
       minimum-idle: 3
       pool-name: HikariPool-wave
     password: ghktkskagyqls123
-    url: jdbc:oracle:thin:@43.203.185.0:1522:XE
+    url: jdbc:oracle:thin:@15.165.32.91:1522:XE
     username: wave
   devtools:
     livereload:

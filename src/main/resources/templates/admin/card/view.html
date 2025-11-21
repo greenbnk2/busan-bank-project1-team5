@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <title>CARD ADMIN</title>
+    <!-- 카드 상품 자세히보기 -->
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonActionBarTable.css}">
     <script th:src="@{/js/admin/common/aside.js}"></script>
     <script th:src="@{/js/admin/card/cardForm.js}"></script>
 </head>
 <body>
-<div th:replace="~{common/header :: header}"></div>
+<div th:replace="~{admin/common/header :: header}"></div>
+<div th:replace="~{admin/common/aside :: aside}"></div>
 <main>
     <div class="main-container">
-        <div th:replace="~{common/aside :: aside}"></div>
+        <div th:replace="~{admin/common/mainHeader :: mainHeader}"></div>
         <div id="main-content">
 
             <!-- 본문 -->

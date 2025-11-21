@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CARD ADMIN</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonActionBarTable.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
+</head>
+<body>
+<div th:replace="~{admin/common/header :: header}"></div>
+<div th:replace="~{admin/common/aside :: aside}"></div>
+<main>
+    <div class="main-container">
+    <div th:replace="~{admin/common/mainHeader :: mainHeader}"></div>
+        <div id="main-content">
+            <!-- 주요 액션 영역 -->
+            <div class="action-bar">
+                <!-- 검색 -->
+                <form method="get" th:action="@{/admin/card/list}">
+                    <div th:with="st=${param.searchType != null ? param.searchType[0] : ''}">
+                        <select name="searchType" id="searchType">
+                            <option value="" th:selected="${st == ''}">전체</option>
+                            <option value="name" th:selected="${st == 'name'}">상품명</option>
+                            <option value="engName" th:selected="${st == 'engName'}">영어명</option>
+                            <option value="type" th:selected="${st == 'type'}">카드유형</option>
+                        </select>
+                    </div>
+
+                    <label for="keyword">
+                        <input type="text" id="keyword" name="keyword" placeholder="입력하세요."
+                               th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
+                    </label>
+                    <button type="submit" class="btn search-btn">검색</button>
+                </form>
+                <!-- 등록버튼 -->
+                <div class="btn register-btn">
+                    <a th:href="@{#}">관리자 등록</a>
+                </div>
+            </div>
+
+            <!-- 정렬
+            <div class="sort">
+                <p>정렬</p>
+                <form method="get" th:action="@{/qna/list}">
+                    <input type="hidden" name="searchType"
+                           th:value="${param.searchType != null ? param.searchType[0] : ''}">
+                    <input type="hidden" name="keyword" th:value="${param.keyword != null ? param.keyword[0] : ''}">
+                    <input type="hidden" name="answered" th:value="${param.answered != null ? param.answered[0] : ''}">
+                    <input type="hidden" name="size" th:value="${qnAList.size}">
+
+                    <select name="sortBy">
+                        <option value="createdAt" th:selected="${param.sortBy == 'createdAt'}">날짜</option>
+                        <option value="title" th:selected="${param.sortBy == 'title'}">제목</option>
+                    </select>
+
+                    <select name="direction">
+                        <option value="asc" th:selected="${param.direction == 'asc'}">오름차순</option>
+                        <option value="desc" th:selected="${param.direction == 'desc'}">내림차순</option>
+                    </select>
+
+                    <button type="submit" class="sort-btn">정렬 적용</button>
+                </form>
+            </div>
+        -->
+
+            <!-- 본문 -->
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>이름</th>
+                            <th>권한</th>
+                            <th>관리</th>
+    <!--                        <th style="width: 30px;">No</th>-->
+    <!--                        <th style="width: 200px;">상품명</th>-->
+    <!--                        <th style="width: 55px;">카드유형</th>-->
+    <!--                        <th style="width: 300px;">혜택</th>-->
+    <!--                        <th style="width: 200px;">연회비</th>-->
+    <!--                        <th style="width: 100px;">상태</th>-->
+    <!--                        <th style="width: 50px;">등록일</th>-->
+    <!--                        <th style="width: 50px;">수정일</th>-->
+    <!--                        <th style="width: 80px;">관리</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 페이지 객체의 content 리스트를 반복 -->
+                        <tr th:each="admin, stat : ${adminList.content}"
+                            th:class="${stat.even} ? 'even-row' : 'odd-row'">
+                            <td>[[${adminList.totalElements - (adminList.number * adminList.size + stat.index)}]]</td>
+                            <td>[[${admin.name}]]</td>
+                            <td>[[${admin.role}]]</td>
+                            <td>관리</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- 페이징 -->
+            <div class="pagination" th:with="
+                page=${adminList},
+                now=${page.number},
+                total=${page.totalPages},
+                size=${page.size},
+                block=${5},
+                start=${(now / block) * block},
+                end=${ ((total - 1) < (start + block - 1)) ? (total - 1) : (start + block - 1) },
+                prev=${ (now > 0) ? (now - 1) : 0 },
+                next=${ ((now + 1) < total) ? (now + 1) : (total - 1) },
+                st=${param.searchType != null ? param.searchType[0] : ''},
+                kw=${param.keyword != null ? param.keyword[0] : ''},
+                ans=${param.answered != null ? param.answered[0] : ''}
+             ">
+                <div th:if="${total > 0}">
+                    <a th:href="@{|?page=0&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.first} ? ' disabled'">« 처음</a>
+
+                    <a th:href="@{|?page=${prev}&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.first} ? ' disabled'">‹ 이전</a>
+
+                    <th:block th:each="i : ${#numbers.sequence(start, end)}">
+                        <a th:href="@{|?page=${i}&size=${size}&searchType=${st}&keyword=${kw}}"
+                           th:classappend="${i == now} ? ' active'">[[${i + 1}]]</a>
+                    </th:block>
+
+                    <a th:href="@{|?page=${next}&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.last} ? ' disabled'">다음 ›</a>
+
+                    <a th:href="@{|?page=${total - 1}&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.last} ? ' disabled'">마지막 »</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 비활성화 사유 입력 모달 -->
+    <div id="inactivateModal" style="display:none; position:fixed;
+    top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);">
+
+        <div style="background:white; padding:20px; width:400px; margin:100px auto; border-radius:8px;">
+            <h3>카드 비활성화</h3>
+
+            <form id="inactivateForm" th:action="@{/admin/card/inactivate}" method="post">
+                <input type="hidden" name="cardId" id="modalCardId">
+
+                <label>비활성화 사유</label><br>
+                <textarea name="reason" required style="width:100%; height:80px;"></textarea>
+
+                <div style="margin-top:15px; text-align:right;">
+                    <button type="button" onclick="closeInactivateModal()">취소</button>
+                    <button type="submit">확인</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<div th:replace="~{admin/common/footer :: footer}"></div>
+<script>
+    function openInactivateModal(cardId) {
+        document.getElementById('modalCardId').value = cardId;
+        document.getElementById('inactivateModal').style.display = 'block';
+    }
+
+    function closeInactivateModal() {
+        document.getElementById('inactivateModal').style.display = 'none';
+    }
+</script>
+</body>
+</html>

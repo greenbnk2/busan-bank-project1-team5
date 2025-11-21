@@ -2,11 +2,23 @@
     <link rel="stylesheet" th:href="@{/css/admin/common/header.css}">
     <div id="header-container">
         <div id="header-wrap">
-            <h1 class="logo-busan">
-                <img th:src="@{/images/BNK5team-logo.png}" alt="로고">
-            </h1>
-            <div>
-                <input type="search">
+            <a th:href="@{/admin}" class="admin-logo">
+                <img th:src="@{/images/BNK-logo.png}" alt="로고">
+            </a>
+            <div class="search-box">
+                <label><input type="search"></label>
+                <img th:src="@{/images/search.svg}" alt="search-icon">
+            </div>
+            <div class="header-icons">
+                <a th:href="@{/admin}">
+                    <img th:src="@{/images/house.svg}" alt="home">
+                </a>
+                <a th:href="@{#}">
+                    <img th:src="@{/images/circle-user-round.svg}" alt="user">
+                </a>
+                <a th:href="@{#}">
+                    <img th:src="@{/images/log-out.svg}" alt="logout">
+                </a>
             </div>
         </div>
     </div>

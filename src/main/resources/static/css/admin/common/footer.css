@@ -1,8 +1,14 @@
-#footer-container{
-    border-top: 2px solid #CB2B11;
+/*
+    날짜 : 2025-11-18
+    내용 : 관리자 footer CSS
+    참고 : mainContainer.css에 전역 리셋 및 기본설정 있음
+*/
+
+footer {
+    background-color: #F9F9F9;
+    font-size: 10px;
 }
 
-#footer-wrap {
-    max-width: 1200px; /* 가로 크기 1200px */
-    margin: 0 auto; /* 가운데 정렬 */
+#footer-container{
+    border-top: 2px solid #CB2B11;
 }

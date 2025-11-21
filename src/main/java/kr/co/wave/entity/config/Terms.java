@@ -49,4 +49,14 @@ public class Terms {
 
     @Column(name="UPDATED_AT")
     private LocalDate updatedAt; // 수정일
+
+    @Column(name="PDF_FILE")
+    private String pdfFile;
+
+    @Column(name="ORIGINAL_NAME")
+    private String originalName;
+
+    @Column(name="STATUS")
+    private String termStatus;
+
 }

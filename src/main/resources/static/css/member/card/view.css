@@ -717,9 +717,9 @@
 }
 
 .benefit-list .placeholder {
-    list-style: none;
+    /*list-style: none;*/
     padding-left: 0;
-    color: #aaa;
+    color: black;
 }
 
 @media (max-width: 720px) {

@@ -21,8 +21,5 @@ public class Account {
     @Column(name="ACCOUNT_ID")
     private int accountId;
 
-    @ManyToOne
-    @JoinColumn(name = "MEM_ID")
-    private Member member;
 
 }

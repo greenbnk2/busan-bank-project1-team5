@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
-    <script th:src="@{/js/common/aside.js}"></script>
+    <title>CARD ADMIN</title>
+    <!-- 상품 목록 -->
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonActionBarTable.css}">
+    <script th:src="@{/js/admin/common/aside.js}"></script>
 </head>
 <body>
 <div th:replace="~{admin/common/header :: header}"></div>
+<div th:replace="~{admin/common/aside :: aside}"></div>
 <main>
     <div class="main-container">
-        <div th:replace="~{admin/common/aside :: aside}"></div>
+    <div th:replace="~{admin/common/mainHeader :: mainHeader}"></div>
         <div id="main-content">
-            <!-- 검색 -->
-            <div class="search-form">
+            <!-- 주요 액션 영역 -->
+            <div class="action-bar">
+                <!-- 검색 -->
                 <form method="get" th:action="@{/admin/card/list}">
                     <div th:with="st=${param.searchType != null ? param.searchType[0] : ''}">
                         <select name="searchType" id="searchType">
@@ -24,13 +28,16 @@
                         </select>
                     </div>
 
-                    <input type="text" id="keyword" name="keyword" placehaolder="검색어"
-                           th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
-
-                    <button type="submit">
-                        <img th:src="@{/images/magnifier.png}" alt="돋보기"/>
-                    </button>
+                    <label for="keyword">
+                        <input type="text" id="keyword" name="keyword" placeholder="입력하세요."
+                               th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
+                    </label>
+                    <button type="submit" class="btn search-btn">검색</button>
                 </form>
+                <!-- 등록버튼 -->
+                <div class="btn register-btn">
+                    <a th:href="@{/admin/card/register}">상품 등록</a>
+                </div>
             </div>
 
             <!-- 정렬
@@ -62,68 +69,79 @@
             <div class="content">
                 <table>
                     <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>상품명</th>
-                        <th>카드유형</th>
-                        <th>혜택</th>
-                        <th>연회비</th>
-                        <th>상태</th>
-                        <th>등록일</th>
-                        <th>수정일</th>
-                        <th>관리</th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>상품명</th>
+                            <th>카드유형</th>
+                            <th>혜택</th>
+                            <th>연회비</th>
+                            <th>상태</th>
+                            <th>등록일</th>
+                            <th>수정일</th>
+                            <th>관리</th>
+    <!--                        <th style="width: 30px;">No</th>-->
+    <!--                        <th style="width: 200px;">상품명</th>-->
+    <!--                        <th style="width: 55px;">카드유형</th>-->
+    <!--                        <th style="width: 300px;">혜택</th>-->
+    <!--                        <th style="width: 200px;">연회비</th>-->
+    <!--                        <th style="width: 100px;">상태</th>-->
+    <!--                        <th style="width: 50px;">등록일</th>-->
+    <!--                        <th style="width: 50px;">수정일</th>-->
+    <!--                        <th style="width: 80px;">관리</th>-->
+                        </tr>
                     </thead>
+                    <tbody>
+                        <!-- 페이지 객체의 content 리스트를 반복 -->
+                        <tr th:each="cardItem, stat : ${cardList.content}"
+                            th:class="${stat.even} ? 'even-row' : 'odd-row'">
+                            <td>[[${cardList.totalElements - (cardList.number * cardList.size + stat.index)}]]</td>
+                            <td>
+                                <a th:href="@{/admin/card/view(cardId=${cardItem.card.cardId})}">[[${cardItem.card.name}]]
+                                    <br> ([[${cardItem.card.engName}]])</a>
+                            </td>
+                            <td>[[${cardItem.card.type}]]</td>
+                            <!-- 혜택 -->
+                            <td>
+                                <ul>
+                                    <li th:each="benefit : ${cardItem.benefitList}">
+                                        [[${benefit.benefitCategory}]] [[${benefit.value}]] [[${benefit.unit}]]
+                                        [[${benefit.benefitType}]]
+                                    </li>
+                                </ul>
+                            </td>
 
-                    <!-- 페이지 객체의 content 리스트를 반복 -->
-                    <tr th:each="cardItem, stat : ${cardList.content}">
-                        <td>[[${cardList.totalElements - (cardList.number * cardList.size + stat.index)}]]</td>
-                        <td>
-                            <a th:href="@{/admin/card/view(cardId=${cardItem.card.cardId})}">[[${cardItem.card.name}]]
-                                <br> ([[${cardItem.card.engName}]])</a>
-                        </td>
-                        <td>[[${cardItem.card.type}]]</td>
-                        <!-- 혜택 -->
-                        <td>
-                            <ul>
-                                <li th:each="benefit : ${cardItem.benefitList}">
-                                    [[${benefit.benefitCategory}]] [[${benefit.value}]] [[${benefit.unit}]]
-                                    [[${benefit.benefitType}]]
-                                </li>
-                            </ul>
-                        </td>
-
-                        <!-- 연회비 -->
-                        <td>
-                            <ul>
-                                <li th:each="fee : ${cardItem.annualFeeList}">
-                                    [[${fee.annualName}]]원
-                                </li>
-                            </ul>
-                        </td>
-                        <td>[[${cardItem.card.status}]]</td>
-                        <td>[[${#temporals.format(cardItem.card.createdAt, 'yyyy-MM-dd')}]]</td>
-                        <td>[[${#temporals.format(cardItem.card.updatedAt, 'yyyy-MM-dd')}]]</td>
-                        <td th:if="${cardItem.card.status == '비활성'}">
-                            <a th:href="@{/admin/card/view(cardId=${cardItem.card.cardId})}">수정</a> <br>
-                            <a th:href="@{/admin/card/view(cardId=${cardItem.card.cardId})}">삭제</a> <br>
-                            <a th:href="@{/admin/card/activate(cardId=${cardItem.card.cardId})}"
-                               onclick="return confirm('활성화하면 더 이상 상품 정보를 변경할 수 없습니다.\n계속 진행하시겠습니까?');">
-                                활성화
-                            </a>
-                        </td>
-                        <td th:if="${cardItem.card.status == '활성'}">
-                            <div th:if="${cardItem.approvalStatus == '결재진행중'}">
-                                <a>[[${cardItem.approvalStatus}]]</a>
-                            </div>
-                            <div th:unless="${cardItem.approvalStatus == '결재진행중'}">
-                                <a href="#"
-                                   th:onclick="|openInactivateModal(${cardItem.card.cardId})|">
-                                    비활성화
+                            <!-- 연회비 -->
+                            <td>
+                                <ul>
+                                    <li th:each="fee : ${cardItem.annualFeeList}">
+                                        [[${fee.annualName}]]
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>[[${cardItem.card.status}]]</td>
+                            <td>[[${#temporals.format(cardItem.card.createdAt, 'yyyy-MM-dd')}]]</td>
+                            <td>[[${#temporals.format(cardItem.card.updatedAt, 'yyyy-MM-dd')}]]</td>
+                            <td th:if="${cardItem.card.status == '비활성'}">
+                                <a th:href="@{/admin/card/view(cardId=${cardItem.card.cardId})}">수정</a> <br>
+                                <a th:href="@{/admin/card/view(cardId=${cardItem.card.cardId})}">삭제</a> <br>
+                                <a th:href="@{/admin/card/activate(cardId=${cardItem.card.cardId})}"
+                                   onclick="return confirm('활성화하면 더 이상 상품 정보를 변경할 수 없습니다.\n계속 진행하시겠습니까?');">
+                                    활성화
                                 </a>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td th:if="${cardItem.card.status == '활성'}">
+                                <div th:if="${cardItem.approvalStatus == '결재진행중'}">
+                                    <a>[[${cardItem.approvalStatus}]]</a>
+                                </div>
+                                <div th:unless="${cardItem.approvalStatus == '결재진행중'}">
+                                    <a href="#"
+                                       th:onclick="|openInactivateModal(${cardItem.card.cardId})|">
+                                        비활성화
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
@@ -148,7 +166,7 @@
                        th:classappend="${page.first} ? ' disabled'">« 처음</a>
 
                     <a th:href="@{|?page=${prev}&size=${size}&searchType=${st}&keyword=${kw}}"
-                       th:classappend="${page.first} ? ' disabled'">‹ 이전</a>
+                       th:classappend="${page.first} ? ' disabled'">&lt;</a>
 
                     <th:block th:each="i : ${#numbers.sequence(start, end)}">
                         <a th:href="@{|?page=${i}&size=${size}&searchType=${st}&keyword=${kw}}"
@@ -156,7 +174,7 @@
                     </th:block>
 
                     <a th:href="@{|?page=${next}&size=${size}&searchType=${st}&keyword=${kw}}"
-                       th:classappend="${page.last} ? ' disabled'">다음 ›</a>
+                       th:classappend="${page.last} ? ' disabled'">&gt;</a>
 
                     <a th:href="@{|?page=${total - 1}&size=${size}&searchType=${st}&keyword=${kw}}"
                        th:classappend="${page.last} ? ' disabled'">마지막 »</a>
@@ -185,10 +203,8 @@
             </form>
         </div>
     </div>
-
 </main>
 <div th:replace="~{admin/common/footer :: footer}"></div>
-
 <script>
     function openInactivateModal(cardId) {
         document.getElementById('modalCardId').value = cardId;
@@ -199,6 +215,5 @@
         document.getElementById('inactivateModal').style.display = 'none';
     }
 </script>
-
 </body>
 </html>

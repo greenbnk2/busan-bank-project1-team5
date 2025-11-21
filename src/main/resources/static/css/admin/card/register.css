@@ -1,0 +1,266 @@
+/*
+    날짜 : 2025-11-20
+    이름 : 이수연
+    내용 : 관리자 상품 등록 CSS
+    참고 : common css
+*/
+/* --- 1. 기본 설정 및 전체 레이아웃 --- */
+.main-content {
+    font-family: 'Pretendard', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8; /* 배경색: 밝은 회색 */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    max-width: 1000px; /* 폼의 최대 너비 확장 */
+}
+
+.form-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* 섹션 간 넓은 간격 */
+}
+
+/* --- 2. 섹션/카드 스타일 --- */
+.form-section {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0; /* 얇은 경계선 추가 */
+    border-radius: 4px; /* 최소한의 radius (모던 스타일) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); /* 은은한 그림자 */
+    display: flex; /* 섹션 헤더와 컨텐츠 영역을 분할하기 위해 Flex 사용 */
+    min-height: 150px;
+}
+
+/* 폼 섹션 헤더 (제목 영역) */
+.section-header {
+    flex-basis: 300px; /* 제목 영역 고정 너비 (데스크탑 기준) */
+    padding: 25px 30px;
+    background-color: #f8fafc; /* 헤더 배경색으로 구분 */
+    border-right: 1px solid #e2e8f0;
+}
+
+.section-header h2 {
+    font-size: 18px;
+    color: #1e293b;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.section-header p {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 섹션 컨텐츠 영역 (입력 필드 영역) */
+.section-content {
+    flex-grow: 1;
+    padding: 25px 30px;
+}
+
+/* --- 3. 폼 필드 스타일 --- */
+
+/* 개별 필드 래퍼 */
+.form-field-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-field-wrapper label {
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+/* 모든 입력/선택 요소에 통일된 스타일 적용 */
+/* **주의: HTML에서 `<br>` 태그는 제거해야 레이아웃이 깔끔하게 나옵니다! */
+.section-content input[type="text"],
+.section-content input[type="number"],
+.section-content input[type="file"],
+.section-content select {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px; /* 최소한의 radius */
+    font-size: 15px;
+    color: #333;
+    transition: border-color 0.2s;
+    background-color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.section-content input:focus,
+.section-content select:focus {
+    border-color: #3b82f6; /* 포커스 시 파란색 경계 */
+    box-shadow: 0 0 0 1px #3b82f6;
+    outline: none;
+}
+
+/* 체크박스 스타일 */
+.form-field-wrapper label input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto;
+}
+
+/* --- 4. 그리드 레이아웃 (기본 정보 섹션) --- */
+.two-columns-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.full-width {
+    grid-column: 1 / -1; /* 100% 너비로 확장 */
+}
+
+/* --- 5. 동적 항목 (연회비/혜택) 스타일 --- */
+
+.dynamic-items-container {
+    padding: 10px 0;
+}
+
+/* 헤더와 추가 버튼이 있는 컨트롤 영역 */
+.section-content .dynamic-items-container:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+/* 연회비 항목 행 스타일 */
+.annualFeeContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.annualFeeContainer:last-of-type {
+    border-bottom: none;
+}
+
+.annualFeeContainer input[type="text"] {
+    flex-grow: 1;
+}
+
+/* 혜택 항목 카드 스타일 */
+.benefitContainer.dynamic-card-item {
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* 혜택 인라인 필드 (select/input 그룹) */
+.benefit-inline-fields {
+    /* form-field-wrapper의 flex-direction: column을 오버라이드하고 4열 그리드 적용 */
+    display: grid;
+    grid-template-columns: 2fr 2fr 1.5fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px; /* 다음 입력 필드와의 간격 */
+    align-items: flex-end; /* 입력 요소들을 아래 정렬 */
+}
+
+.benefit-inline-fields select,
+.benefit-inline-fields input {
+    margin-top: 0; /* form-field-wrapper의 label margin에 맞춰 조정 */
+}
+
+
+/* --- 6. 버튼 스타일 --- */
+.btn-section {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.2s, opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+
+.button-primary, .register-btn:not(a) { /* 등록 버튼 */
+    background-color: #3b82f6;
+    color: white;
+}
+
+.button-primary:hover, .register-btn:not(a):hover {
+    background-color: #2563eb;
+}
+
+.button-secondary, .btn-section a.btn { /* 취소 버튼 */
+    background-color: #f0f4f8;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+.button-secondary:hover, .btn-section a.btn:hover {
+    background-color: #e2e8f0;
+}
+
+/* 추가/삭제 버튼 스타일 */
+button.annualFee-add-btn,
+button.benefit-add-btn {
+    background-color: #10b981;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+button.annualFee-add-btn:hover,
+button.benefit-add-btn:hover {
+    background-color: #059669;
+}
+
+button.annualFee-remove-btn,
+button.benefit-remove-btn {
+    background: none;
+    color: #ef4444;
+    border: 1px solid #fecaca;
+    padding: 5px 8px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+button.annualFee-remove-btn:hover,
+button.benefit-remove-btn:hover {
+    background-color: #fee2e2;
+}
+
+/* --- 7. 반응형 디자인 --- */
+@media (max-width: 900px) {
+    .form-section {
+        flex-direction: column; /* 화면이 작아지면 헤더와 컨텐츠를 세로로 쌓음 */
+    }
+
+    .section-header {
+        flex-basis: auto;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+}
+
+@media (max-width: 700px) {
+    .two-columns-layout,
+    .benefit-inline-fields {
+        grid-template-columns: 1fr; /* 모바일에서 1열로 변경 */
+    }
+}

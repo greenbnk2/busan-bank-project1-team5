@@ -1,16 +1,12 @@
 package kr.co.wave.controller.card;
 
-import kr.co.wave.dto.board.company.NoticeDTO;
 import kr.co.wave.dto.card.CardWithInfoDTO;
-import kr.co.wave.service.board.company.NoticeService;
 import kr.co.wave.service.card.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -45,8 +41,13 @@ public class CardController {
 
     @GetMapping("/card/view2")
     public String viewCard(int cardId, Model model) {
+
+        // 상세보기 페이지 메인쪽을 담당 cardId를 통해 "1개의 카드에 대한 정보 가져옴"
         CardWithInfoDTO cardInfo = cardService.getCardWithInfoById(cardId);
         model.addAttribute("cardItem", cardInfo);
+
+        // 상세보기 페이지 메인 아래의 카드 비교함 - 비교카드 가져오기를 위해 전체 카드(status="활성")만 가져오기
+        model.addAttribute("compareCards",cardService.getCardWithInfoAllBySearch2("","",0,100).getContent());
 
         return "card/view2";
     }

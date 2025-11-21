@@ -33,15 +33,6 @@ public class AdminConfigController {
         return "admin/config/banner";
     }
 
-    // 약관관리
-    @GetMapping("/admin/config/policy/list")
-    public String adminConfigPolicy(Model model) {
-
-        List<TermsDTO> termsList = termsService.getTermsAll();
-        model.addAttribute("termsList", termsList);
-
-        return "admin/config/policy/list";
-    }
 
     // 카테고리
     @GetMapping("/admin/config/category")
@@ -55,19 +46,5 @@ public class AdminConfigController {
         return "admin/config/version";
     }
 
-    // 약관 수정
-    @PostMapping("/admin/config/policy/update")
-    public String adminConfigUpdate(TermsDTO termsDTO) {
-
-        System.out.println(termsDTO);
-        termsService.updateTerms(termsDTO);
-        return "redirect:/admin/config/policy/list";
-    }
-
-    // 약관 등록
-    @GetMapping("/admin/config/policy/register")
-    public String adminConfigRegister() {
-        return "admin/config/policy/register";
-    }
 
 }

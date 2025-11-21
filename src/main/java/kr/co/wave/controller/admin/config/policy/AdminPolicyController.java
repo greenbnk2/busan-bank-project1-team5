@@ -2,11 +2,8 @@ package kr.co.wave.controller.admin.config.policy;
 
 import kr.co.wave.dto.config.TermsDTO;
 import kr.co.wave.dto.config.TermsRepositoryDTO;
-import kr.co.wave.entity.config.Terms;
-import kr.co.wave.service.board.util.FileUploadUtil;
 import kr.co.wave.service.config.TermsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,22 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.net.MalformedURLException;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor

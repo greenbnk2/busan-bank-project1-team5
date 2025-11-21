@@ -1,5 +1,5 @@
 /* ===== 본문 ===== */
-#main-content {
+.content {
     max-width: 1200px;
     margin: 150px auto;
 }
@@ -95,13 +95,18 @@
 }
 
 .fake-card {
-    width: 120px;
-    height: 170px;
+    width: 140px;
+    height: 220px;
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
 }
-
+.fake-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* div 크기에 맞게 자르고 비율 유지 */
+    display: block;    /* inline-gap 없애기 */
+}
 /* 점 */
 .hero-dots {
     position: absolute;
@@ -335,9 +340,11 @@
 }
 
 .orig-item img {
-    width: 100%;
+    width: 140px;
+    height: 220px;
     border-radius: 12px;
     display: block;
+
 }
 
 .orig-name {
@@ -457,7 +464,7 @@
     transform: translateY(-2px);
 }
 
-.promo-text{
+.promo-text {
     padding-top: 9px;
 }
 
@@ -477,4 +484,179 @@
     display: block;
     width: 90px;
     height: auto;
+}
+
+/* 로그인 후 로그인 패널 */
+/* 기본 상태: 로그인 폼만 보이도록 */
+#servicePanel {
+    display: none;
+    padding: 16px 18px 18px;
+}
+
+/* 로그인 후 상태: .logged-in 클래스가 붙으면 폼 숨기고 서비스 박스 보여줌 */
+.login-card.new.logged-in .login-tabs2,
+.login-card.new.logged-in .login-panels2,
+.login-card.new.logged-in .login-divide {
+    display: none;
+}
+
+.login-card.new.logged-in #servicePanel {
+    display: block;
+}
+
+/* 인사말 타이틀 */
+.myp-box-title-sm.service-box-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 0 8px;
+}
+
+/* 타이틀 아래 가는 선 */
+.service-divider {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 6px 0 14px;
+}
+
+/* ===== 2x2 아이콘 버튼 박스 (서로 간격 있게) ===== */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 12px;
+    /* ✅ 칸 사이 간격 */
+    border: none;
+    /* 바깥 테두리 제거 */
+    background: transparent;
+    margin-bottom: 30px;
+}
+
+/* 각 칸 개별 박스 */
+.service-item {
+    padding: 12px 10px 10px;
+    text-decoration: none;
+    color: #111;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    place-content: center;
+    border: 1px solid #e1e4ec;
+    border-radius: 8px;
+    background: #fbfdff;
+    transition:
+        background .15s ease,
+        color .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease;
+}
+
+/* 더 이상 구분선 필요 없음 → border-right/bottom 관련 규칙은 전부 삭제 */
+
+/* 아이콘 */
+.svc-icon {
+    font-size: 23px;
+    line-height: 1;
+}
+
+/* 라벨 */
+.svc-label {
+    line-height: 1.2;
+    font-size: 14px;
+}
+
+/* ✅ 호버 시: 우리 메인 빨간색(#CB2B11) + 흰 글씨 */
+.service-item:hover {
+    background: #CB2B11;
+    color: #fff;
+    border-color: #CB2B11;
+    box-shadow: 0 4px 10px rgba(203, 43, 17, 0.25);
+}
+
+/* 아이콘/텍스트 색도 같이 흰색으로 */
+.service-item:hover .svc-icon,
+.service-item:hover .svc-label {
+    color: #fff;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+    .service-grid {
+        gap: 10px 10px;
+        /* 모바일에선 간격 조금 줄이기 */
+    }
+
+    .service-item {
+        padding: 10px 6px 8px;
+        font-size: 11px;
+    }
+
+    .svc-icon {
+        font-size: 18px;
+    }
+}
+
+/* 하단 제어 버튼 영역 (로그인 연장 / 로그아웃) */
+.service-actions {
+    display: flex;
+    gap: 10px;
+    max-width: 280px;
+    margin: auto;
+    margin-top: 18px;
+}
+
+/* 공통 버튼 베이스 – 기존 red-btn 느낌 차용 */
+.svc-ctrl-btn {
+    flex: 1;
+    height: 44px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+        background .15s ease,
+        color .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease;
+}
+
+/* 왼쪽: 로그인 연장 (흰색 버튼) */
+.svc-ctrl-btn.svc-extend {
+    background: #fff;
+    color: #CB2B11;
+    border-color: #CB2B11;
+}
+
+.svc-ctrl-btn.svc-extend:hover {
+    background: #fff5f3;
+    box-shadow: 0 2px 6px rgba(203, 43, 17, 0.15);
+}
+
+/* 오른쪽: 로그아웃 (기존 빨간 버튼 스타일) */
+.svc-ctrl-btn.svc-logout {
+    background: #CB2B11;
+    /* 기존 red-btn 색 */
+    color: #fff;
+    border-color: #CB2B11;
+}
+
+.svc-ctrl-btn.svc-logout:hover {
+    background: #b0240f;
+    box-shadow: 0 2px 8px rgba(203, 43, 17, 0.35);
+}
+
+/* 모바일에서 간격/높이 조금 줄이기 */
+@media (max-width: 600px) {
+    .service-actions {
+        margin-top: 14px;
+        gap: 8px;
+    }
+
+    .svc-ctrl-btn {
+        height: 40px;
+        font-size: 12px;
+    }
 }

@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <title>CARD ADMIN</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonActionBarTable.css}">
     <script th:src="@{/js/admin/common/aside.js}"></script>
 </head>
 <div th:replace="~{admin/common/header :: header}"></div>
+<div th:replace="~{admin/common/aside :: aside}"></div>
 <body>
 <main>
     <div class="main-container">
-        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div th:replace="~{admin/common/mainHeader :: mainHeader}"></div>
         <div id="main-content">
             <div class="tab-bar">
                 <a th:href="@{#}">메인상단배너</a>
@@ -24,16 +26,22 @@
                 <hr>
                 <table>
                     <thead>
-                        <td>번호</td>
-                        <td>이미지</td>
-                        <td>배너정보</td>
-                        <td>배너위치</td>
-                        <td>시작일</td>
-                        <td>종료일</td>
-                        <td>시작시간</td>
-                        <td>종료시간</td>
-                        <td>관리</td>
+                        <tr>
+                            <td>번호</td>
+                            <td>이미지</td>
+                            <td>배너정보</td>
+                            <td>배너위치</td>
+                            <td>시작일</td>
+                            <td>종료일</td>
+                            <td>시작시간</td>
+                            <td>종료시간</td>
+                            <td>관리</td>
+
+                        </tr>
                     </thead>
+                    <tbody>
+
+                    </tbody>
                 </table>
             </div>
         </div>

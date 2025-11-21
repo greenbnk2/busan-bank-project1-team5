@@ -1,10 +1,7 @@
 package kr.co.wave.controller.company;
 
-import kr.co.wave.dto.board.company.EventDTO;
-import kr.co.wave.dto.board.company.InvestorInfoDTO;
 import kr.co.wave.dto.board.company.NoticeDTO;
-import kr.co.wave.dto.board.company.PressDTO;
-import kr.co.wave.service.board.company.NoticeService;
+import kr.co.wave.service.cs.question.NoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

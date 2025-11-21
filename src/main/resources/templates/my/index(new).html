@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
-    <link rel="stylesheet" href="../../static/css/common/header.css">
-    <link rel="stylesheet" href="../../static/css/member/my/index.css">
-    <link rel="stylesheet" href="../../static/css/common/footer.css">
+    <link rel="stylesheet" th:href="@{/css/member/my/index.css}">
 </head>
 
 <body>
-    <div id="header"></div>
+    <div th:replace="~{common/header :: header}"></div>
 
     <main class="content">
 
@@ -136,7 +134,7 @@
             <section class="myp-box myp-pay-info">
                 <header class="myp-box-head">
                     <h2 class="myp-box-title-sm">결제 예정 금액</h2>
-                    <a href="#" class="myp-link-small">자세히 보기</a>
+                    <a th:href="@{/my/BillingStates}" class="myp-link-small">자세히 보기</a>
                 </header>
 
                 <div class="myp-pay-body">
@@ -238,7 +236,7 @@
         </section>
 
     </main>
-    <div id="footer"></div>
+    <div th:replace="~{common/footer :: footer}"></div>
 
     <script>
         // 헤더/푸터 로드 (index와 동일 패턴)

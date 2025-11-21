@@ -11,7 +11,7 @@ import kr.co.wave.repository.approval.CardApprovalRepository;
 import kr.co.wave.repository.card.AnnualFeeRepository;
 import kr.co.wave.repository.card.BenefitRepository;
 import kr.co.wave.repository.card.CardRepository;
-import kr.co.wave.service.board.util.FileUploadUtil;
+import kr.co.wave.service.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -34,6 +34,7 @@ public class CardService {
     private final CardApprovalRepository cardApprovalRepository;
     private final ModelMapper modelMapper; // Entity와 DTO를 변환해주는 객체
     private final FileUploadUtil fileUploadUtil; // 저기 util 불러오는 객체
+
     // 필요없는데 혹시나 남겨둠
     public Page<CardDTO> getCardAllBySearch(String searchType, String keyword, int page, int size){
         String st = (searchType == null) ? "" : searchType.trim();

@@ -3,49 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonActionBarTable.css}">
     <script th:src="@{/js/admin/common/aside.js}"></script>
 </head>
 <div th:replace="~{admin/common/header :: header}"></div>
+<div th:replace="~{admin/common/aside :: aside}"></div>
 <body>
 <main>
     <div class="main-container">
-        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div th:replace="~{admin/common/mainHeader :: mainHeader}"></div>
         <div id="main-content">
+            <!-- 주요 액션 영역 -->
+            <div class="action-bar">
+                <!-- 검색 -->
+                <form method="get" th:action="@{/admin/card/list}">
+                    <div th:with="st=${param.searchType != null ? param.searchType[0] : ''}">
+                        <select name="searchType" id="searchType">
+                            <option value="" th:selected="${st == ''}">전체</option>
+                            <option value="name" th:selected="${st == 'name'}">상품명</option>
+                            <option value="engName" th:selected="${st == 'engName'}">영어명</option>
+                            <option value="type" th:selected="${st == 'type'}">카드유형</option>
+                        </select>
+                    </div>
 
-            <div class="space" th:each="terms : ${termsList}">
-                <h3>[[${terms.category}]]</h3>
-                <p class="description">[[${terms.title}]]입니다.</p>
-                <form th:action="@{/admin/config/policy/update}" method="post">
-                    <input type="hidden" name="termsId" th:value="${terms.termsId}">
-                    <table>
-                        <tr>
-                            <td>약관 내용</td>
-                            <td>
-                                <textarea name="content" rows="5" cols="80" th:text="${terms.content}"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>필수 여부</td>
-                            <td>
-                                <label>
-                                    <input type="radio" name="required" value="true" th:checked="${terms.isRequired}"> 필수
-                                </label>
-                                <label>
-                                    <input type="radio" name="required" value="false" th:checked="${!terms.isRequired}"> 선택
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="text-align:right;">
-                                <input type="submit" value="수정">
-                            </td>
-                        </tr>
-                    </table>
+                    <label for="keyword">
+                        <input type="text" id="keyword" name="keyword" placeholder="입력하세요."
+                               th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
+                    </label>
+                    <button type="submit" class="btn search-btn">검색</button>
                 </form>
-                <hr>
+                <!-- 등록버튼 -->
+                <div class="btn register-btn">
+                    <a th:href="@{/admin/card/register}">약관 등록</a>
+                </div>
             </div>
 
+            <table>
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>약관명</th>
+                    <th>약관내용</th>
+                    <th>필수여부</th>
+                    <th>PDF파일</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="term, stat : ${termsList.content}">
+                        <td>[[${termsList.totalElements - (termsList.number * termsList.size + stat.index)}]]</td>
+                        <td>[[${term.title}]]</td>
+                        <td>[[${term.content}]]</td>
+                        <td>[[${term.isRequired}]]</td>
+                        <td><a th:href="@{/terms/download/{id}(id=${term.termsId})}">
+                            [[${term.originalName}]]
+                        </a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 페이징 -->
+            <div class="pagination" th:with="
+                page=${termsList},
+                now=${page.number},
+                total=${page.totalPages},
+                size=${page.size},
+                block=${5},
+                start=${(now / block) * block},
+                end=${ ((total - 1) < (start + block - 1)) ? (total - 1) : (start + block - 1) },
+                prev=${ (now > 0) ? (now - 1) : 0 },
+                next=${ ((now + 1) < total) ? (now + 1) : (total - 1) },
+                st=${param.searchType != null ? param.searchType[0] : ''},
+                kw=${param.keyword != null ? param.keyword[0] : ''},
+                ans=${param.answered != null ? param.answered[0] : ''}
+             ">
+                <div th:if="${total > 0}">
+                    <a th:href="@{|?page=0&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.first} ? ' disabled'">« 처음</a>
+
+                    <a th:href="@{|?page=${prev}&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.first} ? ' disabled'">‹ 이전</a>
+
+                    <th:block th:each="i : ${#numbers.sequence(start, end)}">
+                        <a th:href="@{|?page=${i}&size=${size}&searchType=${st}&keyword=${kw}}"
+                           th:classappend="${i == now} ? ' active'">[[${i + 1}]]</a>
+                    </th:block>
+
+                    <a th:href="@{|?page=${next}&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.last} ? ' disabled'">다음 ›</a>
+
+                    <a th:href="@{|?page=${total - 1}&size=${size}&searchType=${st}&keyword=${kw}}"
+                       th:classappend="${page.last} ? ' disabled'">마지막 »</a>
+                </div>
+            </div>
         </div>
     </div>
 </main>

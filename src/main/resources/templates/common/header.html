@@ -1,9 +1,9 @@
-<header th:fragment="header">
+<header class="header">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <div class="header-inner">
         <div class="logo">
             <div class="logo-main">
-                <a href="#">
+                <a th:href="@{/}">
                     <img src="https://www.busanbank.co.kr/resource/img/tit/h1_busanbank_new.png" alt="">
                 </a>
             </div>
@@ -12,23 +12,22 @@
         <!-- 1차 메뉴: hover하면 아래 .mega-panel이 열리는 구조 -->
         <ul class="nav_menu">
             <li title="menu1">
-                <a href="/" class="menu_title">마이</a>
+                <a th:href="@{/my}" class="menu_title">마이</a>
                 <!-- 임시 메뉴 하위 영역 -->
                 <div class="mega-panel">
                     <div class="mega-inner">
                         <div class="mega-col">
                             <h4>카드 이용 내역</h4>
                             <ul>
-                                <li><a href="#">이용 대금 명세서</a></li>
+                                <li><a th:href="@{/my/BillingStates}">이용내역 명세서</a></li>
                                 <li><a href="#">최근 이용 내역</a></li>
+                                <li><a href="#">결제 위치 지도로 확인하기</a></li>
                             </ul>
                         </div>
                         <div class="mega-col">
                             <h4>이용 금액 결제</h4>
                             <ul>
-                                <li><a href="#">즉시 결제</a></li>
-                                <li><a href="#">분할 결제</a></li>
-                                <li><a href="#">결제 내역</a></li>
+                                <li><a href="#">즉시 납부</a></li>
                             </ul>
                         </div>
                     </div>
@@ -44,14 +43,14 @@
             </li>
 
             <li>
-                <a href="/" class="menu_title">카드</a>
+                <a th:href="@{/card/list}" class="menu_title">카드</a>
                 <div class="mega-panel">
                     <div class="mega-inner">
                         <div class="mega-col">
                             <h4>카드신청</h4>
                             <ul>
-                                <li><a href="#">체크카드</a></li>
-                                <li><a href="#">신용카드</a></li>
+                                <li><a th:href="@{/card/list}">체크카드</a></li>
+                                <li><a th:href="@{/card/list}">신용카드</a></li>
                             </ul>
                         </div>
                     </div>
@@ -84,10 +83,12 @@
             </li>
         </ul>
         <div class="util">
+            <form th:action="@{/card/list}" method="get">
             <div class="search-box">
                 <span class="search-ico">🔍</span>
-                <input type="text" placeholder="카드, 메뉴, 혜택을 검색해 보세요">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="카드, 메뉴, 혜택을 검색해 보세요">
             </div>
+            </form>
             <button class="all-nav-btn" id="allNavOpen" aria-label="전체 메뉴 열기">☰</button>
         </div>
     </div>

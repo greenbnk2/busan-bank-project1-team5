@@ -1,7 +1,6 @@
 package kr.co.wave.controller.member;
 
 import kr.co.wave.dto.MemberDTO;
-import kr.co.wave.dto.config.TermsDTO;
 import kr.co.wave.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -48,10 +47,5 @@ public class MemberController {
     public String signup(MemberDTO memberDTO) {
         memberService.signup(memberDTO);
         return "member/signup";
-    }
-
-    @GetMapping
-    public String member_register_terms(TermsDTO termsDTO) {
-        return "member/register_terms";
     }
 }

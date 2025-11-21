@@ -3,31 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/admin/common/mainContainer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonCSS.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/common/commonActionBarTable.css}">
     <script th:src="@{/js/admin/common/aside.js}"></script>
 </head>
 <body>
-<div th:replace="~{common/header :: header}"></div>
+<div th:replace="~{admin/common/header :: header}"></div>
+<div th:replace="~{admin/common/aside :: aside}"></div>
 <main>
     <div class="main-container">
-        <div th:replace="~{admin/common/aside :: aside}"></div>
+        <div th:replace="~{admin/common/mainHeader :: mainHeader}"></div>
         <div id="main-content">
+            <!-- 주요 액션 영역 -->
+            <div class="action-bar">
+                <!-- 검색 -->
+                <form method="get" th:action="@{/admin/card/list}">
+                    <div th:with="st=${param.searchType != null ? param.searchType[0] : ''}">
+                        <select name="searchType" id="searchType">
+                            <option value="" th:selected="${st == ''}">전체</option>
+                            <option value="name" th:selected="${st == 'name'}">상품명</option>
+                            <option value="engName" th:selected="${st == 'engName'}">영어명</option>
+                            <option value="type" th:selected="${st == 'type'}">카드유형</option>
+                        </select>
+                    </div>
+
+                    <label for="keyword">
+                        <input type="text" id="keyword" name="keyword" placeholder="입력하세요."
+                               th:value="${param.keyword != null ? param.keyword[0] : ''}"/>
+                    </label>
+                    <button type="submit" class="btn search-btn">검색</button>
+                </form>
+                <!-- 등록버튼 -->
+                <div class="btn register-btn">
+                    <a th:href="@{/admin/card/register}">상품 등록</a>
+                </div>
+            </div>
+            <!-- 본문 -->
             <table>
                 <thead>
-                <th>번호</th>
-                <th>제품명</th>
-                <th>설명</th>
-                <th>관리</th>
+                    <tr>
+                        <th>번호</th>
+                        <th>제품명</th>
+                        <th>설명</th>
+                        <th>관리</th>
+                    </tr>
                 </thead>
-                <tr th:each="product : ${productList}">
-                    <td><a th:href="@{/admin/product/view/{proId}(proId=${product.proId})}">[[${product.proId}]]</a></td>
-                    <td>[[${product.name}]]</td>
-                    <td>[[${product.description}]]</td>
-                    <td><a th:href="@{/admin/product/delete/{proId}(proId=${product.proId})}"
-                           onclick="return confirm('정말 삭제하시겠습니까?');">
-                        삭제
-                    </a></td>
-                </tr>
+                <tbody>
+                    <tr th:each="product : ${productList}">
+                        <td><a th:href="@{/admin/product/view/{proId}(proId=${product.proId})}">[[${product.proId}]]</a></td>
+                        <td>[[${product.name}]]</td>
+                        <td>[[${product.description}]]</td>
+                        <td><a th:href="@{/admin/product/delete/{proId}(proId=${product.proId})}"
+                               onclick="return confirm('정말 삭제하시겠습니까?');">
+                            삭제
+                        </a></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

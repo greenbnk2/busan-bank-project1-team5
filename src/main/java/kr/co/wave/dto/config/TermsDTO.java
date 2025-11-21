@@ -3,6 +3,7 @@ package kr.co.wave.dto.config;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -29,4 +30,15 @@ public class TermsDTO {
     private LocalDate createdAt; // 생성일
 
     private LocalDate updatedAt; // 수정일
+
+    private MultipartFile pdfFile;
+
+    private String originalName;
+
+    private String termStatus;
+
+    public void setIsRequired(boolean isRequired) {
+        this.isRequired = isRequired;
+    }
+
 }

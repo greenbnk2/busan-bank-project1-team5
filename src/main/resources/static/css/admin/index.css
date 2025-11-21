@@ -22,12 +22,42 @@
     grid-column: span 3; /* 1:1:1:1 (12 / 4 = 3칸씩 차지) */
     background: #AE1100;
     color: #fff;
-    padding: 1rem;
     height: 150px;
     text-align: center;
     font-weight: bold;
 
-    
+    position: relative; /* 자식 요소의 기준점 설정 */
+}
+.kpi-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+.kpi-info img {
+    width: 90px;
+    height: 100%;
+}
+.kpi-count-name{
+    line-height: 1;
+    font-size: 20px;
+    font-weight: 400;
+}
+.kpi-num {
+    display: flex;
+    justify-content: left;
+    font-size: 40px;
+    font-weight: 600;
+}
+.kpi-more-btn-area {
+    background-color: #9C0E00;
+    position: absolute; /* 부모 요소를 기준으로 위치 지정을 위한 자식 요소 */
+    bottom: 0; /* 바닥에 붙임 */
+    width: 100%;
+}
+.kpi-more-btn-area a {
+    text-decoration: none;
+    color: #FFB6A7;
+    font-weight: 400;
 }
 
 /* 중간 그래프 영역: 2열 구성, 상단 4열 전체 차지 */

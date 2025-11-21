@@ -12,8 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // 스위치 상태를 확인하여 aside 초기 상태를 설정
     if(asideSwitch && asideSwitch.checked) {
         body.classList.add('sb-expanded');
+        body.classList.add('sb-pinned');
     } else {
         body.classList.remove('sb-expanded');
+        body.classList.remove('sb-pinned');
     }
 
     // ---- 1. 사이드바 확장/축소 및 고정 기능 ----
@@ -23,11 +25,13 @@ document.addEventListener('DOMContentLoaded', function () {
         asideSwitch.addEventListener('change', function () {
             console.log('스위치 클릭 이벤트 발생');
             if (this.checked) {
-                body.classList.add('sb-expanded');
+                body.classList.add('sb-expanded');  // 사이드바 너비 확장 (애니메이션)
+                body.classList.add('sb-pinned');    // 메인 콘텐츠 밀림 활성화 (고정 상태)
                 aside.classList.add('sb-fixed');    // 마우스 오버 방해용
                 console.log('초기 스위치 체크됨');
             } else {
                 body.classList.remove('sb-expanded');
+                body.classList.remove('sb-pinned');
                 aside.classList.remove('sb-fixed');
             }
         });
@@ -48,14 +52,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 body.classList.remove('sb-expanded');
             }
 
-            // aside를 벗어나면 확장 여부와 관계없이 모든 서브메뉴 닫기
-            menuTitles.forEach(menuTitle => {
-                menuTitle.classList.remove('active-menu');
-                const submenu = menuTitle.parentElement.querySelector('.submenu');
-                if (submenu) {
-                    submenu.style.maxHeight = null;
-                }
-            });
+            // aside를 벗어나면 확장 여부(고정 아닐 때) 모든 서브메뉴 닫기
+            if (!asideSwitch.checked) {
+                menuTitles.forEach(menuTitle => {
+                    menuTitle.classList.remove('active-menu');
+                    const submenu = menuTitle.parentElement.querySelector('.submenu');
+                    if (submenu) {
+                        submenu.style.maxHeight = null;
+                    }
+                });
+            }
 
         });
     }
@@ -88,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     submenu.style.maxHeight = null;
                 } else {
                     // 닫혀 있으면 열기 (스크롤 높이를 이용해 정확한 애니메이션 구현)
-                    submenu.style.maxHeight = 'fit-contatent'
+                    submenu.style.maxHeight = 'fit-content'
                     let finalHeigh = submenu.scrollHeight;
                     console.log('최종 높이 측정값:', finalHeigh);
                     submenu.style.maxHeight = submenu.scrollHeight + 'px';
